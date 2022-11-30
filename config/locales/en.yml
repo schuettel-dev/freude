@@ -1,0 +1,18 @@
+en:
+  activemodel:
+    errors:
+      models:
+        session_form:
+          attributes:
+            token:
+              does_not_exist: "does not exist"
+  shared:
+    buttons:
+      join_games: Join games
+  sign_ups:
+    new:
+      pick_a_username: Pick a user name
+      sign_up: Join
+  sessions:
+    new:
+      token: Enter token

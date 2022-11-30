@@ -1,0 +1,9 @@
+mario:
+  name: Mario
+  token: MARIOTOKEN
+  color: "#e60011"
+
+luigi:
+  name: Luigi
+  token: LUIGITOKEN
+  color: "#369a0f"
