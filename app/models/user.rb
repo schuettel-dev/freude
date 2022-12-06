@@ -9,6 +9,6 @@ class User < ApplicationRecord
   private
 
   def initialize_token
-    self.token ||= SecureRandom.alphanumeric(10)
+    self.token ||= SecureRandom.alphanumeric(16)
   end
 end

@@ -16,6 +16,7 @@ class GameTypeTest < ActiveSupport::TestCase
   test "#new_game" do
     game_type = game_types(:beatle)
     game = game_type.new_game(user: users(:mario))
+
     assert_equal Game::Beatle, game.type.constantize
     assert_equal Game::Beatle, game.class
   end

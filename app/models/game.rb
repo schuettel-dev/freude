@@ -4,5 +4,5 @@ class Game < ApplicationRecord
 
   validates :name, :state, :type, presence: true
 
-  validates :type, inclusion: { in: Proc.new { GameType.pluck(:instance_type) } }
+  validates :type, inclusion: { in: proc { GameType.pluck(:instance_type) } }
 end

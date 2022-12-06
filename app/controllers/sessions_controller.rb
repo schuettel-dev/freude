@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_token] = nil
+    session[:user_id] = nil
     redirect_to new_sign_up_path
   end
 end

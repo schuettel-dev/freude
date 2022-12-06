@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
-    session[:user_token] = user.token
+    session[:user_id] = user.id
   end
 
   def redirect_if_signed_in
@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    Current.user = session[:user_token].present? && User.find_by(token: session[:user_token])
+    Current.user = session[:user_id].present? && User.find_by(id: session[:user_id])
   end
 end
