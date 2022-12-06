@@ -1,0 +1,6 @@
+beatle_mario:
+  name: "Mario Bros"
+  game_type: beatle
+  type: "Game::Beatle"
+  state: "ended"
+  user: mario

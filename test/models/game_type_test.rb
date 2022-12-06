@@ -3,6 +3,7 @@ require "test_helper"
 class GameTypeTest < ActiveSupport::TestCase
   test "validations" do
     game_type = GameType.new
+
     assert_not game_type.valid?
 
     game_type.errors.to_a.tap do |errors|
@@ -12,9 +13,10 @@ class GameTypeTest < ActiveSupport::TestCase
     end
   end
 
-  # test "#new_game" do
-  #   game_type = game_types(:beatle)
-  #   game = game_type.new_game(user: users(:mario))
-  #   assert_equal Game::Beatle, game.type.constantize
-  # end
+  test "#new_game" do
+    game_type = game_types(:beatle)
+    game = game_type.new_game(user: users(:mario))
+    assert_equal Game::Beatle, game.type.constantize
+    assert_equal Game::Beatle, game.class
+  end
 end

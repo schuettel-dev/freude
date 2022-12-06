@@ -3,14 +3,17 @@ require "test_helper"
 class SignUpsControllerTest < ActionDispatch::IntegrationTest
   test "GET new" do
     get new_sign_up_path
+
     assert_response :success
   end
 
   test "GET new, redirected when already signed in" do
     sign_in :mario
     get new_sign_up_path
+
     assert_redirected_to(root_path)
     follow_redirect!
+
     assert_response :success
   end
 
@@ -20,6 +23,7 @@ class SignUpsControllerTest < ActionDispatch::IntegrationTest
     end
 
     follow_redirect!
+
     assert_response :success
   end
 end

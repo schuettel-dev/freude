@@ -6,7 +6,7 @@ class GameType < ApplicationRecord
 
   scope :ordered, -> { order(name: :asc) }
 
-  # def new_game(user:)
-  #   instance_type.constantize.new(game_type: self, user:)
-  # end
+  def new_game(user:)
+    instance_type.constantize.new(game_type: self, user:)
+  end
 end
