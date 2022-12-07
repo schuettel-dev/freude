@@ -4,6 +4,7 @@ class SignUpsController < ApplicationController
 
   def new
     @user = User.new
+    @rejoin_form = SessionForm.new(params: { session: { token: session_past_user_token }})
   end
 
   def create
@@ -21,5 +22,9 @@ class SignUpsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name)
+  end
+
+  def session_past_user_token
+    session.dig(:past_user, "token")
   end
 end

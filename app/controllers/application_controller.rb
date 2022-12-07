@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
     session[:user_id] = user.id
+    session[:past_user] = nil
+  end
+
+  def sign_out
+    session[:past_user] = { name: Current.user.name, token: Current.user.token }
+    session[:user_id] = nil
   end
 
   def redirect_if_signed_in

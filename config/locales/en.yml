@@ -12,6 +12,7 @@ en:
   sign_ups:
     new:
       pick_a_username: Pick a user name
+      rejoin_as_user_name: Rejoin as %{user_name}
       sign_up: Join
   sessions:
     new:
