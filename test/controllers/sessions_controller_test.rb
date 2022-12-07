@@ -23,6 +23,20 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_routing "/", controller: "dashboard", action: "show"
   end
 
+  test "POST create, invalid params" do
+    post session_path, params: { session: { token: "" } }
+
+    assert_predicate session, :empty?
+    assert_response :unprocessable_entity
+  end
+
+  test "POST create, wrong token" do
+    post session_path, params: { session: { token: "INVALIDTOKEN" } }
+
+    assert_predicate session, :empty?
+    assert_response :unprocessable_entity
+  end
+
   test "DELETE destroy" do
     sign_in :mario
     delete session_path

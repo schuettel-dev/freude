@@ -26,4 +26,12 @@ class SignUpsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "POST create, invalid params" do
+    assert_no_difference -> { User.count } do
+      post sign_up_path, params: { user: { name: "" } }
+    end
+
+    assert_response :unprocessable_entity
+  end
 end

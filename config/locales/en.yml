@@ -15,4 +15,5 @@ en:
       sign_up: Join
   sessions:
     new:
+      sign_in: Sign in
       token: Enter token
