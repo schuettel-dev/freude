@@ -1,0 +1,8 @@
+<h1><%= t(".my_games") %></h1>
+
+<%= link_to t(".new_game"), games_path %>
+
+<% @games.each do |game| %>
+  <h2><%= game.group_name %></h2>
+  <%= link_to "#{game.id} - #{game.group_name}", my_game_path(game) %>
+<% end %>

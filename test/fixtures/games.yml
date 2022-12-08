@@ -1,6 +1,6 @@
-beatle_mario:
-  name: "Mario Bros"
-  game_type: beatle
+beatle:
+  name: "Beatle"
+  image_path: "games/beatle.png"
+  description: "Guess who's behind a playlist of 3 songs"
+  url_identifier: "beatle"
   type: "Game::Beatle"
-  state: "ended"
-  user: mario

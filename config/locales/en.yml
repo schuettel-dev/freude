@@ -6,6 +6,44 @@ en:
           attributes:
             token:
               does_not_exist: "does not exist"
+  activerecord:
+    attributes:
+      game:
+        name: Name
+        image_path: Image
+        description: Description
+        url_identifier: URL identifier
+        type: Type
+      game_instance:
+        group_name: Group name
+        state: State
+        type: Type
+        token: Token
+      user:
+        name: Name
+        token: Token
+        color: Color
+    models:
+      game:
+        one: Game
+        other: Games
+      game_instance:
+        one: Game instance
+        other: Game instances
+      user:
+        one: User
+        other: Users
+  games:
+    index:
+      start_this_game: Start this game
+    instances:
+      new:
+        ready: Ready!
+  my:
+    games:
+      index:
+        my_games: My games
+        new_game: New game
   shared:
     buttons:
       join_games: Join games

@@ -1,0 +1,8 @@
+<%= form_with(model: @game_instance.becomes(GameInstance)) do |f| %>
+
+  <%= f.label :group_name, class: "label" %>
+  <%= f.text_field :group_name, class: "input", placeholder: Game.human_attribute_name(:name) %>
+
+  <%= f.submit t(".ready"), class: "button" %>
+
+<% end %>

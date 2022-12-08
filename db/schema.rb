@@ -14,26 +14,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_192413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "game_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description", null: false
-    t.string "instance_type", null: false
+  create_table "game_instances", force: :cascade do |t|
+    t.string "group_name", null: false
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.string "state", null: false
+    t.string "type", null: false
+    t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["instance_type"], name: "index_game_types_on_instance_type", unique: true
-    t.index ["name"], name: "index_game_types_on_name", unique: true
+    t.index ["game_id"], name: "index_game_instances_on_game_id"
+    t.index ["user_id"], name: "index_game_instances_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "game_type_id", null: false
-    t.bigint "user_id", null: false
-    t.string "state", null: false
+    t.string "image_path", null: false
+    t.string "description", null: false
+    t.string "url_identifier", null: false
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_type_id"], name: "index_games_on_game_type_id"
-    t.index ["user_id"], name: "index_games_on_user_id"
+    t.index ["name"], name: "index_games_on_name", unique: true
+    t.index ["type"], name: "index_games_on_type", unique: true
+    t.index ["url_identifier"], name: "index_games_on_url_identifier", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,6 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_192413) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
-  add_foreign_key "games", "game_types"
-  add_foreign_key "games", "users"
+  add_foreign_key "game_instances", "games"
+  add_foreign_key "game_instances", "users"
 end

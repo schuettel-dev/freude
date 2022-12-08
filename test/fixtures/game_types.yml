@@ -1,4 +1,0 @@
-beatle:
-  name: "Beatle"
-  description: "Guess who's behind a playlist of 3 songs"
-  instance_type: "Game::Beatle"

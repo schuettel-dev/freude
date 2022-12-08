@@ -4,7 +4,7 @@ class SignUpsController < ApplicationController
 
   def new
     @user = User.new
-    @rejoin_form = SessionForm.new(params: { session: { token: session_past_user_token }})
+    @rejoin_form = SessionForm.new(params: { session: { token: session_past_user_token } })
   end
 
   def create

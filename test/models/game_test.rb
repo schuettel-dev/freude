@@ -2,33 +2,25 @@ require "test_helper"
 
 class GameTest < ActiveSupport::TestCase
   test "validations" do
-    game = Game.new(
-      name: "New game",
-      user: users(:mario),
-      game_type: game_types(:beatle),
-      state: :new,
-      type: "Game::Beatle"
-    )
+    game_type = Game.new
 
-    assert_difference -> { Game.count }, +1 do
-      assert game.save!
+    assert_not game_type.valid?
+
+    game_type.errors.to_a.tap do |errors|
+      assert_includes errors, "Name can't be blank"
+      assert_includes errors, "Image can't be blank"
+      assert_includes errors, "Description can't be blank"
+      assert_includes errors, "URL identifier can't be blank"
+      assert_includes errors, "Type can't be blank"
     end
   end
 
-  test "invalid" do
-    game = Game.new
+  test "#new_game_instance" do
+    game = games(:beatle)
 
-    assert_no_difference -> { Game.count } do
-      assert_not game.save
-    end
-
-    game.errors.to_a.tap do |errors|
-      assert_includes errors, "Name can't be blank"
-      assert_includes errors, "User must exist"
-      assert_includes errors, "Game type must exist"
-      assert_includes errors, "State can't be blank"
-      assert_includes errors, "Type can't be blank"
-      assert_includes errors, "Type is not included in the list"
+    game.new_game_instance.tap do |game_instance|
+      assert_equal GameInstance::Beatle, game_instance.type.constantize
+      assert_equal GameInstance::Beatle, game_instance.class
     end
   end
 end

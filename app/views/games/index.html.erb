@@ -1,0 +1,9 @@
+<h1><%= Game.model_name.human(count: 2) %></h1>
+
+<% @games.each do |game| %>
+  <section class="game">
+    <h2><%= game.name %></h2>
+    <p><%= game.description %></p>
+    <%= link_to t(".start_this_game"), new_game_instance_path(game) %>
+  </section>
+<% end %>

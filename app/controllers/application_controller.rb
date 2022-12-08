@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   before_action :set_current_user
   before_action :authenticate!
 
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    session[:past_user] = { name: Current.user.name, token: Current.user.token }
+    session[:past_user] = { name: Current.user.name, token: Current.user.token } if Current.user.present?
     session[:user_id] = nil
   end
 
@@ -25,6 +27,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    Current.user = session[:user_id].present? && User.find_by(id: session[:user_id])
+    return nil if session[:user_id].nil?
+
+    Current.user = User.find_by(id: session[:user_id])
+  end
+
+  def pundit_user
+    Current.user
   end
 end
