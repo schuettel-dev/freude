@@ -12,16 +12,8 @@
   </head>
 
   <body>
-    <header>
-      <% if Current.user.present? %>
-        <nav class="bg-indigo-700 text-white">
-          <ul>
-            <li>Games</li>
-            <li><%= button_to "Sign out", session_path, method: :delete %></li>
-          </ul>
-        </nav>
-      <% end %>
-    </header>
+    <%= render "layouts/header" %>
+
     <main>
       <%= yield %>
     </main>

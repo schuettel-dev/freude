@@ -13,7 +13,7 @@ class GameInstancesTest < ApplicationSystemTestCase
       click_on "Start this game"
     end
 
-    fill_in "Name", with: "All stars"
+    fill_in "Group name", with: "All stars"
     click_on "Ready!"
 
     assert_selector "h1", text: "All stars"

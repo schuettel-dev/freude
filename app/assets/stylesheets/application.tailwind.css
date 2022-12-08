@@ -7,7 +7,7 @@
 }
 
 .input {
-  @apply p-2 border border-gray-200;
+  @apply p-2 border border-gray-200 rounded border-indigo-500 border-2 bg-gray-100 text-lg;
 }
 
 .field_with_errors .input {
@@ -15,5 +15,19 @@
 }
 
 .button {
-  @apply bg-indigo-500 border border-indigo-500 px-8 py-2 text-white cursor-pointer hover:opacity-90 transition;
+  @apply inline-block w-full bg-indigo-600 px-8 py-2 text-white text-center text-lg cursor-pointer hover:opacity-90 transition rounded-lg;
+}
+
+html, body {
+  @apply min-h-screen;
+}
+
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #fbfbfb,
+    #fbfbfb 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
 }

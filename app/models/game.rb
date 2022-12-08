@@ -9,4 +9,8 @@ class Game < ApplicationRecord
   def new_game_instance(params = {})
     game_instances.new(params.merge(type: "GameInstance::#{self.class.name.demodulize}"))
   end
+
+  def to_partial_path
+    "games/game"
+  end
 end

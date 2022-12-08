@@ -34,10 +34,11 @@ en:
         one: User
         other: Users
   games:
-    index:
+    game:
       start_this_game: Start this game
     instances:
       new:
+        start_new_game: Start new game
         ready: Ready!
   my:
     games:
@@ -46,7 +47,9 @@ en:
         new_game: New game
   shared:
     buttons:
+      i_changed_my_mind: I changed my mind...
       join_games: Join games
+      sign_out: Sign out
   sign_ups:
     new:
       pick_a_username: Pick a user name
