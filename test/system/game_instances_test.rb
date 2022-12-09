@@ -6,7 +6,7 @@ class GameInstancesTest < ApplicationSystemTestCase
 
     click_on "New game"
 
-    assert_selector "h1", text: "Games"
+    assert_selector "h1", text: "All games"
 
     within_game_section "Beatle" do
       assert_text "Guess who's behind a playlist of 3 songs"

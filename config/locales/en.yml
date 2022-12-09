@@ -46,10 +46,14 @@ en:
         my_games: My games
         new_game: New game
   shared:
+    all_games: All games
     buttons:
+      back_to_dashboard: Back to dashboard
       i_changed_my_mind: I changed my mind...
       join_games: Join games
+      open: Open
       sign_out: Sign out
+    my_games: My games
   sign_ups:
     new:
       pick_a_username: Pick a user name

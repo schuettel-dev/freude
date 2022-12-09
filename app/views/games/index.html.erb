@@ -1,7 +1,11 @@
-<div class="p-8 sm:p-0">
-  <h1 class="text-5xl"><%= Game.model_name.human(count: 2) %></h1>
+<% content_for :navigation do %>
+  <%= render Links::BackToDashboardComponent.new %>
+<% end %>
 
-  <div class="flex flex-col gap-y-8 my-8">
+<div class="px-8 flex flex-col gap-y-8">
+  <h1 class="text-5xl mb-8"><%= t("shared.all_games") %></h1>
+
+  <div class="flex flex-col gap-y-8">
     <%= render @games %>
   </div>
 </div>

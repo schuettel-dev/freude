@@ -9,7 +9,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Name", with: "Toad"
     click_on "Join games"
 
-    assert_selector "h1", text: "Dashboard"
+    assert_selector "h1", text: "My games"
   end
 
   test "rejoin" do
@@ -20,6 +20,6 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Sign out"
     click_on "Rejoin as Yoshi"
 
-    assert_selector "h1", text: "Dashboard"
+    assert_selector "h1", text: "My games"
   end
 end
