@@ -4,6 +4,6 @@ class My::GamesController < ApplicationController
   end
 
   def show
-    @game_instance = policy_scope(GameInstance).find(params[:id])
+    @game_instance = policy_scope(GameInstance).find_by!(url_identifier: params[:id])
   end
 end

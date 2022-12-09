@@ -14,6 +14,7 @@ class GameInstanceTest < ActiveSupport::TestCase
     end
 
     assert_predicate game_instance, :initialized?
+    assert_match(/^[[:alnum:]]{6,}$/, game_instance.url_identifier)
     assert_match(/^[[:alnum:]]{5,}$/, game_instance.token)
   end
 

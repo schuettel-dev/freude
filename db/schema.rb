@@ -20,10 +20,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_192413) do
     t.bigint "user_id", null: false
     t.string "state", null: false
     t.string "type", null: false
+    t.string "url_identifier", null: false
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_game_instances_on_game_id"
+    t.index ["url_identifier"], name: "index_game_instances_on_url_identifier", unique: true
     t.index ["user_id"], name: "index_game_instances_on_user_id"
   end
 

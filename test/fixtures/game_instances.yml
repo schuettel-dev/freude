@@ -4,4 +4,5 @@ beatle_mario:
   type: "GameInstance::Beatle"
   state: "ended"
   user: mario
+  url_identifier: "MARIOBROSURLIDENTIFIER"
   token: "MARIOBROSTOKEN"
