@@ -21,6 +21,6 @@ end
 
 class ViewComponent::TestCase
   def new_component(...)
-    self.class.name.sub(/Test$/, '').constantize.new(...)
+    self.class.name.sub(/Test$/, "").constantize.new(...)
   end
 end

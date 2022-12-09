@@ -11,12 +11,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="flex flex-col">
     <%= render "layouts/header" %>
 
-    <main>
+    <main class="grow p-4">
       <%= yield %>
     </main>
-    <footer></footer>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>

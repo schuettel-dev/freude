@@ -1,4 +1,6 @@
-<h1><%= t(".my_games") %></h1>
+<% content_for :navigation do %>
+  <%= render "navigation" %>
+<% end %>
 
 <%= link_to t(".new_game"), games_path %>
 

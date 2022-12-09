@@ -1,10 +1,7 @@
 <% if Current.user.present? %>
   <header>
-    <nav class="px-8 py-4 sm:p-0 bg-indigo-700 text-white">
-      <ul class="w-full flex items-center justify-between">
-        <li><%= link_to Game.model_name.human(count: 2), my_games_path, class: "px-4 py-2 bg-indigo-600 text-xl inline-block rounded-lg" %></li>
-        <li><%= button_to t("shared.buttons.sign_out"), session_path, method: :delete, class: "px-4 py-2 bg-indigo-600 text-xl inline-block rounded-lg" %></li>
-      </ul>
-    </nav>
+    <div class="flex justify-between bg-gradient-to-br from-indigo-600 to bg-indigo-700 p-4 text-white">
+      <%= content_for :navigation %>
+    </div>
   </header>
 <% end %>
