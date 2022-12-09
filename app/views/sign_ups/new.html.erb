@@ -1,23 +1,30 @@
-<div>
-  <h1><%= t(".sign_up") %></h1>
+<div class="p-8 flex flex-col gap-y-10">
+  <h1 class="text-5xl mb-8"><%= t(".join_the_games") %></h1>
 
-  <div class="flex flex-col gap-y-4">
-    <% if session[:past_user].present? %>
+  <% if session[:past_user].present? %>
+    <div>
       <%= form_with(model: @rejoin_form, url: session_path) do |f| %>
         <%= f.hidden_field :token %>
         <div class="flex flex-col">
           <%= f.submit t(".rejoin_as_user_name", user_name: session.dig(:past_user, "name")), class: "button" %>
         </div>
       <% end %>
-    <% end %>
+    </div>
+    <div class="text-center text-lg text-gray-500"><%= t("shared.or").downcase %></div>
+  <% end %>
 
-    <%= form_with(model: @user, url: sign_up_path, class: "flex flex-col") do |f| %>
-      <div class="flex flex-col">
-        <%= f.label :name, class: "label" %>
-        <%= f.text_field :name, class: "input", placeholder: t(".pick_a_username") %>
-        <%= render Forms::FieldErrorsComponent.new(f.object, :name) %>
-      </div>
-      <%= f.submit t("shared.buttons.join_games"), class: "button" %>
+  <div>
+    <%= render CardComponent.new do %>
+      <%= form_with(model: @user, url: sign_up_path, class: "flex flex-col") do |f| %>
+        <div class="flex flex-col gap-y-4">
+          <div class="flex flex-col">
+            <%= f.label :name, class: "label" %>
+            <%= f.text_field :name, class: "input", placeholder: t(".pick_a_username") %>
+            <%= render Forms::FieldErrorsComponent.new(f.object, :name) %>
+          </div>
+          <%= f.submit t("shared.buttons.sign_up"), class: "button" %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -53,12 +53,14 @@ en:
       join_games: Join games
       open: Open
       sign_out: Sign out
+      sign_up: Sign up
     my_games: My games
+    or: Or
   sign_ups:
     new:
       pick_a_username: Pick a user name
       rejoin_as_user_name: Rejoin as %{user_name}
-      sign_up: Join
+      join_the_games: Join the games
   sessions:
     new:
       sign_in: Sign in
