@@ -1,12 +1,19 @@
 class GameInstance < ApplicationRecord
+  attr_readonly :url_identifier
+
   belongs_to :user
   belongs_to :game
 
-  attr_readonly :url_identifier
+  has_many :players
 
-  before_validation :initialize_state, if: :new_record?
-  before_validation :initialize_url_identifier, if: :new_record?
-  before_validation :initialize_token, if: :new_record?
+  with_options if: :new_record? do
+    before_validation(
+      :initialize_state,
+      :initialize_url_identifier,
+      :initialize_token,
+      :initialize_player
+    )
+  end
 
   validates :group_name, :state, :type, :token, presence: true
 
@@ -31,5 +38,9 @@ class GameInstance < ApplicationRecord
 
   def initialize_token
     self.token ||= SecureRandom.alphanumeric(5)
+  end
+
+  def initialize_player
+    players.find_or_initialize_by(user:)
   end
 end

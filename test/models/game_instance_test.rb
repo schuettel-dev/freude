@@ -2,11 +2,11 @@ require "test_helper"
 
 class GameInstanceTest < ActiveSupport::TestCase
   test "validations" do
-    game_instance = GameInstance.new(
+    user = users(:mario)
+
+    game_instance = games(:beatle).new_game_instance(
       group_name: "Group game",
-      user: users(:mario),
-      game: games(:beatle),
-      type: "GameInstance::Beatle"
+      user:
     )
 
     assert_difference -> { GameInstance.count }, +1 do
@@ -16,6 +16,8 @@ class GameInstanceTest < ActiveSupport::TestCase
     assert_predicate game_instance, :initialized?
     assert_match(/^[[:alnum:]]{6,}$/, game_instance.url_identifier)
     assert_match(/^[[:alnum:]]{5,}$/, game_instance.token)
+    assert_equal 1, game_instance.players.count
+    assert_equal user, game_instance.players.first.user
   end
 
   test "invalid" do
