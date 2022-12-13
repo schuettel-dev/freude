@@ -10,7 +10,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
   test "GET show" do
     sign_in :mario
-    get game_path(games(:beatle_mario))
+    get game_path(games(:beatle_mario_bros))
 
     assert_response :success
   end
@@ -19,7 +19,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     skip "to be implemented"
 
     sign_in :mario
-    get edit_game_path(games(:beatle_mario))
+    get edit_game_path(games(:beatle_mario_bros))
 
     assert_response :success
   end
@@ -28,7 +28,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     skip "to be implemented"
 
     sign_in :mario
-    put game_path(games(:beatle_mario))
+    put game_path(games(:beatle_mario_bros))
     follow_redirect!
 
     assert_response :success
@@ -38,7 +38,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     skip "to be implemented"
 
     sign_in :mario
-    delete game_path(games(:beatle_mario))
+    delete game_path(games(:beatle_mario_bros))
     follow_redirect!
 
     assert_response :success

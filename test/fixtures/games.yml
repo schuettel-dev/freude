@@ -1,4 +1,4 @@
-beatle_mario:
+beatle_mario_bros:
   group_name: "Mario Bros"
   game_template: beatle
   type: "Game::Beatle"
