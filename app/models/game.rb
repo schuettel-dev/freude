@@ -20,7 +20,7 @@ class Game < ApplicationRecord
   validates :group_name, :state, :type, :token, presence: true
 
   scope :ordered, -> { order(created_at: :desc) }
-  scope :for_user, ->(user) { where(user:) }
+  scope :for_user, ->(user) { where(players: Player.for_user(user)) }
 
   def to_param
     url_identifier

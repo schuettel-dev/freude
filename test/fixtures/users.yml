@@ -7,3 +7,8 @@ luigi:
   name: Luigi
   token: LUIGITOKEN
   color: "#369a0f"
+
+link:
+  name: Link
+  token: LINKTOKEN
+  color: "#4ba42d"

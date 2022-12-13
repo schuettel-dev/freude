@@ -30,6 +30,13 @@ class GameTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Luigi Bros"
   end
 
+  test "non-owner cannot edit a game" do
+    sign_in :luigi
+    goto_game "Mario Bros"
+
+    assert_no_link "Edit game"
+  end
+
   private
 
   def goto_game(group_name)

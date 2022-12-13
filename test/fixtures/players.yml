@@ -1,4 +1,9 @@
-mario_player_in_beatle_mario:
+mario_player_in_beatle_mario_bros:
   user: mario
+  game: beatle_mario_bros
+  type: "Player::Beatle"
+
+luigi_player_in_beatle_mario_bros:
+  user: luigi
   game: beatle_mario_bros
   type: "Player::Beatle"
