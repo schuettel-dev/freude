@@ -2,7 +2,7 @@ beatle_mario_bros:
   group_name: "Mario Bros"
   game_template: beatle
   type: "Game::Beatle"
-  state: "ended"
+  state: "initialized"
   user: mario
   url_identifier: "MARIOBROSURLIDENTIFIER"
   token: "MARIOBROSTOKEN"

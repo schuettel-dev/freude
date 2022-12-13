@@ -16,8 +16,6 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET edit" do
-    skip "to be implemented"
-
     sign_in :mario
     get edit_game_path(games(:beatle_mario_bros))
 
@@ -25,10 +23,15 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "PUT update" do
-    skip "to be implemented"
-
     sign_in :mario
-    put game_path(games(:beatle_mario_bros))
+
+    game = games(:beatle_mario_bros)
+
+    assert_changes -> { game.group_name }, to: "Another group name" do
+      put game_path(game), params: { game: { group_name: "Another group name" } }
+      game.reload
+    end
+
     follow_redirect!
 
     assert_response :success

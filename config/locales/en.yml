@@ -37,6 +37,9 @@ en:
     index:
       my_games: My games
       new_game: New game
+    shared:
+      edit_game: Edit game
+      update_game: Update game
   game_templates:
     game_template:
       start_this_game: Start this game
@@ -50,6 +53,7 @@ en:
     buttons:
       back_to_dashboard: Back to dashboard
       i_changed_my_mind: I changed my mind...
+      i_meant_to_do_something_else: I meant to do something else
       join_games: Join games
       goto_game: Goto game
       sign_out: Sign out

@@ -6,21 +6,20 @@
   <h1 class="text-5xl"><%= t(".start_new_game") %></h1>
 
   <%= render CardComponent.new do %>
-    <%= turbo_frame_tag :game_template do %>
-      <div class="flex flex-col gap-y-4">
-        <%= form_with(model: @game.becomes(Game), url: game_template_instance_path(@game.game_template)) do |f| %>
-          <div class="flex flex-col gap-y-4">
-            <fieldset class="flex flex-col">
-              <%= f.label :group_name, class: "label", error_class: '' %>
-              <%= f.text_field :group_name, class: "input", placeholder: Game.human_attribute_name(:group_name) %>
-              <%= render Forms::FieldErrorsComponent.new(f.object, :group_name) %>
-            </fieldset>
+    <%= turbo_frame_tag :new_game_template_instance do %>
+      <%= form_with(model: @game.becomes(Game), url: game_template_instance_path(@game.game_template)) do |f| %>
+        <div class="flex flex-col gap-y-4">
+          <fieldset class="flex flex-col">
+            <%= f.label :group_name, class: "label", error_class: '' %>
+            <%= f.text_field :group_name, class: "input", placeholder: Game.human_attribute_name(:group_name) %>
+            <%= render Forms::FieldErrorsComponent.new(f.object, :group_name) %>
+          </fieldset>
 
-            <%= f.submit t(".ready"), class: "button" %>
-          </div>
-        <% end %>
-        <%= link_to t("shared.buttons.i_changed_my_mind"), games_path, class: "ghost-button" %>
-      </div>
+          <%= f.submit t(".ready"), class: "button" %>
+
+          <%= link_to t("shared.buttons.i_changed_my_mind"), games_path, class: "ghost-button" %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

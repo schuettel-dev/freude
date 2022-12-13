@@ -1,5 +1,5 @@
-<%= render CardComponent.new do %>
-  <%= turbo_frame_tag dom_id(game, :list_item) do %>
+<section>
+  <%= render CardComponent.new do %>
     <div class="flex flex-col gap-y-4">
       <h2 class="text-2xl"><%= game.group_name %></h2>
       <%= link_to game_path(game), class: "button" do %>
@@ -8,4 +8,4 @@
       <% end %>
     </div>
   <% end %>
-<% end %>
+</section>
