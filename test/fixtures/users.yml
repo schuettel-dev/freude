@@ -8,6 +8,11 @@ luigi:
   token: LUIGITOKEN
   color: "#369a0f"
 
+toad:
+  name: Toad
+  token: TOADTOKEN
+  color: "#6117FF"
+
 link:
   name: Link
   token: LINKTOKEN
