@@ -30,11 +30,22 @@ class GameTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Luigi Bros"
   end
 
-  test "non-owner cannot edit a game" do
+  test "owner deletes a game" do
+    sign_in :mario
+
+    goto_game "Mario Bros"
+    click_on "Delete game"
+
+    assert_selector "h1", text: "My games"
+    assert_no_selector "h2", text: "Mario Bros"
+  end
+
+  test "non-owner cannot edit or delete a game" do
     sign_in :luigi
     goto_game "Mario Bros"
 
     assert_no_link "Edit game"
+    assert_no_link "Delete game"
   end
 
   private

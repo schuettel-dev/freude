@@ -3,14 +3,17 @@
 <% end %>
 
 <div class="px-8 flex flex-col gap-y-8">
-  <div class="fle flex-col gap-y-2">
-    <%= turbo_frame_tag @game, :edit do %>
-      <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
+  <%= turbo_frame_tag @game, :edit do %>
+    <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
+
+    <div class="flex flex-col gap-y-2">
       <% if policy(@game).edit? %>
         <%= link_to t("games.shared.edit_game"), edit_game_path, class: "button" %>
       <% end %>
-    <% end %>
-  </div>
+
+      <%= button_to t("games.shared.delete_game"), game_path, method: :delete, 'data-turbo-confirm': t("games.shared.do_you_really_want_to_delete_the_game"), class: "dangerous-button" %>
+    </div>
+  <% end %>
 
   <div>
     TODO

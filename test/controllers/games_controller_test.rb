@@ -38,10 +38,10 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "DELETE destroy" do
-    skip "to be implemented"
-
     sign_in :mario
-    delete game_path(games(:beatle_mario_bros))
+    assert_difference -> { Game.count }, -1 do
+      delete game_path(games(:beatle_mario_bros))
+    end
     follow_redirect!
 
     assert_response :success

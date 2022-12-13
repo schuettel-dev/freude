@@ -17,6 +17,11 @@ class GamesController < ApplicationController
     end
   end
 
+  def destroy
+    @game.destroy
+    redirect_to root_path
+  end
+
   private
 
   def set_and_authorize_game

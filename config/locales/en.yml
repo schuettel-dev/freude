@@ -38,6 +38,8 @@ en:
       my_games: My games
       new_game: New game
     shared:
+      delete_game: Delete game
+      do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
       update_game: Update game
   game_templates:
