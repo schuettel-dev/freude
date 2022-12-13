@@ -2,16 +2,13 @@
   <%= turbo_frame_tag dom_id(game, :list_item) do %>
     <div class="flex flex-col gap-y-4">
       <h2 class="text-2xl"><%= game.group_name %></h2>
-      <%= link_to game_path(game), class: "p-2 rounded-lg bg-indigo-600 text-white flex justify-center items-center gap-x-2 hover:bg-indigo-500 transition" do %>
-
+      <%= link_to game_path(game), class: "button" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
         </svg>
 
         <%= t("shared.buttons.goto_game") %>
-
       <% end %>
-
     </div>
   <% end %>
 <% end %>

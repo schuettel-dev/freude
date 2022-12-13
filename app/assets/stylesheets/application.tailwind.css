@@ -15,7 +15,11 @@
 }
 
 .button {
-  @apply inline-block w-full bg-indigo-600 px-8 py-2 text-white text-center text-lg cursor-pointer hover:opacity-90 transition rounded-lg;
+  @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-indigo-600 text-white cursor-pointer hover:opacity-90 transition;
+}
+
+.ghost-button {
+  @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-white text-gray-400 cursor-pointer hover:bg-gray-100 hover:text-gray-500 transition
 }
 
 html, body {
