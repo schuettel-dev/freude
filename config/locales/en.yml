@@ -9,16 +9,16 @@ en:
   activerecord:
     attributes:
       game:
+        group_name: Group name
+        state: State
+        type: Type
+        token: Token
+      game_template:
         name: Name
         image_path: Image
         description: Description
         url_identifier: URL identifier
         type: Type
-      game_instance:
-        group_name: Group name
-        state: State
-        type: Type
-        token: Token
       user:
         name: Name
         token: Token
@@ -34,24 +34,24 @@ en:
         one: User
         other: Users
   games:
-    game:
+    index:
+      my_games: My games
+      new_game: New game
+  game_templates:
+    game_template:
       start_this_game: Start this game
     instances:
       new:
+        back_to_all_games: Back to all games
         start_new_game: Start new game
         ready: Ready!
-  my:
-    games:
-      index:
-        my_games: My games
-        new_game: New game
   shared:
     all_games: All games
     buttons:
       back_to_dashboard: Back to dashboard
       i_changed_my_mind: I changed my mind...
       join_games: Join games
-      open: Open
+      goto_game: Goto game
       sign_out: Sign out
       sign_up: Sign up
     my_games: My games

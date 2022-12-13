@@ -14,22 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "game_instances", force: :cascade do |t|
-    t.string "group_name", null: false
-    t.bigint "game_id", null: false
-    t.bigint "user_id", null: false
-    t.string "state", null: false
-    t.string "type", null: false
-    t.string "url_identifier", null: false
-    t.string "token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_game_instances_on_game_id"
-    t.index ["url_identifier"], name: "index_game_instances_on_url_identifier", unique: true
-    t.index ["user_id"], name: "index_game_instances_on_user_id"
-  end
-
-  create_table "games", force: :cascade do |t|
+  create_table "game_templates", force: :cascade do |t|
     t.string "name", null: false
     t.string "image_path", null: false
     t.string "description", null: false
@@ -37,19 +22,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_games_on_name", unique: true
-    t.index ["type"], name: "index_games_on_type", unique: true
+    t.index ["name"], name: "index_game_templates_on_name", unique: true
+    t.index ["type"], name: "index_game_templates_on_type", unique: true
+    t.index ["url_identifier"], name: "index_game_templates_on_url_identifier", unique: true
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "group_name", null: false
+    t.bigint "game_template_id", null: false
+    t.bigint "user_id", null: false
+    t.string "state", null: false
+    t.string "type", null: false
+    t.string "url_identifier", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_template_id"], name: "index_games_on_game_template_id"
     t.index ["url_identifier"], name: "index_games_on_url_identifier", unique: true
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "players", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "game_instance_id", null: false
+    t.bigint "game_id", null: false
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_instance_id", "user_id"], name: "index_players_on_game_instance_id_and_user_id", unique: true
-    t.index ["game_instance_id"], name: "index_players_on_game_instance_id"
+    t.index ["game_id", "user_id"], name: "index_players_on_game_id_and_user_id", unique: true
+    t.index ["game_id"], name: "index_players_on_game_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -62,8 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
-  add_foreign_key "game_instances", "games"
-  add_foreign_key "game_instances", "users"
-  add_foreign_key "players", "game_instances"
+  add_foreign_key "games", "game_templates"
+  add_foreign_key "games", "users"
+  add_foreign_key "players", "games"
   add_foreign_key "players", "users"
 end

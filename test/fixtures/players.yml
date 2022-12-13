@@ -1,0 +1,4 @@
+mario_player_in_beatle_mario:
+  user: mario
+  game: beatle_mario
+  type: "Player::Beatle"

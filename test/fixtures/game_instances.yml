@@ -1,8 +1,0 @@
-beatle_mario:
-  group_name: "Mario Bros"
-  game: beatle
-  type: "GameInstance::Beatle"
-  state: "ended"
-  user: mario
-  url_identifier: "MARIOBROSURLIDENTIFIER"
-  token: "MARIOBROSTOKEN"

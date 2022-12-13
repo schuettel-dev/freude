@@ -1,16 +1,50 @@
 class Game < ApplicationRecord
-  has_many :game_instances, dependent: :destroy
+  attr_readonly :url_identifier
 
-  validates :name, :image_path, :description, :url_identifier, :type, presence: true
-  validates :name, :url_identifier, :type, uniqueness: true
+  belongs_to :user
+  belongs_to :game_template
 
-  scope :ordered, -> { order(name: :asc) }
+  has_many :players, dependent: :destroy
+  has_many :players_users, through: :players, source: :user
 
-  def new_game_instance(params = {})
-    game_instances.new(params.merge(type: "GameInstance::#{self.class.name.demodulize}"))
+  with_options if: :new_record? do
+    before_validation(
+      :initialize_type,
+      :initialize_state,
+      :initialize_url_identifier,
+      :initialize_token,
+      :initialize_player
+    )
   end
 
-  def to_partial_path
-    "games/game"
+  validates :group_name, :state, :type, :token, presence: true
+
+  scope :ordered, -> { order(created_at: :desc) }
+  scope :for_user, ->(user) { where(user:) }
+
+  def to_param
+    url_identifier
+  end
+
+  private
+
+  def initialize_type
+    self.type ||= [self.class, game_template&.class&.name&.demodulize].compact.join("::")
+  end
+
+  def initialize_state
+    self.state ||= type.safe_constantize.try(:states)&.keys&.first
+  end
+
+  def initialize_url_identifier
+    self.url_identifier ||= SecureRandom.alphanumeric(6)
+  end
+
+  def initialize_token
+    self.token ||= SecureRandom.alphanumeric(5)
+  end
+
+  def initialize_player
+    players.find_or_initialize_by(user:)
   end
 end

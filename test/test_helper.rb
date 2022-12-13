@@ -3,11 +3,28 @@ require_relative "../config/environment"
 require "rails/test_help"
 
 class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+
+  def assert_permit(user, record, action)
+    assert(
+      permit(user, record, action),
+      "User #{user.inspect} should be permitted to #{action} #{record}, but isn't permitted"
+    )
+  end
+
+  def assert_not_permit(user, record, action)
+    assert_not(
+      permit(user, record, action),
+      "User #{user.inspect} should NOT be permitted to #{action} #{record}, but is permitted"
+    )
+  end
+
+  def permit(user, record, action)
+    cls = self.class.to_s.gsub(/Test/, "")
+    cls.constantize.new(user, record).public_send(action)
+  end
 end
 
 class ActionDispatch::IntegrationTest

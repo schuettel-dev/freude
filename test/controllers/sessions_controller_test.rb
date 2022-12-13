@@ -37,7 +37,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     sign_in :mario
 
     assert_equal "/", request.path
-    assert_equal "my/games", request.params[:controller]
+    assert_equal "games", request.params[:controller]
     assert_equal "index", request.params[:action]
   end
 

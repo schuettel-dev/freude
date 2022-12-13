@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class GameInstancesTest < ApplicationSystemTestCase
+class GameTest < ApplicationSystemTestCase
   test "starts a new game" do
     sign_in :mario
 

@@ -1,0 +1,6 @@
+beatle:
+  name: "Beatle"
+  image_path: "games/beatle.png"
+  description: "Guess who's behind a playlist of 3 songs"
+  url_identifier: "beatle"
+  type: "GameTemplate::Beatle"
