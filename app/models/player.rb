@@ -5,6 +5,7 @@ class Player < ApplicationRecord
   before_validation :initialize_type, if: :new_record?
 
   scope :for_user, ->(user) { where(user:) }
+  scope :ordered_by_user_name, -> { joins(:user).order("users.name DESC") }
 
   private
 

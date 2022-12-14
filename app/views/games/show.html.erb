@@ -8,7 +8,37 @@
   <div>
     <%= render CardComponent.new do %>
       <div class="flex flex-col gap-y-4">
-        <h2 class="text-2xl"><%= t("shared.admin") %></h2>
+        <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("games.shared.invite") %></h2>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= render CardComponent.new do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="text-xl uppercase tracking-wide text-gray-600">
+          <%= t("players.shared.players_with_count", count: @game.players.size) %>
+        </h2>
+
+        <div class="text-2xl divide-y divide-indigo-200">
+          <% @game.players.ordered_by_user_name.each do |player| %>
+            <div class="flex gap-x-4 items-center py-4">
+              <div>
+                <span class="block w-6 h-6 rounded-lg border-4 border-white/60" style="background-color: <%= player.user.color %>;"></span>
+              </div>
+              <div><%= player.user.name %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= render CardComponent.new do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("shared.admin") %></h2>
 
         <%= turbo_frame_tag @game, :edit do %>
           <div class="flex flex-col gap-y-2">

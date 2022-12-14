@@ -30,6 +30,9 @@ en:
       game_instance:
         one: Game instance
         other: Game instances
+      player:
+        one: Player
+        other: Players
       user:
         one: User
         other: Users
@@ -51,6 +54,11 @@ en:
         back_to_all_games: Back to all games
         start_new_game: Start new game
         ready: Ready!
+  players:
+    shared:
+      players_with_count:
+        one: 1 Player
+        other: "%{count} Players"
   shared:
     admin: Admin
     all_games: All games
