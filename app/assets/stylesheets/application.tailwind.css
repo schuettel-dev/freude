@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .label {
-  @apply sr-only;
+  @apply text-sm text-gray-400;
 }
 
 .input {

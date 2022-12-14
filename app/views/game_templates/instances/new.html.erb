@@ -10,7 +10,7 @@
       <%= form_with(model: @game.becomes(Game), url: game_template_instance_path(@game.game_template)) do |f| %>
         <div class="flex flex-col gap-y-4">
           <fieldset class="flex flex-col">
-            <%= f.label :group_name, class: "label", error_class: '' %>
+            <%= f.label :group_name, class: "sr-only", error_class: "" %>
             <%= f.text_field :group_name, class: "input", placeholder: Game.human_attribute_name(:group_name) %>
             <%= render Forms::FieldErrorsComponent.new(f.object, :group_name) %>
           </fieldset>

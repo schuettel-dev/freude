@@ -38,6 +38,7 @@ en:
       my_games: My games
       new_game: New game
     shared:
+      back_to_game: Back to game
       delete_game: Delete game
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
@@ -51,6 +52,7 @@ en:
         start_new_game: Start new game
         ready: Ready!
   shared:
+    admin: Admin
     all_games: All games
     buttons:
       back_to_dashboard: Back to dashboard
