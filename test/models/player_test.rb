@@ -10,5 +10,7 @@ class PlayerTest < ActiveSupport::TestCase
     assert_difference -> { game.players.count }, +1 do
       assert player.save!
     end
+
+    assert_equal "Player::Beatle", player.type
   end
 end

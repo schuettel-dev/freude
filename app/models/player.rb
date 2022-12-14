@@ -10,6 +10,6 @@ class Player < ApplicationRecord
   private
 
   def initialize_type
-    self.type ||= [self.class, game&.class&.name&.demodulize].compact.join("::")
+    self.type ||= [self.class, game&.type&.split("::")&.last].compact.join("::")
   end
 end
