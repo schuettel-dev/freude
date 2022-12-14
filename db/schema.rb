@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
     t.string "type", null: false
+    t.integer "final_rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id", "user_id"], name: "index_players_on_game_id_and_user_id", unique: true
