@@ -7,7 +7,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
       t.string :state, null: false
       t.string :type, null: false
       t.string :url_identifier, null: false, index: { unique: true }
-      t.string :token, null: false
+      t.string :join_token, null: false
 
       t.timestamps
     end

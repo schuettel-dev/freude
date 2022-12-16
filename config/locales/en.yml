@@ -46,6 +46,8 @@ en:
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
       update_game: Update game
+    show:
+      join_url: URL to join
   game_templates:
     game_template:
       start_this_game: Start this game

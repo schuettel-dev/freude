@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.string "state", null: false
     t.string "type", null: false
     t.string "url_identifier", null: false
-    t.string "token", null: false
+    t.string "join_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_template_id"], name: "index_games_on_game_template_id"

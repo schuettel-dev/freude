@@ -5,4 +5,4 @@ beatle_mario_bros:
   state: "initialized"
   user: mario
   url_identifier: "MARIOBROSURLIDENTIFIER"
-  token: "MARIOBROSTOKEN"
+  join_token: "MARIOBROSJOINTOKEN"

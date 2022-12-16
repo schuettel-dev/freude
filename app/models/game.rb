@@ -12,12 +12,12 @@ class Game < ApplicationRecord
       :initialize_type,
       :initialize_state,
       :initialize_url_identifier,
-      :initialize_token,
+      :initialize_join_token,
       :initialize_player
     )
   end
 
-  validates :group_name, :state, :type, :token, presence: true
+  validates :group_name, :state, :type, :join_token, presence: true
 
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }
@@ -40,8 +40,8 @@ class Game < ApplicationRecord
     self.url_identifier ||= SecureRandom.alphanumeric(6)
   end
 
-  def initialize_token
-    self.token ||= SecureRandom.alphanumeric(5)
+  def initialize_join_token
+    self.join_token ||= SecureRandom.alphanumeric(5)
   end
 
   def initialize_player
