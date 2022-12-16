@@ -35,4 +35,16 @@ class ApplicationController < ActionController::Base
   def pundit_user
     Current.user
   end
+
+  def store_after_sign_in_redirect_to_url
+    return nil if session[:user_id].present?
+
+    session[:after_sign_in_redirect_to_url] = request.url
+  end
+
+  def use_after_sign_in_redirect_to_url
+    return if session[:after_sign_in_redirect_to_url].nil?
+
+    redirect_to session.delete(:after_sign_in_redirect_to_url)
+  end
 end

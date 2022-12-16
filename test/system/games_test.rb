@@ -61,6 +61,42 @@ class GamesTest < ApplicationSystemTestCase
     assert_no_link "Delete game"
   end
 
+  test "user joins game" do
+    game = games(:beatle_mario_bros)
+    sign_in :toad
+    visit game_join_url(game, token: game.join_token, host: "www.example.com")
+
+    assert_selector "h1", text: "Mario Bros"
+  end
+
+  test "user tries to join game, has a wrong token" do
+    game = games(:beatle_mario_bros)
+    sign_in :toad
+    visit game_join_url(game, token: "WRONGTOKEN", host: "www.example.com")
+
+    assert_selector "h1", text: "My games"
+    assert_selector ".flashes", text: "Game couldn't be joined, the token was wrong."
+  end
+
+  test "guest opens joins game url, signs up first" do
+    game = games(:beatle_mario_bros)
+    visit game_join_url(game, token: game.join_token, host: "www.example.com")
+    fill_in "Name", with: "Koopa"
+    click_on "Sign up"
+
+    assert_selector "h1", text: "Mario Bros"
+  end
+
+  test "user opens joins game url, rejoins first" do
+    game = games(:beatle_mario_bros)
+    sign_in :toad
+    sign_out
+    visit game_join_url(game, token: game.join_token, host: "www.example.com")
+    click_on "Rejoin as Toad"
+
+    assert_selector "h1", text: "Mario Bros"
+  end
+
   private
 
   def goto_game(group_name)

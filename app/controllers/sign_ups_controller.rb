@@ -12,7 +12,7 @@ class SignUpsController < ApplicationController
 
     if @user.save
       sign_in @user
-      redirect_to root_path
+      use_after_sign_in_redirect_to_url || redirect_to(root_path)
     else
       render :new, status: :unprocessable_entity
     end

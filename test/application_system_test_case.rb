@@ -8,4 +8,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "Token", with: users(user_fixture_key).token
     click_on "Join games"
   end
+
+  def sign_out
+    click_on "Sign out"
+  end
 end

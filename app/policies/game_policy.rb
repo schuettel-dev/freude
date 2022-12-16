@@ -27,6 +27,10 @@ class GamePolicy < ApplicationPolicy
     edit?
   end
 
+  def join?
+    true
+  end
+
   class Scope < Scope
     def resolve
       Game.for_user(user)

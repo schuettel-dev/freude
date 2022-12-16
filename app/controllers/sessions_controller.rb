@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     if @form.valid?
       sign_in(@form.user)
-      redirect_to root_path
+      use_after_sign_in_redirect_to_url || redirect_to(root_path)
     else
       render :new, status: :unprocessable_entity
     end

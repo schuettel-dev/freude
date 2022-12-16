@@ -46,4 +46,31 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "GET join" do
+    game = games(:beatle_mario_bros)
+    sign_in :toad
+
+    assert_difference -> { game.players.count }, +1 do
+      get game_join_url(game, token: game.join_token, host: "www.example.com")
+    end
+
+    follow_redirect!
+
+    assert_response :success
+  end
+
+  test "GET join, wrong token" do
+    game = games(:beatle_mario_bros)
+    sign_in :toad
+
+    assert_no_difference -> { game.players.count } do
+      get game_join_url(game, token: "WRONGTOKEN", host: "www.example.com")
+    end
+
+    follow_redirect!
+
+    assert_response :success
+    assert_equal "Game couldn't be joined, the token was wrong.", flash[:notice]
+  end
 end

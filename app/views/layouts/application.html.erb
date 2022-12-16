@@ -15,6 +15,7 @@
     <%= render "layouts/header" %>
 
     <main class="grow">
+      <%= render FlashesComponent.new(flash:) %>
       <%= yield %>
     </main>
   </body>

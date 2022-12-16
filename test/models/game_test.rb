@@ -36,4 +36,16 @@ class GameTest < ActiveSupport::TestCase
       assert_includes errors, "State can't be blank"
     end
   end
+
+  test "#add_player" do
+    game = games(:beatle_mario_bros)
+    user = users(:toad)
+    game.add_player(user:)
+
+    assert_difference -> { game.players.count }, +1 do
+      game.save!
+    end
+
+    assert_includes game.players_users, user
+  end
 end

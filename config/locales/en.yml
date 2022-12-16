@@ -40,6 +40,8 @@ en:
     index:
       my_games: My games
       new_game: New game
+    join:
+      could_not_join_game_due_to_wrong_token: Game couldn't be joined, the token was wrong.
     shared:
       back_to_game: Back to game
       delete_game: Delete game

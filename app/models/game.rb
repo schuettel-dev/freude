@@ -26,6 +26,10 @@ class Game < ApplicationRecord
     url_identifier
   end
 
+  def add_player(user:)
+    players.find_or_initialize_by(user:)
+  end
+
   private
 
   def initialize_type
@@ -45,6 +49,6 @@ class Game < ApplicationRecord
   end
 
   def initialize_player
-    players.find_or_initialize_by(user:)
+    add_player(user:)
   end
 end
