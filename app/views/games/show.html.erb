@@ -7,7 +7,7 @@
 
   <section>
     <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-8">
+      <div class="flex flex-col gap-y-4">
         <div class="flex flex-col gap-y-4">
           <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("games.shared.invite") %></h2>
           <fieldset>
@@ -17,9 +17,12 @@
         </div>
 
         <div class="w-full">
-          <div class="text-gray-800 max-w-lg mx-auto">
-            <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
-          </div>
+          <details>
+            <summary class="ghost-button block"><%= t("games.show.show_hide_qr_code") %></summary>
+            <div class="text-gray-800 max-w-lg mx-auto mt-4">
+              <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
+            </div>
+          </details>
         </div>
       </div>
     <% end %>

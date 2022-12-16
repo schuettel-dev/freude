@@ -48,6 +48,7 @@ en:
       update_game: Update game
     show:
       join_url: URL to join
+      show_hide_qr_code: Show/hide QR code
   game_templates:
     game_template:
       start_this_game: Start this game
