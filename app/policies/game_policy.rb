@@ -16,19 +16,23 @@ class GamePolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user
+    admin?
   end
 
   def update?
-    edit?
+    admin?
   end
 
   def destroy?
-    edit?
+    admin?
   end
 
   def join?
     true
+  end
+
+  def admin?
+    record.user == user
   end
 
   class Scope < Scope

@@ -53,12 +53,12 @@ class GamesTest < ApplicationSystemTestCase
     assert_no_selector "h2", text: "Mario Bros"
   end
 
-  test "non-owner cannot edit or delete a game" do
+  test "non-owner does not see the invite and admin section" do
     sign_in :luigi
     goto_game "Mario Bros"
 
-    assert_no_link "Edit game"
-    assert_no_link "Delete game"
+    assert_no_selector "h2", text: "Invite"
+    assert_no_selector "h2", text: "Admin"
   end
 
   test "user joins game" do

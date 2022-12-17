@@ -10,11 +10,13 @@ class GamePolicyTest < ActiveSupport::TestCase
     assert_permit users(:mario), games(:beatle_mario_bros), :edit?
     assert_permit users(:mario), games(:beatle_mario_bros), :update?
     assert_permit users(:mario), games(:beatle_mario_bros), :destroy?
+    assert_permit users(:mario), games(:beatle_mario_bros), :admin?
 
     assert_permit users(:luigi), games(:beatle_mario_bros), :show?
     assert_not_permit users(:luigi), games(:beatle_mario_bros), :edit?
     assert_not_permit users(:luigi), games(:beatle_mario_bros), :update?
     assert_not_permit users(:luigi), games(:beatle_mario_bros), :destroy?
+    assert_not_permit users(:luigi), games(:beatle_mario_bros), :admin?
 
     assert_not_permit users(:link), games(:beatle_mario_bros), :show?
   end

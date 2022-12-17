@@ -5,28 +5,30 @@
 <div class="px-8 flex flex-col gap-y-8">
   <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
 
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-4">
+  <% if policy(@game).admin? %>
+    <section>
+      <%= render CardComponent.new do %>
         <div class="flex flex-col gap-y-4">
-          <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("games.shared.invite") %></h2>
-          <fieldset>
-            <%= label_tag :join_url, t(".join_url"), class: "label" %>
-            <%= text_field_tag :join_url, game_join_url(@game, token: @game.join_token), readonly: true, class: "readonly-input font-mono" %>
-          </fieldset>
-        </div>
+          <div class="flex flex-col gap-y-4">
+            <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("games.shared.invite") %></h2>
+            <fieldset>
+              <%= label_tag :join_url, t(".join_url"), class: "label" %>
+              <%= text_field_tag :join_url, game_join_url(@game, token: @game.join_token), readonly: true, class: "readonly-input font-mono" %>
+            </fieldset>
+          </div>
 
-        <div class="w-full">
-          <details>
-            <summary class="ghost-button block"><%= t("games.show.show_hide_qr_code") %></summary>
-            <div class="text-gray-800 max-w-lg mx-auto mt-4">
-              <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
-            </div>
-          </details>
+          <div class="w-full">
+            <details>
+              <summary class="ghost-button block"><%= t("games.show.show_hide_qr_code") %></summary>
+              <div class="text-gray-800 max-w-lg mx-auto mt-4">
+                <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
+              </div>
+            </details>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </section>
+      <% end %>
+    </section>
+  <% end %>
 
   <section>
     <%= render CardComponent.new do %>
@@ -49,21 +51,23 @@
     <% end %>
   </section>
 
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-4">
-        <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("shared.admin") %></h2>
+  <% if policy(@game).admin? %>
+    <section>
+      <%= render CardComponent.new do %>
+        <div class="flex flex-col gap-y-4">
+          <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("shared.admin") %></h2>
 
-        <%= turbo_frame_tag @game, :edit do %>
-          <div class="flex flex-col gap-y-2">
-            <% if policy(@game).edit? %>
-              <%= link_to t("games.shared.edit_game"), edit_game_path, class: "button" %>
-            <% end %>
+          <%= turbo_frame_tag @game, :edit do %>
+            <div class="flex flex-col gap-y-2">
+              <% if policy(@game).edit? %>
+                <%= link_to t("games.shared.edit_game"), edit_game_path, class: "button" %>
+              <% end %>
 
-            <%= button_to t("games.shared.delete_game"), game_path, method: :delete, 'data-turbo-confirm': t("games.shared.do_you_really_want_to_delete_the_game"), class: "dangerous-button" %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </section>
+              <%= button_to t("games.shared.delete_game"), game_path, method: :delete, 'data-turbo-confirm': t("games.shared.do_you_really_want_to_delete_the_game"), class: "dangerous-button" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  <% end %>
 </div>
