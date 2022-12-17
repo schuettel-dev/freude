@@ -5,10 +5,15 @@ class User < ApplicationRecord
   attr_readonly :token
 
   before_validation :initialize_token, if: :new_record?
+  before_validation :initialize_color, if: :new_record?
 
   private
 
   def initialize_token
     self.token ||= SecureRandom.alphanumeric(16)
+  end
+
+  def initialize_color
+    self.color ||= Array.new(3).map { rand(0..255).to_s(16) }.join.prepend("#")
   end
 end

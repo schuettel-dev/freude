@@ -6,6 +6,7 @@ class UserTest < ActiveSupport::TestCase
 
     assert koopa.save!
     assert_match(/^[[:alnum:]]{16}$/, koopa.token)
+    assert_equal 7, koopa.color.size
   end
 
   test "token is readonly" do
