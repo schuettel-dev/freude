@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     resource :instance, only: %i[new create], module: :game_templates
   end
 
+  resource :profile, only: %i[show edit update]
+
   root to: "games#index"
 end

@@ -1,0 +1,31 @@
+<% content_for :navigation do %>
+  <%= render Links::BackToComponent.new(profile_path, t("profiles.shared.back_to_profile")) %>
+<% end %>
+
+<div class="px-8 flex flex-col gap-y-8">
+  <h1 class="text-5xl mb-8"><%= t("profiles.shared.edit_profile") %></h1>
+
+  <%= render CardComponent.new do %>
+    <%= turbo_frame_tag @user, :edit do %>
+      <%= form_with(model: @user, url: profile_path, method: :put) do |f| %>
+        <div class="flex flex-col gap-y-4">
+          <fieldset class="flex flex-col">
+            <%= f.label :name, class: "label", error_class: "" %>
+            <%= f.text_field :name, class: "input" %>
+            <%= render Forms::FieldErrorsComponent.new(f.object, :name) %>
+          </fieldset>
+
+          <fieldset class="flex flex-col">
+            <%= f.label :color, class: "label", error_class: "" %>
+            <%= f.color_field :color, class: "color-input" %>
+            <%= render Forms::FieldErrorsComponent.new(f.object, :color) %>
+          </fieldset>
+
+          <%= f.submit t("profiles.shared.update_profile"), class: "button" %>
+          <%= link_to t("shared.buttons.i_wanna_go_back"), profile_path, class: "ghost-button" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>

@@ -1,23 +1,7 @@
 <% if Current.user.present? %>
   <header>
     <div class="flex items-center justify-between bg-gradient-to-br from-indigo-600 to bg-indigo-700 px-8 py-4 text-white text-lg">
-      <div class="grow">
-        <%= content_for :navigation %>
-      </div>
-      <div class="shrink-0">
-        <%=
-          button_to(
-            session_path,
-            {
-              title: t("shared.buttons.sign_out"),
-              method: :delete,
-              class: "p-1 flex justify-center items-centertext-gray-400 opacity-20 hover:opacity-100 transition"
-            }
-          ) do
-        %>
-          <%= render HeroiconComponent.new(:"arrow-right-on-rectangle") %>
-        <% end %>
-      </div>
+      <%= content_for :navigation %>
     </div>
   </header>
 <% end %>

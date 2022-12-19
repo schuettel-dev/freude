@@ -3,6 +3,12 @@ require "test_helper"
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :rack_test
 
+  def navigate_to(target)
+    within "header" do
+      click_on target, exact_text: true
+    end
+  end
+
   def sign_in(user_fixture_key)
     visit new_session_path
     fill_in "Token", with: users(user_fixture_key).token
@@ -10,6 +16,19 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def sign_out
+    visit "/profile"
     click_on "Sign out"
+  end
+
+  def assert_description_list(term, description)
+    assert_selector "dl dt", exact_text: term do |element|
+      assert(
+        element.sibling("dd").has_text?(description),
+        <<~MESSAGE
+          Expected <dt> with term '#{term}' to have a sibling <dd> with description '#{description}', but hasn't.
+          Instead sibling <dd> has text '#{element.sibling("dd").text}'
+        MESSAGE
+      )
+    end
   end
 end

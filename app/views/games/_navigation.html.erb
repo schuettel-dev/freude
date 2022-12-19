@@ -1,4 +1,10 @@
-<div class="flex items-center gap-x-2">
-  <%= render HeroiconComponent.new(:"puzzle-piece") %>
-  <%= t("shared.dashboard") %>
+<div class="flex gap-x-4 justify-between items-center w-full">
+  <div class="flex items-center gap-x-2">
+    <%= render HeroiconComponent.new(:"puzzle-piece") %>
+    <%= t("shared.dashboard") %>
+  </div>
+
+  <%= link_to profile_path, class: "flex justify-center items-centertext-gray-400 opacity-20 hover:opacity-100 transition", title: t("shared.profile") do %>
+    <%= render HeroiconComponent.new(:user) %>
+  <% end %>
 </div>

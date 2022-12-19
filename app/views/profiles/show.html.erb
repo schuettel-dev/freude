@@ -1,0 +1,26 @@
+<% content_for :navigation do %>
+  <%= render Links::BackToComponent.new(root_path, t("shared.buttons.back_to_dashboard")) %>
+<% end %>
+
+<div class="px-8 flex flex-col gap-y-8">
+  <h1 class="text-5xl mb-8"><%= t(".my_profile") %></h1>
+
+  <%= render CardComponent.new do %>
+    <%= turbo_frame_tag @user, :edit do %>
+      <div class="flex flex-col gap-y-4">
+        <dl>
+          <dt class="label">Name</dt>
+          <dd class="text-2xl">
+            <%= render Users::NameWithColorBadgeComponent.new(user: @user) %>
+          </dd>
+        </dl>
+        <%= link_to t("profiles.shared.edit_profile"), edit_profile_path, class: "button" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= button_to session_path, method: :delete, class: "dangerous-button" do %>
+    <%= render HeroiconComponent.new(:"arrow-right-on-rectangle") %>
+    <%= t("shared.buttons.sign_out") %>
+  <% end %>
+</div>

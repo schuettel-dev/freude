@@ -17,7 +17,7 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Name", with: "Yoshi"
     click_on "Sign up"
-    click_on "Sign out"
+    sign_out
     click_on "Rejoin as Yoshi"
 
     assert_selector "h1", text: "My games"

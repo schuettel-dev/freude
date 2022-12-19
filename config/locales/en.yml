@@ -64,6 +64,11 @@ en:
       players_with_count:
         one: 1 Player
         other: "%{count} Players"
+  profiles:
+    shared:
+      back_to_profile: Back to profile
+      edit_profile: Edit profile
+      update_profile: Update profile
   shared:
     admin: Admin
     all_games: All games
@@ -71,12 +76,15 @@ en:
       back_to_dashboard: Back to dashboard
       i_changed_my_mind: I changed my mind...
       i_meant_to_do_something_else: I meant to do something else
+      i_wanna_go_back: I wanna go back
       join_games: Join games
       goto_game: Goto game
       sign_out: Sign out
       sign_up: Sign up
+    dashboard: Dashboard
     my_games: My games
     or: Or
+    profile: Profile
   sign_ups:
     new:
       pick_a_username: Pick a user name
