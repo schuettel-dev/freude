@@ -450,6 +450,9 @@ Style/ArgumentsForwarding:
 Style/ArrayCoercion:
   Enabled: true
 
+Style/ArrayIntersect:
+  Enabled: true
+
 Style/BisectedAttrAccessor:
   Enabled: true
 
@@ -580,6 +583,9 @@ Style/RedundantArgument:
   Enabled: true
 
 Style/RedundantAssignment:
+  Enabled: true
+
+Style/RedundantConstantBase:
   Enabled: true
 
 Style/RedundantEach:
