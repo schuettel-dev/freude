@@ -10,6 +10,7 @@ class GameTemplateTest < ActiveSupport::TestCase
       assert_includes errors, "Name can't be blank"
       assert_includes errors, "Image can't be blank"
       assert_includes errors, "Description can't be blank"
+      assert_includes errors, "Minimum players can't be blank"
       assert_includes errors, "URL identifier can't be blank"
       assert_includes errors, "Type can't be blank"
     end

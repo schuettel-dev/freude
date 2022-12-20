@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.string "name", null: false
     t.string "image_path", null: false
     t.string "description", null: false
+    t.integer "minimum_players", null: false
     t.string "url_identifier", null: false
     t.string "type", null: false
     t.datetime "created_at", null: false

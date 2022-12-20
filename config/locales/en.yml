@@ -17,6 +17,7 @@ en:
         name: Name
         image_path: Image
         description: Description
+        minimum_players: Minimum players
         url_identifier: URL identifier
         type: Type
       user:
