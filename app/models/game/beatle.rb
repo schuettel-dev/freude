@@ -1,5 +1,7 @@
 class Game::Beatle < Game
   enum state: {
-    initialized: "initialized"
+    collecting: "collecting",
+    guessing: "guessing",
+    ended: "ended"
   }
 end

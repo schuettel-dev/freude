@@ -8,6 +8,11 @@ luigi:
   token: LUIGITOKEN
   color: "#369a0f"
 
+peach:
+  name: Peach
+  token: PEACHTOKEN
+  color: "#F5A889"
+
 toad:
   name: Toad
   token: TOADTOKEN

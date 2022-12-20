@@ -7,3 +7,8 @@ luigi_player_in_beatle_mario_bros:
   user: luigi
   game: beatle_mario_bros
   type: "Player::Beatle"
+
+peach_player_in_beatle_mario_bros:
+  user: peach
+  game: beatle_mario_bros
+  type: "Player::Beatle"

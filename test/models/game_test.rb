@@ -15,7 +15,7 @@ class GameTest < ActiveSupport::TestCase
       assert game.save!
     end
 
-    assert_predicate game, :initialized?
+    assert_predicate game, :collecting?
     assert_match(/^[[:alnum:]]{6,}$/, game.url_identifier)
     assert_match(/^[[:alnum:]]{5,}$/, game.join_token)
     assert_equal 1, game.players.count

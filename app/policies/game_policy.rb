@@ -28,7 +28,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def join?
-    true
+    raise "implement in subclass"
   end
 
   def admin?

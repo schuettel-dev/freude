@@ -13,6 +13,15 @@ en:
         state: State
         type: Type
         token: Token
+      game/beatle:
+        states:
+          collecting: Collecting
+          ended: Ended
+          guessing: Guessing
+        state_descriptions:
+          collecting: Players join and submit their songs.
+          ended: Final results and ranking.
+          guessing: Players listen to the others songs and guess who is behind.
       game_template:
         name: Name
         image_path: Image
@@ -48,6 +57,7 @@ en:
       delete_game: Delete game
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
+      how_it_works: How it works
       update_game: Update game
     show:
       join_url: URL to join

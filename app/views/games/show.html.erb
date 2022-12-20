@@ -39,12 +39,29 @@
 
         <div class="text-2xl divide-y divide-indigo-200">
           <% @game.players.ordered_by_user_name.each do |player| %>
-            <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+            <div class="py-2">
+              <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+            </div>
           <% end %>
         </div>
       </div>
     <% end %>
   </section>
+
+  <section>
+    <%= render CardComponent.new do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="text-xl uppercase tracking-wide text-gray-600">
+          <%= t("games.shared.how_it_works") %>
+        </h2>
+
+        <div>
+          <%= render Games::StateDescriptionComponent.new(game: @game) %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+
 
   <% if policy(@game).admin? %>
     <section>
