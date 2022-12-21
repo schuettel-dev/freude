@@ -22,7 +22,7 @@ class GamesTest < ApplicationSystemTestCase
     assert_selector "h2", text: "Admin"
   end
 
-  test "owner sees invitation section" do
+  test "owner sees invitation section, if joining is still possible" do
     sign_in :mario
 
     goto_game "Mario Bros"
@@ -30,6 +30,15 @@ class GamesTest < ApplicationSystemTestCase
     within_game_section "Invite" do
       assert_field "URL to join", with: "http://www.example.com/games/MARIOBROSURLIDENTIFIER/join/MARIOBROSJOINTOKEN"
     end
+  end
+
+  test "owner does not see invitation section, if joining is not possible" do
+    games(:beatle_mario_bros).guessing!
+    sign_in :mario
+
+    goto_game "Mario Bros"
+
+    assert_no_selector "h2", text: "Invite"
   end
 
   test "owner edits a game" do
