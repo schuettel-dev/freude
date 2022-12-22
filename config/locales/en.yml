@@ -46,6 +46,9 @@ en:
       user:
         one: User
         other: Users
+  game:
+    beatle:
+      proceed_to_guessing_phase: Proceed to Guessing phase
   games:
     index:
       my_games: My games

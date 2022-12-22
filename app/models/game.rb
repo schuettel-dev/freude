@@ -30,6 +30,20 @@ class Game < ApplicationRecord
     players.find_or_initialize_by(user:)
   end
 
+  def change_state(to_state)
+    update(state: to_state) if transition_allowed?(to_state:)
+  end
+
+  def transition_allowed?(to_state:)
+    state.to_sym == to_state.to_sym ||
+      (self.class::ALLOWED_TRANSITIONS[state.to_sym].include?(to_state.to_sym) &&
+        meets_preconditions_to_transit_to_state?(to_state:))
+  end
+
+  def minimum_players_reached?
+    players.count >= (game_template&.minimum_players || Float::INFINITY)
+  end
+
   private
 
   def initialize_type
@@ -50,5 +64,9 @@ class Game < ApplicationRecord
 
   def initialize_player
     add_player(user:)
+  end
+
+  def meets_preconditions_to_transit_to_state?(*)
+    raise "implement in subclass"
   end
 end

@@ -105,27 +105,4 @@ class GamesTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Mario Bros"
   end
-
-  private
-
-  def goto_game(group_name)
-    within_game_list_item(group_name) do
-      click_on "Goto game"
-    end
-  end
-
-  def within_game_template_section(game_name, &)
-    game_title_element = find "h2", text: game_name
-    within(game_title_element.ancestor("section"), &)
-  end
-
-  def within_game_list_item(group_name, &)
-    group_title_element = find "h2", text: group_name
-    within(group_title_element.ancestor("section"), &)
-  end
-
-  def within_game_section(section_title, &)
-    section_title_element = find "h2", text: section_title
-    within(section_title_element.ancestor("section"), &)
-  end
 end

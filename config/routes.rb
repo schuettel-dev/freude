@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resource :sign_up, only: %i[new create]
   resources :games, only: %i[index show edit update destroy] do
     get "join/:token", action: :join, as: :join
+    resource :state, only: :update, module: :games
   end
 
   resources :game_templates, only: %i[index] do

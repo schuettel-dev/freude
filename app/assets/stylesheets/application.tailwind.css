@@ -26,6 +26,10 @@
   @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-indigo-600 text-white cursor-pointer hover:opacity-90 transition;
 }
 
+.attractive-button {
+  @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-teal-500 text-black cursor-pointer hover:opacity-90 transition;
+}
+
 .dangerous-button {
   @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-red-600 text-white cursor-pointer hover:opacity-90 transition;
 }
