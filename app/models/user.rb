@@ -14,6 +14,6 @@ class User < ApplicationRecord
   end
 
   def initialize_color
-    self.color ||= Array.new(3).map { rand(0..255).to_s(16) }.join.prepend("#")
+    self.color ||= Array.new(3).map { rand(0..255).to_s(16).rjust(2, "0") }.join.prepend("#")
   end
 end
