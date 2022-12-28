@@ -1,5 +1,10 @@
 ---
 
+Style/ConcatArrayLiterals: # new in 1.41
+  Enabled: true
+Style/RedundantDoubleSplatHashBraces: # new in 1.41
+  Enabled: true
+
 require:
 - rubocop-minitest
 - rubocop-rails
