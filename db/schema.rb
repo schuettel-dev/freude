@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.string "group_name", null: false
     t.bigint "game_template_id", null: false
     t.bigint "user_id", null: false
-    t.string "state", null: false
+    t.string "phase", null: false
     t.string "type", null: false
     t.string "url_identifier", null: false
     t.string "join_token", null: false

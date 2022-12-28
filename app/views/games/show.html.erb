@@ -5,16 +5,26 @@
 <div class="px-8 flex flex-col gap-y-8">
   <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
 
-  <div>
-    <%= render Games::StateBadgeComponent.new(game: @game) %>
-  </div>
+  <section>
+    <%= render CardComponent.new(padding: false) do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="mt-4 mx-4 text-xl uppercase tracking-wide text-gray-600">
+          <%= t("shared.phases", count: 2) %>
+        </h2>
+
+        <%= render Games::PhaseDescriptionComponent.new(game: @game) %>
+      </div>
+    <% end %>
+  </section>
 
   <% if policy(@game).admin? && policy(@game).join? %>
     <section>
       <%= render CardComponent.new do %>
         <div class="flex flex-col gap-y-4">
           <div class="flex flex-col gap-y-4">
-            <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("games.shared.invite") %></h2>
+            <h2 class="text-xl uppercase tracking-wide text-gray-600">
+              <%= t("games.shared.invite") %>
+            </h2>
             <fieldset>
               <%= label_tag :join_url, t(".join_url"), class: "label" %>
               <%= text_field_tag :join_url, game_join_url(@game, token: @game.join_token), readonly: true, class: "readonly-input font-mono" %>
@@ -23,7 +33,11 @@
 
           <div class="w-full">
             <details>
-              <summary class="ghost-button block"><%= t("games.show.show_hide_qr_code") %></summary>
+              <summary class="ghost-button block items-center">
+                <%= render HeroiconComponent.new(:"qr-code") %>
+                <%= t("games.show.qr_code") %>
+
+              </summary>
               <div class="text-gray-800 max-w-lg mx-auto mt-4">
                 <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
               </div>
@@ -52,21 +66,6 @@
     <% end %>
   </section>
 
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-4">
-        <h2 class="text-xl uppercase tracking-wide text-gray-600">
-          <%= t("games.shared.how_it_works") %>
-        </h2>
-
-        <div>
-          <%= render Games::StateDescriptionComponent.new(game: @game) %>
-        </div>
-      </div>
-    <% end %>
-  </section>
-
-
   <% if policy(@game).admin? %>
     <section>
       <%= render CardComponent.new do %>
@@ -75,7 +74,7 @@
 
           <%= turbo_frame_tag @game, :edit do %>
             <div class="flex flex-col gap-y-2">
-              <%= render Games::StateChangesComponent.new(game: @game) %>
+              <%= render Games::PhaseChangesComponent.new(game: @game) %>
 
               <% if policy(@game).edit? %>
                 <%= link_to t("games.shared.edit_game"), edit_game_path, class: "button" %>

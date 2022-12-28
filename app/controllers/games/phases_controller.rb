@@ -1,8 +1,8 @@
-class Games::StatesController < ApplicationController
+class Games::PhasesController < ApplicationController
   before_action :set_and_authorize_game
 
   def update
-    unless @game.change_state(params[:state].presence)
+    unless @game.change_phase(params[:phase].presence)
       # TODO
     end
 
@@ -13,6 +13,6 @@ class Games::StatesController < ApplicationController
 
   def set_and_authorize_game
     @game = policy_scope(Game).find_by!(url_identifier: params[:game_id])
-    authorize @game, :update_state?
+    authorize @game, :update_phase?
   end
 end

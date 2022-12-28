@@ -33,7 +33,7 @@ class GameTest < ActiveSupport::TestCase
       assert_includes errors, "Group name can't be blank"
       assert_includes errors, "User must exist"
       assert_includes errors, "Game template must exist"
-      assert_includes errors, "State can't be blank"
+      assert_includes errors, "Phase can't be blank"
     end
   end
 

@@ -38,6 +38,10 @@
   @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-white text-gray-400 cursor-pointer hover:bg-gray-100 hover:text-gray-500 transition
 }
 
+details summary {
+  @apply cursor-pointer;
+}
+
 html, body {
   @apply min-h-screen;
 }

@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class Games::BeatleTest < ApplicationSystemTestCase
-  test "owner cannot change state to :guessing if not enough players" do
+  test "owner cannot change phase to :guessing if not enough players" do
     players(:peach_player_in_beatle_mario_bros).destroy!
     sign_in :mario
     goto_game "Mario Bros"
@@ -11,16 +11,20 @@ class Games::BeatleTest < ApplicationSystemTestCase
     end
   end
 
-  test "owner changes state to guessing" do
+  test "owner changes phase to guessing" do
     sign_in :mario
     goto_game "Mario Bros"
 
-    assert_selector ".games--state-badge", text: "Collecting"
+    within_game_section "Phases" do
+      assert_selector "details[open]", text: "Collecting"
+    end
 
     within_game_section "Admin" do
       click_on "Proceed to Guessing phase"
     end
 
-    assert_selector ".games--state-badge", text: "Guessing"
+    within_game_section "Phases" do
+      assert_selector "details[open]", text: "Guessing"
+    end
   end
 end

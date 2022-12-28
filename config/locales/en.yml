@@ -10,15 +10,15 @@ en:
     attributes:
       game:
         group_name: Group name
-        state: State
+        phase: Phase
         type: Type
         token: Token
       game/beatle:
-        states:
+        phases:
           collecting: Collecting
           ended: Ended
           guessing: Guessing
-        state_descriptions:
+        phase_descriptions:
           collecting: Players join and submit their songs.
           ended: Final results and ranking.
           guessing: Players listen to the others songs and guess who is behind.
@@ -57,6 +57,7 @@ en:
       could_not_join_game_due_to_wrong_token: Game couldn't be joined, the token was wrong.
     shared:
       back_to_game: Back to game
+      current_phase: Current
       delete_game: Delete game
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
@@ -64,7 +65,7 @@ en:
       update_game: Update game
     show:
       join_url: URL to join
-      show_hide_qr_code: Show/hide QR code
+      qr_code: QR code
   game_templates:
     game_template:
       start_this_game: Start this game
@@ -99,6 +100,9 @@ en:
     my_games: My games
     or: Or
     profile: Profile
+    phase:
+      one: Phase
+      other: Phases
   sign_ups:
     new:
       pick_a_username: Pick a user name

@@ -5,16 +5,16 @@ class Game::BeatlePolicyTest < ActiveSupport::TestCase
     assert_permit users(:toad), games(:beatle_mario_bros), :join?
   end
 
-  test "not #join?, state :guessing" do
+  test "not #join?, phase :guessing" do
     game = games(:beatle_mario_bros)
-    game.state = :guessing
+    game.phase = :guessing
 
     assert_not_permit users(:toad), game, :join?
   end
 
-  test "not #join?, state :ended" do
+  test "not #join?, phase :ended" do
     game = games(:beatle_mario_bros)
-    game.state = :ended
+    game.phase = :ended
 
     assert_not_permit users(:toad), game, :join?
   end

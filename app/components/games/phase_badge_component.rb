@@ -1,4 +1,4 @@
-class Games::Beatle::StateChangesComponent < ViewComponent::Base
+class Games::PhaseBadgeComponent < ViewComponent::Base
   attr_reader :game
 
   def initialize(game:)

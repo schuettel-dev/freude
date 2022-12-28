@@ -1,5 +1,5 @@
 class Game::Beatle < Game
-  enum state: {
+  enum phase: {
     collecting: "collecting",
     guessing: "guessing",
     ended: "ended"
@@ -11,8 +11,8 @@ class Game::Beatle < Game
     ended: []
   }.freeze
 
-  def meets_preconditions_to_transit_to_state?(to_state:)
-    return true unless to_state.to_sym == :guessing
+  def meets_preconditions_to_transit_to_phase?(to_phase:)
+    return true unless to_phase.to_sym == :guessing
 
     minimum_players_reached?
   end

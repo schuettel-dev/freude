@@ -1,4 +1,6 @@
 class Games::ProxyComponent < ViewComponent::Base
+  attr_reader :game
+
   def initialize(game:)
     @game = game
     super()

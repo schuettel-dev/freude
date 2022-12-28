@@ -13,28 +13,28 @@ class Game::BeatleTest < ActiveSupport::TestCase
 
   test "#transition_allowed?, from: :collecting" do
     game = games(:beatle_mario_bros)
-    game.state = :collecting
+    game.phase = :collecting
 
-    assert game.transition_allowed?(to_state: :collecting)
-    assert game.transition_allowed?(to_state: :guessing)
-    assert_not game.transition_allowed?(to_state: :ended)
+    assert game.transition_allowed?(to_phase: :collecting)
+    assert game.transition_allowed?(to_phase: :guessing)
+    assert_not game.transition_allowed?(to_phase: :ended)
   end
 
   test "#transition_allowed?, from: :guessing" do
     game = games(:beatle_mario_bros)
-    game.state = :guessing
+    game.phase = :guessing
 
-    assert game.transition_allowed?(to_state: :collecting)
-    assert game.transition_allowed?(to_state: :guessing)
-    assert game.transition_allowed?(to_state: :ended)
+    assert game.transition_allowed?(to_phase: :collecting)
+    assert game.transition_allowed?(to_phase: :guessing)
+    assert game.transition_allowed?(to_phase: :ended)
   end
 
   test "#transition_allowed?, from: :ended" do
     game = games(:beatle_mario_bros)
-    game.state = :ended
+    game.phase = :ended
 
-    assert_not game.transition_allowed?(to_state: :collecting)
-    assert_not game.transition_allowed?(to_state: :guessing)
-    assert game.transition_allowed?(to_state: :ended)
+    assert_not game.transition_allowed?(to_phase: :collecting)
+    assert_not game.transition_allowed?(to_phase: :guessing)
+    assert game.transition_allowed?(to_phase: :ended)
   end
 end

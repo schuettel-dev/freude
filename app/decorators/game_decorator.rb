@@ -1,9 +1,9 @@
 class GameDecorator < SimpleDelegator
-  def display_state
-    __getobj__.class.human_enum_name(:state, state)
+  def display_phase
+    __getobj__.class.human_enum_name(:phase, phase)
   end
 
-  def display_state_description
-    __getobj__.class.human_enum_name(:state_description, state)
+  def display_phase_description
+    __getobj__.class.human_enum_name(:phase_description, phase)
   end
 end

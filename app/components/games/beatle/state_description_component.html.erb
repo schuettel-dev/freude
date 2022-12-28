@@ -1,7 +1,0 @@
-<ol class="list-decimal list-outside px-4 text-lg">
-  <% states.each do |state| %>
-    <li class="p-2 <%= state_classes(state) %>">
-      <%= Game::Beatle.human_enum_name(:state_description, state) %>
-    </li>
-  <% end %>
-</ol>

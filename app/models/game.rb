@@ -10,14 +10,14 @@ class Game < ApplicationRecord
   with_options if: :new_record? do
     before_validation(
       :initialize_type,
-      :initialize_state,
+      :initialize_phase,
       :initialize_url_identifier,
       :initialize_join_token,
       :initialize_player
     )
   end
 
-  validates :group_name, :state, :type, :join_token, presence: true
+  validates :group_name, :phase, :type, :join_token, presence: true
 
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }
@@ -30,14 +30,14 @@ class Game < ApplicationRecord
     players.find_or_initialize_by(user:)
   end
 
-  def change_state(to_state)
-    update(state: to_state) if transition_allowed?(to_state:)
+  def change_phase(to_phase)
+    update(phase: to_phase) if transition_allowed?(to_phase:)
   end
 
-  def transition_allowed?(to_state:)
-    state.to_sym == to_state.to_sym ||
-      (self.class::ALLOWED_TRANSITIONS[state.to_sym].include?(to_state.to_sym) &&
-        meets_preconditions_to_transit_to_state?(to_state:))
+  def transition_allowed?(to_phase:)
+    phase.to_sym == to_phase.to_sym ||
+      (self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym) &&
+        meets_preconditions_to_transit_to_phase?(to_phase:))
   end
 
   def minimum_players_reached?
@@ -50,8 +50,8 @@ class Game < ApplicationRecord
     self.type ||= [self.class, game_template&.class&.name&.demodulize].compact.join("::")
   end
 
-  def initialize_state
-    self.state ||= type.safe_constantize.try(:states)&.keys&.first
+  def initialize_phase
+    self.phase ||= type.safe_constantize.try(:phases)&.keys&.first
   end
 
   def initialize_url_identifier
@@ -66,7 +66,7 @@ class Game < ApplicationRecord
     add_player(user:)
   end
 
-  def meets_preconditions_to_transit_to_state?(*)
+  def meets_preconditions_to_transit_to_phase?(*)
     raise "implement in subclass"
   end
 end
