@@ -1,7 +1,7 @@
 <ol class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
   <% phases.each do |phase| %>
     <li>
-      <details class="open:bg-indigo-100" <%= current_phase?(phase) ? "open" : nil %>>
+      <details class="open:bg-indigo-50" <%= current_phase?(phase) ? "open" : nil %>>
         <summary class="text-lg p-4 hover:bg-indigo-100 transition flex items-center gap-x-2 justify-between">
           <%= Game::Beatle.human_enum_name(:phase, phase) %>
 
@@ -12,7 +12,7 @@
           <% end %>
         </summary>
 
-        <p class="p-4 text-lg bg-white">
+        <p class="p-4 text-lg bg-indigo-50">
           <%= Game::Beatle.human_enum_name(:phase_description, phase) %>
         </p>
       </details>
