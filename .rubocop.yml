@@ -1,10 +1,5 @@
 ---
 
-Style/ConcatArrayLiterals: # new in 1.41
-  Enabled: true
-Style/RedundantDoubleSplatHashBraces: # new in 1.41
-  Enabled: true
-
 require:
 - rubocop-minitest
 - rubocop-rails
@@ -22,6 +17,9 @@ Rails:
   Enabled: true
 
 Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+
+Gemspec/DevelopmentDependencies:
   Enabled: true
 
 Gemspec/RequireMFA:
@@ -191,6 +189,9 @@ Lint/UnreachableLoop:
 Lint/UselessMethodDefinition:
   Enabled: true
 
+Lint/UselessRescue:
+  Enabled: true
+
 Lint/UselessRuby2Keywords:
   Enabled: true
 
@@ -233,6 +234,9 @@ Minitest/AssertRaisesCompoundBody:
 Minitest/AssertRaisesWithRegexpArgument:
   Enabled: true
 
+Minitest/AssertSame:
+  Enabled: true
+
 Minitest/AssertSilent:
   Enabled: true
 
@@ -254,6 +258,9 @@ Minitest/LiteralAsActualArgument:
 Minitest/MultipleAssertions:
   Enabled: false
 
+Minitest/NonPublicTestMethod:
+  Enabled: true
+
 Minitest/RefuteInDelta:
   Enabled: true
 
@@ -266,10 +273,16 @@ Minitest/RefutePathExists:
 Minitest/RefutePredicate:
   Enabled: true
 
+Minitest/RefuteSame:
+  Enabled: true
+
 Minitest/SkipEnsure:
   Enabled: true
 
 Minitest/SkipWithoutReason:
+  Enabled: true
+
+Minitest/TestFileName:
   Enabled: true
 
 Minitest/TestMethodName:
@@ -279,6 +292,9 @@ Minitest/UnreachableAssertion:
   Enabled: true
 
 Minitest/UnspecifiedException:
+  Enabled: true
+
+Minitest/UselessAssertion:
   Enabled: true
 
 Naming/BlockForwarding:
@@ -473,6 +489,12 @@ Style/CollectionCompact:
 Style/CombinableLoops:
   Enabled: true
 
+Style/ComparableClamp:
+  Enabled: true
+
+Style/ConcatArrayLiterals:
+  Enabled: true
+
 Style/DocumentDynamicEvalDefinition:
   Enabled: true
 
@@ -551,6 +573,12 @@ Style/MapCompactWithConditionalBlock:
 Style/MapToHash:
   Enabled: true
 
+Style/MapToSet:
+  Enabled: true
+
+Style/MinMaxComparison:
+  Enabled: true
+
 Style/MultilineInPatternThen:
   Enabled: true
 
@@ -591,6 +619,9 @@ Style/RedundantAssignment:
   Enabled: true
 
 Style/RedundantConstantBase:
+  Enabled: true
+
+Style/RedundantDoubleSplatHashBraces:
   Enabled: true
 
 Style/RedundantEach:
