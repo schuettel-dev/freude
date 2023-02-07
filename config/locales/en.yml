@@ -60,10 +60,9 @@ en:
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
       how_it_works: How it works
-      update_game: Update game
-    show:
       join_url: URL to join
       qr_code: QR code
+      update_game: Update game
   game_templates:
     game_template:
       start_this_game: Start this game

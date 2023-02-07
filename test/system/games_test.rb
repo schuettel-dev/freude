@@ -17,7 +17,6 @@ class GamesTest < ApplicationSystemTestCase
     click_on "Ready!"
 
     assert_selector "h1", text: "All stars"
-    assert_selector "h2", text: "Invite"
     assert_selector "h2", text: "1 Player"
     assert_selector "h2", text: "Admin"
   end
@@ -27,7 +26,7 @@ class GamesTest < ApplicationSystemTestCase
 
     goto_game "Mario Bros"
 
-    within_game_section "Invite" do
+    within_game_section "Admin" do
       assert_field "URL to join", with: "http://www.example.com/games/MARIOBROSURLIDENTIFIER/join/MARIOBROSJOINTOKEN"
     end
   end

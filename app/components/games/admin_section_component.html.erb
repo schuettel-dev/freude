@@ -1,0 +1,42 @@
+<section>
+  <%= render CardComponent.new do %>
+    <div class="flex flex-col gap-y-4">
+      <h2 class="text-xl uppercase tracking-wide text-gray-600"><%= t("shared.admin") %></h2>
+
+      <%= turbo_frame_tag @game, :edit do %>
+        <div class="flex flex-col gap-y-2">
+
+          <% if game_policy.join? %>
+            <div class="flex flex-col gap-y-1 mb-4">
+              <div class="flex flex-col gap-y-4">
+                <fieldset>
+                  <%= label_tag :join_url, t("games.shared.join_url"), class: "label" %>
+                  <%= text_field_tag :join_url, game_join_url(@game, token: @game.join_token), readonly: true, class: "readonly-input font-mono" %>
+                </fieldset>
+              </div>
+
+              <div class="w-full">
+                <details>
+                  <summary class="ghost-button block items-center">
+                    <%= render HeroiconComponent.new(:"qr-code") %>
+                    <%= t("games.shared.qr_code") %>
+
+                  </summary>
+                  <div class="text-gray-800 max-w-lg mx-auto mt-4">
+                    <%= render QrCodeComponent.new(url: game_join_url(@game, token: @game.join_token)) %>
+                  </div>
+                </details>
+              </div>
+            </div>
+          <% end %>
+
+          <% if game_policy.edit? %>
+            <%= link_to t("games.shared.edit_game"), edit_game_path(game), class: "button" %>
+          <% end %>
+
+          <%= button_to t("games.shared.delete_game"), game_path(game), method: :delete, 'data-turbo-confirm': t("games.shared.do_you_really_want_to_delete_the_game"), class: "dangerous-button" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</section>
