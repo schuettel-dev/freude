@@ -6,6 +6,7 @@ class BadgeComponent < ViewComponent::Base
 
   def initialize(theme: :indigo)
     @theme = theme
+    super()
   end
 
   def call

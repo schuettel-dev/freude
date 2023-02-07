@@ -37,7 +37,11 @@ class Game < ApplicationRecord
   def transition_allowed?(to_phase:)
     phase.to_sym == to_phase.to_sym ||
       (self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym) &&
-        meets_preconditions_to_transit_to_phase?(to_phase:))
+        minimal_requirements_met_for_phase?(to_phase:))
+  end
+
+  def phases
+    self.class.phases
   end
 
   def next_phase
@@ -50,6 +54,16 @@ class Game < ApplicationRecord
 
   def minimum_players_reached?
     players.count >= (game_template&.minimum_players || Float::INFINITY)
+  end
+
+  def preconditions_met_for_phase?(target_phase)
+    raise ArgumentError, "phase '#{target_phase}' does not exist" unless phases.key?(target_phase)
+
+    method_name = "preconditions_met_for_#{target_phase}_phase?"
+
+    raise NotImplementedError, "'#{self.class}##{method_name}' is not implemented" unless respond_to?(method_name)
+
+    send(method_name)
   end
 
   private
@@ -74,7 +88,7 @@ class Game < ApplicationRecord
     add_player(user:)
   end
 
-  def meets_preconditions_to_transit_to_phase?(*)
-    raise "implement in subclass"
-  end
+  # def meets_preconditions_to_transit_to_phase?(*)
+  #   raise "implement in subclass"
+  # end
 end

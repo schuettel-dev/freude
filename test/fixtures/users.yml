@@ -11,14 +11,34 @@ luigi:
 peach:
   name: Peach
   token: PEACHTOKEN
-  color: "#F5A889"
+  color: "#f5a889"
 
 toad:
   name: Toad
   token: TOADTOKEN
-  color: "#6117FF"
+  color: "#6117ff"
 
 link:
   name: Link
   token: LINKTOKEN
   color: "#4ba42d"
+
+jerry:
+  name: Jerry
+  token: JERRYTOKEN
+  color: "#701e3e"
+
+elaine:
+  name: Laney
+  token: ELAINETOKEN
+  color: "#0bb757"
+
+george:
+  name: George
+  token: GEORGETOKEN
+  color: "#0b24b8"
+
+kramer:
+  name: Kramer
+  token: KRAMERTOKEN
+  color: "#bbcc19"

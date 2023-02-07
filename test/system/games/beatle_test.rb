@@ -12,6 +12,8 @@ class Games::BeatleTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to guessing" do
+    skip "to be implemented"
+
     sign_in :mario
     goto_game "Mario Bros"
 

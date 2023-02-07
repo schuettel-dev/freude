@@ -2,7 +2,9 @@ require "test_helper"
 
 class Games::PhaseDescriptionComponentTest < ViewComponent::TestCase
   test "render" do
-    render_inline new_component(game: games(:beatle_mario_bros))
+    game = games(:beatle_mario_bros)
+    user = users(:luigi)
+    render_inline new_component(game:, user:)
 
     assert_selector "ol", count: 1
   end

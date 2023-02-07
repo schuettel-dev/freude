@@ -6,3 +6,12 @@ beatle_mario_bros:
   user: mario
   url_identifier: "MARIOBROSURLIDENTIFIER"
   join_token: "MARIOBROSJOINTOKEN"
+
+beatle_seinfeld:
+  group_name: "Seinfeld"
+  game_template: beatle
+  type: "Game::Beatle"
+  phase: "ended"
+  user: jerry
+  url_identifier: "BEATLEJERRYURLIDENTIFIER"
+  join_token: "BEATLEJERRYJOINTOKEN"

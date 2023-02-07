@@ -12,7 +12,7 @@
           <%= t("shared.phases", count: 2) %>
         </h2>
 
-        <%= render Games::PhaseDescriptionComponent.new(game: @game) %>
+        <%= render Games::PhaseDescriptionComponent.new(game: @game, user: Current.user) %>
       </div>
     <% end %>
   </section>
@@ -74,8 +74,6 @@
 
           <%= turbo_frame_tag @game, :edit do %>
             <div class="flex flex-col gap-y-2">
-              <%= render Games::PhaseChangesComponent.new(game: @game) %>
-
               <% if policy(@game).edit? %>
                 <%= link_to t("games.shared.edit_game"), edit_game_path, class: "button" %>
               <% end %>

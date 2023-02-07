@@ -37,4 +37,24 @@ class Game::BeatleTest < ActiveSupport::TestCase
     assert_not game.transition_allowed?(to_phase: :guessing)
     assert game.transition_allowed?(to_phase: :ended)
   end
+
+  test "#minimal_requirements_met_for_phase?, :guessing" do
+    skip "to be implemented"
+  end
+
+  test "#minimal_requirements_met_for_phase?, :ended" do
+    skip "to be implemented"
+  end
+
+  test "#transit_to!, from: :collecting, to: :guessing" do
+    skip "to be implemented"
+  end
+
+  test "#transit_to!, from: :guessing, to: :ended" do
+    skip "to be implemented"
+  end
+
+  test "#transit_to!, from: :guessing, to: :collecting" do
+    skip "to be implemented"
+  end
 end

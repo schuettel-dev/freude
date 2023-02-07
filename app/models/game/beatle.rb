@@ -11,9 +11,9 @@ class Game::Beatle < Game
     ended: []
   }.freeze
 
-  def meets_preconditions_to_transit_to_phase?(to_phase:)
-    return true unless to_phase.to_sym == :guessing
+  def minimal_requirements_met_for_phase?(to_phase:)
+    return minimum_players_reached? if to_phase.to_sym == :guessing
 
-    minimum_players_reached?
+    true
   end
 end
