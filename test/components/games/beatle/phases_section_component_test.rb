@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Games::Beatle::PhaseDescriptionComponentTest < ViewComponent::TestCase
+class Games::PhasesSectionComponentTest < ViewComponent::TestCase
   test "render, collecting" do
     user = users(:luigi)
     game = games(:beatle_mario_bros)
