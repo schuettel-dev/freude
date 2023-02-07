@@ -40,6 +40,14 @@ class Game < ApplicationRecord
         meets_preconditions_to_transit_to_phase?(to_phase:))
   end
 
+  def next_phase
+    self.class.phases.keys.then { _1[_1.index(phase).next]&.to_sym }
+  end
+
+  def next_phase?(other)
+    next_phase == other.to_sym
+  end
+
   def minimum_players_reached?
     players.count >= (game_template&.minimum_players || Float::INFINITY)
   end

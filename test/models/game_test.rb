@@ -48,4 +48,26 @@ class GameTest < ActiveSupport::TestCase
 
     assert_includes game.players_users, user
   end
+
+  test "#next_phase" do
+    game = Game::Beatle.new(phase: :collecting)
+
+    assert_equal :guessing, game.next_phase
+
+    game.phase = :guessing
+
+    assert_equal :ended, game.next_phase
+
+    game.phase = :ended
+
+    assert_nil game.next_phase
+  end
+
+  test "#next_phase?" do
+    game = Game::Beatle.new(phase: :collecting)
+
+    assert_not game.next_phase?(:collecting)
+    assert game.next_phase?(:guessing)
+    assert_not game.next_phase?(:ended)
+  end
 end
