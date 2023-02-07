@@ -1,0 +1,17 @@
+<section>
+  <%= render CardComponent.new(padding: false) do %>
+    <div class="flex flex-col gap-y-4">
+      <h2 class="px-4 pt-4 text-xl uppercase tracking-wide text-gray-600">
+        <%= t("players.shared.players_with_count", count: @game.players.size) %>
+      </h2>
+
+      <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
+        <% @game.players.ordered_by_user_name.each do |player| %>
+          <li class="p-4">
+            <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</section>

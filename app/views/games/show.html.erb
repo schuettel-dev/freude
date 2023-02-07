@@ -8,7 +8,7 @@
   <section>
     <%= render CardComponent.new(padding: false) do %>
       <div class="flex flex-col gap-y-4">
-        <h2 class="mt-4 mx-4 text-xl uppercase tracking-wide text-gray-600">
+        <h2 class="pt-4 px-4 text-xl uppercase tracking-wide text-gray-600">
           <%= t("shared.phases", count: 2) %>
         </h2>
 
@@ -17,23 +17,7 @@
     <% end %>
   </section>
 
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-4">
-        <h2 class="text-xl uppercase tracking-wide text-gray-600">
-          <%= t("players.shared.players_with_count", count: @game.players.size) %>
-        </h2>
-
-        <div class="text-2xl divide-y divide-indigo-200">
-          <% @game.players.ordered_by_user_name.each do |player| %>
-            <div class="py-2">
-              <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </section>
+  <%= render Games::PlayersSectionComponent.new(game: @game, user: Current.user) %>
 
   <%= render Games::AdminSectionComponent.new(game: @game, user: Current.user) %>
 </div>
