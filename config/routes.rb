@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :games, only: %i[index show edit update destroy] do
     get "join/:token", action: :join, as: :join
     resource :phase, only: :update, module: :games
+
+    resource :beatle, only: [], module: :games do
+      resource :playlist, module: :beatle # , only: [:show, :edit, :update], module: :beatle
+    end
   end
 
   resources :game_templates, only: %i[index] do

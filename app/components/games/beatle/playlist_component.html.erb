@@ -1,0 +1,18 @@
+<%= render CardComponent.new do %>
+  <div class="flex flex-col gap-y-4">
+    <div class="flex flex-col gap-y-1">
+      <%= label_tag :song_1, Player::Beatle::Playlist.human_attribute_name(:song_1), class: "label" %>
+      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.first) %>
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <%= label_tag :song_2, Player::Beatle::Playlist.human_attribute_name(:song_2), class: "label" %>
+      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.second) %>
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <%= label_tag :song_3, Player::Beatle::Playlist.human_attribute_name(:song_3), class: "label" %>
+      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.third) %>
+    </div>
+  </div>
+<% end %>

@@ -1,8 +1,8 @@
 mario_player_in_beatle_mario_bros_playlist:
   player: mario_player_in_beatle_mario_bros
-  song_1_url: "https://todo"
+  song_1_url: "https://open.spotify.com/track/6lDyt5CQQAWnHhJyGczaBM?si=6a49db56dadc4a7c"
   song_2_url: "https://todo"
-  song_3_url: "https://todo"
+  song_3_url:
 
 luigi_player_in_beatle_mario_bros_playlist:
   player: luigi_player_in_beatle_mario_bros

@@ -2,14 +2,14 @@
   <%= render CardComponent.new do %>
     <div class="flex flex-col gap-y-4">
       <h2 class="text-xl uppercase tracking-wide text-gray-600">
-        <%= t("games.beatle.shared.my_songs") %>
+        <%= t("games.beatle.shared.my_playlist") %>
       </h2>
 
-      <ul>
-        <li>
-          <%= player.playlist.song_1_url %>
-        </li>
-      </ul>
+      <div class="flex gap-x-4">
+        <div class="w-full">
+          <%= link_to t("games.beatle.shared.show_playlist"), game_beatle_playlist_path(game), class: "button" %>
+        </div>
+      </div>
     </div>
   <% end %>
 </section>

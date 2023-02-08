@@ -1,0 +1,26 @@
+<% case provider %>
+  <% when :__blank__ %>
+  <%= t("games.beatle.shared.blank_url") %>
+
+  <% when :spotify %>
+    <%= tag.iframe src: spotify_src,
+                 class: "rounded-lg",
+                 width: "100%",
+                 height: "80",
+                 frameBorder: 0,
+                 allowfullscreen: "",
+                 allow: "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" %>
+
+  <% when :youtube %>
+    [EMBED YOUTUBE]
+
+  <% else %>
+    <div class="flex gap-x-2">
+      <div class="text-red-400">
+        <%= render HeroiconComponent.new(:"x-circle") %>
+      </div>
+      <div>
+        <%= t("games.beatle.shared.invalid_url") %>
+      </div>
+    </div>
+<% end %>
