@@ -47,6 +47,9 @@ en:
         one: User
         other: Users
   games:
+    beatle:
+      shared:
+        my_songs: My songs
     index:
       my_games: My games
       new_game: New game

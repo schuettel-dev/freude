@@ -1,0 +1,17 @@
+mario_player_in_beatle_mario_bros_playlist:
+  player: mario_player_in_beatle_mario_bros
+  song_1_url: "https://todo"
+  song_2_url: "https://todo"
+  song_3_url: "https://todo"
+
+luigi_player_in_beatle_mario_bros_playlist:
+  player: luigi_player_in_beatle_mario_bros
+  song_1_url: "https://todo"
+  song_2_url: "https://todo"
+  song_3_url: "https://todo"
+
+peach_player_in_beatle_mario_bros_playlist:
+  player: peach_player_in_beatle_mario_bros
+  song_1_url: "https://todo"
+  song_2_url: "https://todo"
+  song_3_url: "https://todo"

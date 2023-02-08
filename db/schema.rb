@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
+  create_table "player_beatle_playlists", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.string "song_1_url"
+    t.string "song_2_url"
+    t.string "song_3_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_player_beatle_playlists_on_player_id", unique: true
+  end
+
   create_table "players", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
@@ -66,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_201242) do
 
   add_foreign_key "games", "game_templates"
   add_foreign_key "games", "users"
+  add_foreign_key "player_beatle_playlists", "players"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
 end

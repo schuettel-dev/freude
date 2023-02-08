@@ -5,6 +5,8 @@
 <div class="px-8 flex flex-col gap-y-8">
   <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
 
+  <%= render Games::CurrentPhaseSectionComponent.new(game: @game, user: Current.user) %>
+
   <%= render Games::PhasesSectionComponent.new(game: @game, user: Current.user) %>
 
   <%= render Games::PlayersSectionComponent.new(game: @game, user: Current.user) %>
