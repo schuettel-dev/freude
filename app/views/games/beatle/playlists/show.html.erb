@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= render Links::BackToComponent.new(root_path, t("games.beatle.shared.buttons.back_to_game")) %>
+  <%= render Links::BackToComponent.new(game_path(@playlist.game), t("games.beatle.shared.buttons.back_to_game")) %>
 <% end %>
 
 
@@ -7,6 +7,6 @@
   <h1 class="text-5xl mb-8"><%= t("games.beatle.shared.my_playlist") %></h1>
 
   <div>
-    <%= render Games::Beatle::PlaylistComponent.new(playlist: @playlist) %>
+    <%= render Games::Beatle::PlaylistComponent.new(playlist: @playlist, user: Current.user) %>
   </div>
 </div>
