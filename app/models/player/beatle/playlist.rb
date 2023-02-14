@@ -48,6 +48,14 @@ class Player::Beatle::Playlist < ApplicationRecord
     ]
   end
 
+  def reset_song_urls
+    update(
+      song_1_url: nil,
+      song_2_url: nil,
+      song_3_url: nil
+    )
+  end
+
   private
 
   def to_song_url(song_url_attribute)

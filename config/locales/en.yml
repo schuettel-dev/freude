@@ -30,12 +30,9 @@ en:
         url_identifier: URL identifier
         type: Type
       player/beatle/playlist:
-        song_1: Song 1
-        song_1_url: Song 1 URL
-        song_2: Song 2
-        song_2_url: Song 2 URL
-        song_3: Song 3
-        song_3_url: Song 3 URL
+        song_1_url: Song 1
+        song_2_url: Song 2
+        song_3_url: Song 3
         song_url_providers:
           spotify: Spotify
           youtube: YouTube

@@ -5,7 +5,7 @@
 
         <div class="flex flex-col gap-y-2 px-4 py-8">
           <div class="flex justify-between items-center">
-            <%= f.label song_url.song_url_attribute, class: "label", value: Player::Beatle::Playlist.human_attribute_name(song_url.song_url_attribute.to_s.gsub(/_url$/, ''))  %>
+            <%= f.label song_url.song_url_attribute, class: "label" %>
           </div>
 
           <%= render EmbeddedPlayerComponent.new(song_url:) %>
@@ -14,7 +14,6 @@
             <%= f.text_field song_url.song_url_attribute, class: "input" %>
             <%= render Games::Beatle::Playlist::SongUrlStatusComponent.new(song_url:) %>
           <% end %>
-
         </div>
 
       <% end %>
