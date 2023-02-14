@@ -7,6 +7,8 @@ class User < ApplicationRecord
   before_validation :initialize_token, if: :new_record?
   before_validation :initialize_color, if: :new_record?
 
+  has_many :games
+
   private
 
   def initialize_token

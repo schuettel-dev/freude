@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resource :phase, only: :update, module: :games
 
     resource :beatle, only: [], module: :games do
-      resource :playlist, module: :beatle # , only: [:show, :edit, :update], module: :beatle
+      resource :playlist, module: :beatle, only: [:show, :edit, :update]
     end
   end
 

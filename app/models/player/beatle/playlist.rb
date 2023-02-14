@@ -4,18 +4,30 @@ class Player::Beatle::Playlist < ApplicationRecord
       @provider ||= find_provider
     end
 
+    def status
+      @status ||= find_status
+    end
+
     def url
       playlist[song_url_attribute]
+    end
+
+    def valid?
+      status == :valid
     end
 
     private
 
     def find_provider
-      return :__blank__ if url.blank?
       return :spotify if url.include?("spotify.com/track/")
       return :youtube if false # TODO
+    end
 
-      :__invalid__
+    def find_status
+      return :blank if url.blank?
+      return :valid if provider.in?([:spotify, :youtube])
+
+      :invalid
     end
   end
 
@@ -23,7 +35,7 @@ class Player::Beatle::Playlist < ApplicationRecord
 
   belongs_to :player
 
-  delegate :user, to: :player
+  delegate :game, :user, to: :player
 
   scope :of_game, ->(game) { joins(:player).where(players: { game: }) }
   scope :for_user, ->(user) { joins(:player).where(players: { user: }) }

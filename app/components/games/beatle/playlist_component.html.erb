@@ -1,18 +1,25 @@
-<%= render CardComponent.new do %>
-  <div class="flex flex-col gap-y-4">
-    <div class="flex flex-col gap-y-1">
-      <%= label_tag :song_1, Player::Beatle::Playlist.human_attribute_name(:song_1), class: "label" %>
-      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.first) %>
-    </div>
+<%= render CardComponent.new(padding: false) do %>
+  <div class="flex flex-col divide-y-2 divide-indigo-600">
+    <% playlist.song_urls.each do |song_url| %>
 
-    <div class="flex flex-col gap-y-1">
-      <%= label_tag :song_2, Player::Beatle::Playlist.human_attribute_name(:song_2), class: "label" %>
-      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.second) %>
-    </div>
+      <div class="flex flex-col gap-y-1 px-4 py-8">
+        <div class="flex justify-between items-center">
+          <span class="label"><%= Player::Beatle::Playlist.human_attribute_name(song_url.song_url_attribute.to_s.gsub(/_url$/, '')) %></span>
+          <%= render Games::Beatle::Playlist::SongUrlStatusComponent.new(song_url:) %>
+        </div>
 
-    <div class="flex flex-col gap-y-1">
-      <%= label_tag :song_3, Player::Beatle::Playlist.human_attribute_name(:song_3), class: "label" %>
-      <%= render EmbeddedPlayerComponent.new(song_url: @playlist.song_urls.third) %>
+        <%= render EmbeddedPlayerComponent.new(song_url:) %>
+
+        <span class="overflow-hidden text-gray-500 text-xs font-mono overflow-x-scroll break-all content select-all">
+          <%= song_url.url %>
+        </span>
+      </div>
+
+    <% end %>
+
+    <div class="flex flex-col px-4 py-8 gap-y-2">
+      <%= link_to t("games.beatle.shared.buttons.edit_playlist"), edit_game_beatle_playlist_path(playlist), class: "button primary-button" %>
+      <%= link_to t("games.beatle.shared.buttons.hide_playlist"), game_path(playlist.game), class: "button ghost-button" %>
     </div>
   </div>
 <% end %>

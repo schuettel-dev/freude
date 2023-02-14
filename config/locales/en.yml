@@ -36,6 +36,13 @@ en:
         song_2_url: Song 2 URL
         song_3: Song 3
         song_3_url: Song 3 URL
+        song_url_providers:
+          spotify: Spotify
+          youtube: YouTube
+        song_url_statuses:
+          blank: "Blank"
+          invalid: "Invalid"
+          valid: "Valid"
       user:
         name: Name
         token: Token
@@ -50,6 +57,9 @@ en:
       player:
         one: Player
         other: Players
+      player/beatle/playlist:
+        one: Playlist
+        other: Playlists
       user:
         one: User
         other: Users
@@ -58,8 +68,13 @@ en:
       shared:
         buttons:
           back_to_game: Back to game
+          edit_playlist: Edit playlist
+          hide_playlist: Hide playlist
           show_playlist: Show playlist
-        invalid_url: Invalid URL
+        song_url_statuses:
+          blank: URL is blank
+          invalid: URL is invalid
+          valid: URL is valid
         my_playlist: My playlist
     index:
       my_games: My games
