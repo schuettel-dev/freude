@@ -64,8 +64,9 @@ class Games::BeatleTest < ApplicationSystemTestCase
   private
 
   def assert_urls(blank:, valid:, invalid:)
-    assert_selector "span", text: "URL is blank", exact_text: true, count: blank
-    assert_selector "span", text: "URL is valid", exact_text: true, count: valid
-    assert_selector "span", text: "URL is invalid", exact_text: true, count: invalid
+    assert_selector ".games--beatle--playlist--song-url-status", count: blank + valid + invalid
+    assert_selector ".games--beatle--playlist--song-url-status", text: "URL is blank", exact_text: true, count: blank
+    assert_selector ".games--beatle--playlist--song-url-status", text: "URL is valid", exact_text: true, count: valid
+    assert_selector ".games--beatle--playlist--song-url-status", text: "URL is invalid", exact_text: true, count: invalid
   end
 end
