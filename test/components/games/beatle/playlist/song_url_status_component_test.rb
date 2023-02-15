@@ -1,12 +1,28 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class Games::Beatle::Playlist::SongUrlStatusComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(Games::Beatle::Playlist::SongUrlStatusComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  setup do
+    @playlist = player_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+  end
+
+  test "render, valid" do
+    song_url = @playlist.song_urls.first
+    render_inline new_component(song_url:)
+
+    assert_selector ".games--beatle--playlist--song-url-status", count: 1, text: "URL is valid"
+  end
+
+  test "render, invalid" do
+    song_url = @playlist.song_urls.second
+    render_inline new_component(song_url:)
+
+    assert_selector ".games--beatle--playlist--song-url-status", count: 1, text: "URL is invalid"
+  end
+
+  test "render, blank" do
+    song_url = @playlist.song_urls.third
+    render_inline new_component(song_url:)
+
+    assert_selector ".games--beatle--playlist--song-url-status", count: 1, text: "URL is blank"
   end
 end
