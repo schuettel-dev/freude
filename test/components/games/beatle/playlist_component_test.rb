@@ -15,7 +15,7 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
     assert_field "Song 1", with: "https://open.spotify.com/track/6lDyt5CQQAWnHhJyGczaBM?si=6a49db56dadc4a7c"
     assert_field "Song 2", with: "https://todo"
     assert_field "Song 3" do |field|
-      assert_predicate field.value, :nil?
+      assert_nil field.value
     end
 
     assert_button "Save playlist"

@@ -5,10 +5,11 @@ class Games::Beatle::Playlist::SongUrlBadgeComponent < ApplicationComponent
     valid: "text-green-600",
     invalid: "text-red-400",
     blank: "text-gray-500"
-  }
+  }.freeze
 
   def initialize(song_url:)
     @song_url = song_url
+    super()
   end
 
   def call

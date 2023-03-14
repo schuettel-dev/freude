@@ -5,6 +5,7 @@ class Games::Beatle::PlaylistsControllerTest < ActionDispatch::IntegrationTest
     sign_in(:mario)
     game = games(:beatle_mario_bros)
     get game_beatle_playlist_path(game)
+
     assert_response :success
   end
 
@@ -23,6 +24,7 @@ class Games::Beatle::PlaylistsControllerTest < ActionDispatch::IntegrationTest
     end
 
     follow_redirect!
+
     assert_response :success
   end
 end

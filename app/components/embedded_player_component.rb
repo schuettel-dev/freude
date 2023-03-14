@@ -5,6 +5,7 @@ class EmbeddedPlayerComponent < ApplicationComponent
 
   def initialize(song_url:)
     @song_url = song_url
+    super()
   end
 
   def spotify_src

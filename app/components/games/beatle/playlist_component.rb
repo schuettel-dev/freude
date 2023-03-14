@@ -4,6 +4,7 @@ class Games::Beatle::PlaylistComponent < ApplicationComponent
   def initialize(playlist:, user:)
     @playlist = playlist
     @user = user
+    super()
   end
 
   def edit_playlist?

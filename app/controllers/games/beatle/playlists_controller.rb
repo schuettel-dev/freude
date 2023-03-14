@@ -1,8 +1,7 @@
 class Games::Beatle::PlaylistsController < ApplicationController
   before_action :set_and_authorize_playlist
 
-  def show
-  end
+  def show; end
 
   def update
     @playlist.update(player_beatle_playlist_params)

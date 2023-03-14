@@ -20,7 +20,7 @@ class Player::Beatle::Playlist < ApplicationRecord
 
     def find_provider
       return :spotify if url.include?("spotify.com/track/")
-      return :youtube if false # TODO
+      # return :youtube if false # TODO
     end
 
     def find_status
