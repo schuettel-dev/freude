@@ -21,6 +21,7 @@ gem "view_component"
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "rubocop", require: false
+  gem "rubocop-capybara", require: false
   gem "rubocop-minitest", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false

@@ -1,6 +1,7 @@
 ---
 
 require:
+- rubocop-capybara
 - rubocop-minitest
 - rubocop-rails
 - rubocop-rake
@@ -14,6 +15,21 @@ AllCops:
   - vendor/**/*
 
 Rails:
+  Enabled: true
+
+Capybara/MatchStyle:
+  Enabled: true
+
+Capybara/NegationMatcher:
+  Enabled: true
+
+Capybara/SpecificActions:
+  Enabled: true
+
+Capybara/SpecificFinders:
+  Enabled: true
+
+Capybara/SpecificMatcher:
   Enabled: true
 
 Gemspec/DeprecatedAttributeAssignment:
