@@ -19,7 +19,7 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
     end
 
     assert_button "Save playlist"
-    assert_link "Hide playlist"
+    assert_link "Close playlist"
   end
 
   test "render, phase guessing" do

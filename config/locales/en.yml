@@ -66,8 +66,8 @@ en:
         buttons:
           back_to_game: Back to game
           back_to_playlist: Back to playlist
+          close_playlist: Close playlist
           save_playlist: Save playlist
-          hide_playlist: Hide playlist
           show_playlist: Show playlist
         song_url_statuses:
           blank: URL is blank

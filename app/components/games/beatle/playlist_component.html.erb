@@ -22,7 +22,7 @@
         <% if edit_playlist? %>
           <%= f.submit t("games.beatle.shared.buttons.save_playlist"), class: "button primary-button" %>
         <% end %>
-        <%= link_to t("games.beatle.shared.buttons.hide_playlist"), game_path(playlist.game), class: "button ghost-button" %>
+        <%= link_to t("games.beatle.shared.buttons.close_playlist"), game_path(playlist.game), class: "button ghost-button" %>
       </div>
     </div>
   <% end %>
