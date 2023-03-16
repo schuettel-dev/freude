@@ -18,8 +18,6 @@ class GameTest < ActiveSupport::TestCase
     assert_predicate game, :collecting?
     assert_match(/^[[:alnum:]]{6,}$/, game.url_identifier)
     assert_match(/^[[:alnum:]]{5,}$/, game.join_token)
-    assert_equal 1, game.players.count
-    assert_equal user, game.players.first.user
   end
 
   test "not #save!" do
@@ -35,18 +33,6 @@ class GameTest < ActiveSupport::TestCase
       assert_includes errors, "Game template must exist"
       assert_includes errors, "Phase can't be blank"
     end
-  end
-
-  test "#add_player" do
-    game = games(:beatle_mario_bros)
-    user = users(:toad)
-    game.add_player(user:)
-
-    assert_difference -> { game.players.count }, +1 do
-      game.save!
-    end
-
-    assert_includes game.players_users, user
   end
 
   test "#next_phase" do
@@ -69,5 +55,18 @@ class GameTest < ActiveSupport::TestCase
     assert_not game.next_phase?(:collecting)
     assert game.next_phase?(:guessing)
     assert_not game.next_phase?(:ended)
+  end
+
+  test "#initialize_player" do
+    game = games(:beatle_mario_bros)
+    user = users(:toad)
+
+    assert_difference -> { user.players.count }, +1 do
+      game.initialize_player(user:).save
+    end
+
+    player = game.players.find_by(user:)
+
+    assert_predicate player.playlist, :present?
   end
 end

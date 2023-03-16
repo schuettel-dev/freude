@@ -7,14 +7,19 @@ class Games::Beatle::Playlist::SongUrlBadgeComponent < ApplicationComponent
     blank: "text-gray-500"
   }.freeze
 
-  def initialize(song_url:)
+  DEFAULT_OPTIONS = {
+    class: "h-4 w-4"
+  }.freeze
+
+  def initialize(song_url:, **opts)
     @song_url = song_url
+    @opts = DEFAULT_OPTIONS.deep_dup.merge(opts)
     super()
   end
 
   def call
     tag.div(class: BADGE_COLORS[song_url.status]) do
-      render HeroiconComponent.new(:"musical-note", class: "h-4 w-4")
+      render HeroiconComponent.new(:"musical-note", **@opts)
     end
   end
 end

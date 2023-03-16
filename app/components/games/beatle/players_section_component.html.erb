@@ -7,8 +7,9 @@
 
       <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
         <% @game.players.ordered_by_user_name.each do |player| %>
-          <li class="p-4">
+          <li class="p-4 flex items-center justify-between">
             <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+            <%= render Player::Beatle::InlineStatusComponent.new(player:) %>
           </li>
         <% end %>
       </ul>

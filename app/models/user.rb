@@ -8,6 +8,7 @@ class User < ApplicationRecord
   before_validation :initialize_color, if: :new_record?
 
   has_many :games, dependent: :destroy
+  has_many :players, dependent: :destroy
 
   private
 

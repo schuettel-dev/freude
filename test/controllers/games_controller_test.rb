@@ -58,6 +58,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_response :success
+    assert_predicate game.players.find_by(user: users(:toad)).playlist, :present?
   end
 
   test "GET join, wrong token" do

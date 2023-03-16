@@ -11,6 +11,7 @@ class GameTemplates::InstancesController < ApplicationController
     @game.assign_attributes(game_params.merge(user: Current.user))
 
     if @game.save
+      @game.initialize_player(user: Current.user).save
       redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity

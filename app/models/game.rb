@@ -12,8 +12,7 @@ class Game < ApplicationRecord
       :initialize_type,
       :initialize_phase,
       :initialize_url_identifier,
-      :initialize_join_token,
-      :initialize_player
+      :initialize_join_token
     )
   end
 
@@ -26,8 +25,11 @@ class Game < ApplicationRecord
     url_identifier
   end
 
-  def add_player(user:)
-    players.find_or_initialize_by(user:)
+  def initialize_player(user:)
+    players.find_or_initialize_by(user:).then do |player|
+      player = player.initialize_type_and_becomes
+      player.setup
+    end
   end
 
   def change_phase(to_phase)
@@ -83,12 +85,4 @@ class Game < ApplicationRecord
   def initialize_join_token
     self.join_token ||= SecureRandom.alphanumeric(5)
   end
-
-  def initialize_player
-    add_player(user:)
-  end
-
-  # def meets_preconditions_to_transit_to_phase?(*)
-  #   raise "implement in subclass"
-  # end
 end
