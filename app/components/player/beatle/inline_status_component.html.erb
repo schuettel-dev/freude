@@ -2,7 +2,7 @@
   <% case phase %>
   <% when "collecting" %>
     <% player.playlist.song_urls.each do |song_url| %>
-      <%= render Games::Beatle::Playlist::SongUrlBadgeComponent.new(song_url:, class: "h-6 w-6") %>
+      <%= render Games::Beatle::Playlist::SongUrlBadgeComponent.new(song_url:, **args) %>
     <% end %>
   <% when "guessing" %>
     [GUESSING]
