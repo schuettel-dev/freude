@@ -14,4 +14,8 @@ class Player::Beatle::InlineStatusComponent < ApplicationComponent
   def phase
     player.game.phase
   end
+
+  def to_dom_id
+    dom_id(player, :inline_status)
+  end
 end

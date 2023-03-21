@@ -1,3 +1,4 @@
+<%= turbo_stream_from @game, :players_section %>
 <section>
   <%= render CardComponent.new(padding: false) do %>
     <div class="flex flex-col gap-y-4">
