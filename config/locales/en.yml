@@ -23,12 +23,12 @@ en:
           ended: Final results and ranking.
           guessing: Players listen to the others songs and guess who is behind.
       game_template:
-        name: Name
-        image_path: Image
         description: Description
+        image_path: Image
         minimum_players: Minimum players
+        name: Name
+        namespace: Namespace
         url_identifier: URL identifier
-        type: Type
       player/beatle/playlist:
         song_1_url: Song 1
         song_2_url: Song 2

@@ -1,16 +1,16 @@
 require "test_helper"
 
-class PlayerTest < ActiveSupport::TestCase
+class Games::Beatle::PlayerTest < ActiveSupport::TestCase
   test "save" do
     user = users(:toad)
     game = games(:beatle_mario_bros)
 
-    player = Player.new(user:, game:)
+    player = Games::Beatle::Player.new(user:, game:)
 
     assert_difference -> { game.players.count }, +1 do
       assert player.save!
     end
 
-    assert_equal "Player::Beatle", player.type
+    assert_equal "Games::Beatle::Player", player.type
   end
 end

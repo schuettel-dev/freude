@@ -4,4 +4,4 @@ beatle:
   description: "Guess who's behind a playlist of 3 songs"
   minimum_players: 3
   url_identifier: "beatle"
-  type: "GameTemplate::Beatle"
+  namespace: "Games::Beatle"

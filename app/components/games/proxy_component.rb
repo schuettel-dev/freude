@@ -26,6 +26,6 @@ class Games::ProxyComponent < ApplicationComponent
   end
 
   def target_component_klass
-    self.class.to_s.split("::").insert(1, game.class.to_s.demodulize).join("::").constantize
+    self.class.to_s.split("::").insert(1, game.class.to_s.split("::").second).join("::").safe_constantize
   end
 end

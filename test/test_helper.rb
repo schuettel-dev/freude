@@ -21,9 +21,9 @@ class ActiveSupport::TestCase
     )
   end
 
-  def permit(user, record, action)
-    cls = self.class.to_s.gsub(/Test/, "")
-    cls.constantize.new(user, record).public_send(action)
+  def permit(user, record_or_class, action)
+    cls = record_or_class.is_a?(Class) ? "#{record_or_class}Policy" : "#{record_or_class.class}Policy"
+    cls.constantize.new(user, record_or_class).public_send(action)
   end
 end
 

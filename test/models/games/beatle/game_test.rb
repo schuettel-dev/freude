@@ -1,6 +1,60 @@
 require "test_helper"
 
-class Game::BeatleTest < ActiveSupport::TestCase
+class Games::Beatle::GameTest < ActiveSupport::TestCase
+  test "#save!" do
+    user = users(:mario)
+
+    game = Games::Beatle::Game.new(
+      group_name: "Group game",
+      game_template: game_templates(:beatle),
+      user:,
+    )
+
+    assert_difference -> { Game.count }, +1 do
+      assert game.save!
+    end
+
+    assert_predicate game, :collecting?
+    assert_match(/^[[:alnum:]]{6,}$/, game.url_identifier)
+    assert_match(/^[[:alnum:]]{5,}$/, game.join_token)
+  end
+
+  test "not #save!" do
+    game = Games::Beatle::Game.new
+
+    assert_no_difference -> { Game.count } do
+      assert_not game.save
+    end
+
+    game.errors.to_a.tap do |errors|
+      assert_includes errors, "Group name can't be blank"
+      assert_includes errors, "User must exist"
+      assert_includes errors, "Game template must exist"
+    end
+  end
+
+  test "#next_phase" do
+    game = Games::Beatle::Game.new(phase: :collecting)
+
+    assert_equal :guessing, game.next_phase
+
+    game.phase = :guessing
+
+    assert_equal :ended, game.next_phase
+
+    game.phase = :ended
+
+    assert_nil game.next_phase
+  end
+
+  test "#next_phase?" do
+    game = Games::Beatle::Game.new
+
+    assert_not game.next_phase?(:collecting)
+    assert game.next_phase?(:guessing)
+    assert_not game.next_phase?(:ended)
+  end
+
   test "#minimum_players_reached?" do
     game = games(:beatle_mario_bros)
 

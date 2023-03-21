@@ -1,14 +1,14 @@
 mario_player_in_beatle_mario_bros:
   user: mario
   game: beatle_mario_bros
-  type: "Player::Beatle"
+  type: "Games::Beatle::Player"
 
 luigi_player_in_beatle_mario_bros:
   user: luigi
   game: beatle_mario_bros
-  type: "Player::Beatle"
+  type: "Games::Beatle::Player"
 
 peach_player_in_beatle_mario_bros:
   user: peach
   game: beatle_mario_bros
-  type: "Player::Beatle"
+  type: "Games::Beatle::Player"

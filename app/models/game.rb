@@ -9,8 +9,6 @@ class Game < ApplicationRecord
 
   with_options if: :new_record? do
     before_validation(
-      :initialize_type,
-      :initialize_phase,
       :initialize_url_identifier,
       :initialize_join_token
     )
@@ -25,10 +23,10 @@ class Game < ApplicationRecord
     url_identifier
   end
 
-  def initialize_player(user:)
-    players.find_or_initialize_by(user:).then do |player|
-      player = player.initialize_type_and_becomes
+  def new_player(...)
+    game_template.append_to_namespace(Player).new(...).tap do |player|
       player.setup
+      players << player
     end
   end
 
@@ -69,14 +67,6 @@ class Game < ApplicationRecord
   end
 
   private
-
-  def initialize_type
-    self.type ||= [self.class, game_template&.class&.name&.demodulize].compact.join("::")
-  end
-
-  def initialize_phase
-    self.phase ||= type.safe_constantize.try(:phases)&.keys&.first
-  end
 
   def initialize_url_identifier
     self.url_identifier ||= SecureRandom.alphanumeric(6)

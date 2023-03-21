@@ -10,7 +10,7 @@
           <li>
             <details class="open:bg-indigo-50" %>
               <summary class="text-lg p-4 hover:bg-indigo-100 transition flex items-center gap-x-2 justify-between">
-                <%= Game::Beatle.human_enum_name(:phase, phase) %>
+                <%= Games::Beatle::Game.human_enum_name(:phase, phase) %>
 
                 <% if current_phase?(phase) %>
                   <%= render BadgeComponent.new do %>
@@ -25,7 +25,7 @@
               </summary>
 
               <p class="p-4 text-lg bg-indigo-50">
-                <%= Game::Beatle.human_enum_name(:phase_description, phase) %>
+                <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
               </p>
             </details>
           </li>

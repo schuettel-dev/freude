@@ -12,7 +12,16 @@ class GameTemplateTest < ActiveSupport::TestCase
       assert_includes errors, "Description can't be blank"
       assert_includes errors, "Minimum players can't be blank"
       assert_includes errors, "URL identifier can't be blank"
-      assert_includes errors, "Type can't be blank"
+      assert_includes errors, "Namespace can't be blank"
+    end
+  end
+
+  test "#new_game" do
+    game_template = game_templates(:beatle)
+
+    game_template.new_game.tap do |instance|
+      assert_equal Games::Beatle::Game, instance.class
+      assert_equal game_template, instance.game_template
     end
   end
 end

@@ -20,11 +20,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
     t.string "description", null: false
     t.integer "minimum_players", null: false
     t.string "url_identifier", null: false
-    t.string "type", null: false
+    t.string "namespace", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_game_templates_on_name", unique: true
-    t.index ["type"], name: "index_game_templates_on_type", unique: true
+    t.index ["namespace"], name: "index_game_templates_on_namespace", unique: true
     t.index ["url_identifier"], name: "index_game_templates_on_url_identifier", unique: true
   end
 
@@ -43,14 +43,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "player_beatle_playlists", force: :cascade do |t|
+  create_table "games_beatle_playlists", force: :cascade do |t|
     t.bigint "player_id", null: false
     t.string "song_1_url"
     t.string "song_2_url"
     t.string "song_3_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_player_beatle_playlists_on_player_id", unique: true
+    t.index ["player_id"], name: "index_games_beatle_playlists_on_player_id", unique: true
   end
 
   create_table "players", force: :cascade do |t|
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
 
   add_foreign_key "games", "game_templates"
   add_foreign_key "games", "users"
-  add_foreign_key "player_beatle_playlists", "players"
+  add_foreign_key "games_beatle_playlists", "players"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
 end
