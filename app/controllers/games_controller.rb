@@ -27,7 +27,7 @@ class GamesController < ApplicationController
 
   def join
     if correct_game_token?
-      @game.initialize_player(user: Current.user).save
+      @game.new_player(user: Current.user).save
       redirect_to @game.becomes(Game)
     else
       flash[:notice] = t(".could_not_join_game_due_to_wrong_token")

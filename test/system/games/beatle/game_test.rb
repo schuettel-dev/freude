@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class Games::BeatleTest < ApplicationSystemTestCase
+class Games::Beatle::GameTest < ApplicationSystemTestCase
   test "owner cannot change phase to :guessing if not enough players" do
     players(:peach_player_in_beatle_mario_bros).destroy!
     sign_in :mario

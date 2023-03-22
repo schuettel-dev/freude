@@ -15,7 +15,7 @@ module Games
 
       class Scope < Scope
         def resolve
-          Player::Beatle::Playlist.for_user(user)
+          Games::Beatle::Playlist.for_user(user)
         end
       end
     end

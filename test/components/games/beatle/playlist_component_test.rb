@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
   test "render, phase collecting" do
-    playlist = player_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
     user = users(:mario)
 
     render_inline new_component(playlist:, user:)
@@ -25,7 +25,7 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
   test "render, phase guessing" do
     games(:beatle_mario_bros).guessing!
 
-    playlist = player_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
     user = users(:mario)
 
     render_inline new_component(playlist:, user:)
@@ -36,7 +36,7 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
   test "render, phase ended" do
     games(:beatle_mario_bros).ended!
 
-    playlist = player_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
     user = users(:mario)
 
     render_inline new_component(playlist:, user:)

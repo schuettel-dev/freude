@@ -62,7 +62,12 @@ module Games
         # TODO: refactor me!
         player.reload
         comp = Player::Beatle::InlineStatusComponent.new(player:)
-        broadcast_replace_to(game, :players_section, target: comp.to_dom_id, html: ApplicationController.render(comp, layout: false))
+        broadcast_replace_to(
+          game,
+          :players_section,
+          target: comp.to_dom_id,
+          html: ApplicationController.render(comp, layout: false)
+        )
       end
 
       private

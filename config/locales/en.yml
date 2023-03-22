@@ -13,7 +13,7 @@ en:
         phase: Phase
         type: Type
         token: Token
-      game/beatle:
+      games/beatle/game:
         phases:
           collecting: Collecting
           ended: Ended

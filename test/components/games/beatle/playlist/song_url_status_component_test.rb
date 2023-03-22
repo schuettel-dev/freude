@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::Playlist::SongUrlStatusComponentTest < ViewComponent::TestCase
   setup do
-    @playlist = player_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    @playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
   end
 
   test "render, valid" do

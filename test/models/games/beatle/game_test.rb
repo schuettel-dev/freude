@@ -7,7 +7,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     game = Games::Beatle::Game.new(
       group_name: "Group game",
       game_template: game_templates(:beatle),
-      user:,
+      user:
     )
 
     assert_difference -> { Game.count }, +1 do
