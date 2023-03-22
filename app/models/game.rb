@@ -31,7 +31,7 @@ class Game < ApplicationRecord
   end
 
   def change_phase(to_phase)
-    update(phase: to_phase) if transition_allowed?(to_phase:)
+    update(phase: to_phase) if transition_allowed?(to_phase:) && minimal_requirements_met_for_phase?(to_phase:)
   end
 
   def transition_allowed?(to_phase:)
@@ -40,6 +40,14 @@ class Game < ApplicationRecord
 
   def phases
     self.class.phases
+  end
+
+  def current_phase?(other)
+    phase == other.to_s
+  end
+
+  def completed_phase?(other)
+    ended? || phases.keys.index(other.to_s) < phases.keys.index(phase)
   end
 
   def next_phase
@@ -52,16 +60,6 @@ class Game < ApplicationRecord
 
   def minimum_players_reached?
     players.count >= (game_template.minimum_players || Float::INFINITY)
-  end
-
-  def preconditions_met_for_phase?(target_phase)
-    raise ArgumentError, "phase '#{target_phase}' does not exist" unless phases.key?(target_phase)
-
-    method_name = "preconditions_met_for_#{target_phase}_phase?"
-
-    raise NotImplementedError, "'#{self.class}##{method_name}' is not implemented" unless respond_to?(method_name)
-
-    send(method_name)
   end
 
   private

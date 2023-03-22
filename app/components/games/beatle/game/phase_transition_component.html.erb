@@ -1,0 +1,7 @@
+<div class="flex flex-col gap-y-2">
+  <%= button_to texts[:button], game_phase_path(game), method: :put, params: { phase: phase }, class: "button" %>
+
+  <p class="text-gray-500 text-sm flex justify-center">
+    <%= texts[:info] %>
+  </p>
+</div>

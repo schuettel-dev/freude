@@ -41,10 +41,10 @@ class Games::Beatle::Game::PhaseIconComponent < ApplicationComponent
   end
 
   def current_phase?
-    game.phase.to_s == phase.to_s
+    game.current_phase?(phase)
   end
 
   def completed_phase?
-    game.ended? || game.phases.keys.index(phase.to_s) < game.phases.keys.index(game.phase)
+    game.completed_phase?(phase)
   end
 end

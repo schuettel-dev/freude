@@ -2,9 +2,7 @@ class Games::PhasesController < ApplicationController
   before_action :set_and_authorize_game
 
   def update
-    unless @game.change_phase(params[:phase].presence)
-      # TODO
-    end
+    @game.change_phase(params[:phase].presence)
 
     redirect_to game_path(@game)
   end

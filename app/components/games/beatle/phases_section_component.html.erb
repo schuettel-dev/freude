@@ -2,7 +2,7 @@
   <%= render CardComponent.new(padding: false) do %>
     <div class="flex flex-col gap-y-4">
       <h2 class="pt-4 px-4 text-xl uppercase tracking-wide text-gray-600">
-        <%= t("shared.phases", count: 2) %>
+        <%= t("shared.phase", count: 2) %>
       </h2>
 
       <ul class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
@@ -15,9 +15,13 @@
                 <%= render Games::Beatle::Game::PhaseIconComponent.new(game:, phase:) %>
               </summary>
 
-              <p class="p-4 text-lg bg-indigo-50">
-                <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
-              </p>
+              <div class="p-4 text-lg bg-indigo-50 flex flex-col gap-y-4">
+                <div>
+                  <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
+                </div>
+
+                  <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user: Current.user) %>
+              </div>
             </details>
           </li>
         <% end %>

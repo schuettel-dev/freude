@@ -1,6 +1,4 @@
 class Games::Beatle::PlaylistsController < ApplicationController
-  include Turbo::Broadcastable
-
   before_action :set_and_authorize_playlist
 
   def show; end
