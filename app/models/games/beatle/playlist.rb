@@ -59,9 +59,7 @@ module Games
       end
 
       def broadcast_inline_statuses
-        # TODO: refactor me!
-        player.reload
-        comp = Player::Beatle::InlineStatusComponent.new(player:)
+        comp = Games::Beatle::Playlist::InlineStatusComponent.new(playlist: self)
         broadcast_replace_to(
           game,
           :players_section,

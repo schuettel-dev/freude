@@ -10,7 +10,7 @@
         <% @game.players.ordered_by_user_name.each do |player| %>
           <li class="p-4 flex items-center justify-between">
             <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
-            <%= render Player::Beatle::InlineStatusComponent.new(player:) %>
+            <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
           </li>
         <% end %>
       </ul>
