@@ -11,7 +11,7 @@ beatle_seinfeld:
   group_name: "Seinfeld"
   game_template: beatle
   type: "Games::Beatle::Game"
-  phase: "ended"
+  phase: "guessing"
   user: jerry
   url_identifier: "BEATLEJERRYURLIDENTIFIER"
   join_token: "BEATLEJERRYJOINTOKEN"

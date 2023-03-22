@@ -15,10 +15,6 @@ class Games::ProxyComponent < ApplicationComponent
     game.user == user
   end
 
-  def current_phase?(phase)
-    game.phase == phase
-  end
-
   private
 
   def game_policy

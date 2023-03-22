@@ -42,6 +42,14 @@ module Games
       scope :of_game, ->(game) { joins(:player).where(players: { game: }) }
       scope :for_user, ->(user) { joins(:player).where(players: { user: }) }
 
+      def valid_urls
+        song_urls.count(&:valid?)
+      end
+
+      def ready?
+        song_urls.any?(&:valid?)
+      end
+
       def song_urls
         [
           to_song_url(:song_1_url),

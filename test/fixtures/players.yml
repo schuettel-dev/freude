@@ -12,3 +12,23 @@ peach_player_in_beatle_mario_bros:
   user: peach
   game: beatle_mario_bros
   type: "Games::Beatle::Player"
+
+jerry_player_in_beatle_seinfeld:
+  user: jerry
+  game: beatle_seinfeld
+  type: "Games::Beatle::Player"
+
+elaine_player_in_beatle_seinfeld:
+  user: elaine
+  game: beatle_seinfeld
+  type: "Games::Beatle::Player"
+
+george_player_in_beatle_seinfeld:
+  user: george
+  game: beatle_seinfeld
+  type: "Games::Beatle::Player"
+
+kramer_player_in_beatle_seinfeld:
+  user: kramer
+  game: beatle_seinfeld
+  type: "Games::Beatle::Player"

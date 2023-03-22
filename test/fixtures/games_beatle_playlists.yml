@@ -18,3 +18,27 @@ peach_player_in_beatle_mario_bros_playlist:
   song_1_url: "https://todo"
   song_2_url: "https://todo"
   song_3_url: "https://todo"
+
+jerry_player_in_beatle_seinfeld_playlist:
+  player: jerry_player_in_beatle_seinfeld
+  song_1_url: "https://open.spotify.com/track/JERRY1"
+  song_2_url: "https://open.spotify.com/track/JERRY2"
+  song_3_url: "https://open.spotify.com/track/JERRY3"
+
+elaine_player_in_beatle_seinfeld_playlist:
+  player: elaine_player_in_beatle_seinfeld
+  song_1_url: "https://open.spotify.com/track/ELAINE1"
+  song_2_url: "https://open.spotify.com/track/ELAINE2"
+  song_3_url: "https://open.spotify.com/track/ELAINE3"
+
+george_player_in_beatle_seinfeld_playlist:
+  player: george_player_in_beatle_seinfeld
+  song_1_url: "https://open.spotify.com/track/GEORGE1"
+  song_2_url: "https://open.spotify.com/track/GEORGE2"
+  song_3_url: "https://open.spotify.com/track/GEORGE3"
+
+kramer_player_in_beatle_seinfeld_playlist:
+  player: kramer_player_in_beatle_seinfeld
+  song_1_url: "https://open.spotify.com/track/KRAMER1"
+  song_2_url: "https://open.spotify.com/track/KRAMER2"
+  song_3_url: "https://open.spotify.com/track/KRAMER3"

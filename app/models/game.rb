@@ -35,9 +35,7 @@ class Game < ApplicationRecord
   end
 
   def transition_allowed?(to_phase:)
-    phase.to_sym == to_phase.to_sym ||
-      (self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym) &&
-        minimal_requirements_met_for_phase?(to_phase:))
+    phase.to_sym == to_phase.to_sym || self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
   end
 
   def phases
@@ -53,7 +51,7 @@ class Game < ApplicationRecord
   end
 
   def minimum_players_reached?
-    players.count >= (game_template&.minimum_players || Float::INFINITY)
+    players.count >= (game_template.minimum_players || Float::INFINITY)
   end
 
   def preconditions_met_for_phase?(target_phase)

@@ -24,13 +24,13 @@ class Games::PhasesSectionComponentTest < ViewComponent::TestCase
     game.phase = :ended
     render_inline new_component(game:, user:)
 
-    assert_current_phase "Ended"
+    assert_selector "[title='Current']", count: 0
   end
 
   private
 
   def assert_current_phase(phase)
-    assert_selector "span", text: "Current" do |element|
+    assert_selector "[title='Current']" do |element|
       element.ancestor("summary").has_text?(phase)
     end
   end
