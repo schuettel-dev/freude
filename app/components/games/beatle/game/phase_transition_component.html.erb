@@ -1,7 +1,19 @@
 <div class="flex flex-col gap-y-2">
-  <%= button_to texts[:button], game_phase_path(game), method: :put, params: { phase: phase }, class: "button" %>
+  <%= button_to texts[:button], game_phase_path(game), disabled: transition_blocked?, method: :put, params: { phase: phase }, class: "button" %>
 
-  <p class="text-gray-500 text-sm flex justify-center">
-    <%= texts[:info] %>
-  </p>
+  <% if texts[:info].present? %>
+    <p class="text-gray-500 text-sm flex justify-center">
+      <%= texts[:info] %>
+    </p>
+  <% end %>
+
+  <% if transition_blocked? %>
+    <p>
+      <% if phase.to_sym == :guessing %>
+        <p class="text-gray-500 text-sm flex justify-center">
+          <%= t("games.beatle.phase_transitions.reason_for_proceeding_to_guessing_phase_is_blocked") %>
+        </p>
+      <% end %>
+    </p>
+  <% end %>
 </div>

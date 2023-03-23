@@ -62,6 +62,8 @@ en:
         other: Users
   games:
     beatle:
+      phase_transitions:
+        reason_for_proceeding_to_guessing_phase_is_blocked: "This phase can't be started yet. Make sure enough players have submitted their songs."
       shared:
         buttons:
           back_to_game: Back to game
@@ -79,6 +81,13 @@ en:
       new_game: New game
     join:
       could_not_join_game_due_to_wrong_token: Game couldn't be joined, the token was wrong.
+    phase_transitions:
+      backward:
+        button: "Return to this phase"
+        info: "All data from this phase will be lost"
+      forward:
+        button: "Start this phase"
+        info: ""
     shared:
       back_to_game: Back to game
       blocked: Blocked

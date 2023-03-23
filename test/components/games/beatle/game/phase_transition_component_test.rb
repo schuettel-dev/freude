@@ -34,8 +34,8 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
     user = users(:jerry)
     render_inline new_component(game:, phase:, user:)
 
-    assert_selector "button", text: "Go back to this phase"
-    assert_text "All data from this state will be lost"
+    assert_selector "button", text: "Return to this phase"
+    assert_text "All data from this phase will be lost"
   end
 
   test "render, transition forward, blocked" do
@@ -44,7 +44,10 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
     user = users(:mario)
     render_inline new_component(game:, phase:, user:)
 
-    assert false, "TODO"
+    assert_selector "button", text: "Start this phase" do |element|
+      assert element[:disabled]
+    end
+    assert_text "This phase can't be started yet. Make sure enough players have submitted their songs."
   end
 
   test "render, transition forward, proceed" do
@@ -54,6 +57,6 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
     user = users(:jerry)
     render_inline new_component(game:, phase:, user:)
 
-    assert false, "TODO"
+    assert_selector "button", text: "Start this phase"
   end
 end

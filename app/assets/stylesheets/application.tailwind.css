@@ -26,6 +26,10 @@
   @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-indigo-600 text-white cursor-pointer hover:opacity-90 transition;
 }
 
+.button[disabled] {
+  @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-gray-200 cursor-not-allowed text-gray-400;
+}
+
 .attractive-button {
   @apply p-2 w-full flex items-center gap-x-1 justify-center rounded-lg bg-teal-500 text-black cursor-pointer hover:opacity-90 transition;
 }
