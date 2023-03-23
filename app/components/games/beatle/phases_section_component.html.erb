@@ -1,31 +1,33 @@
-<section>
-  <%= render CardComponent.new(padding: false) do %>
-    <div class="flex flex-col gap-y-4">
-      <h2 class="pt-4 px-4 text-xl uppercase tracking-wide text-gray-600">
-        <%= t("shared.phase", count: 2) %>
-      </h2>
+<%= turbo_frame_tag to_dom_id do %>
+  <section>
+    <%= render CardComponent.new(padding: false) do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="pt-4 px-4 text-xl uppercase tracking-wide text-gray-600">
+          <%= t("shared.phase", count: 2) %>
+        </h2>
 
-      <ul class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
-        <% phases.each do |phase| %>
-          <li>
-            <details class="open:bg-indigo-50" %>
-              <summary class="text-lg p-4 hover:bg-indigo-100 transition flex items-center gap-x-2 justify-between">
-                <%= Games::Beatle::Game.human_enum_name(:phase, phase) %>
+        <ul class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
+          <% phases.each do |phase| %>
+            <li>
+              <details class="open:bg-indigo-50" %>
+                <summary class="text-lg p-4 hover:bg-indigo-100 transition flex items-center gap-x-2 justify-between">
+                  <%= Games::Beatle::Game.human_enum_name(:phase, phase) %>
 
-                <%= render Games::Beatle::Game::PhaseIconComponent.new(game:, phase:) %>
-              </summary>
+                  <%= render Games::Beatle::Game::PhaseIconComponent.new(game:, phase:) %>
+                </summary>
 
-              <div class="p-4 text-lg bg-indigo-50 flex flex-col gap-y-4">
-                <div>
-                  <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
+                <div class="p-4 text-lg bg-indigo-50 flex flex-col gap-y-4">
+                  <div>
+                    <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
+                  </div>
+
+                    <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user: Current.user) %>
                 </div>
-
-                  <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user: Current.user) %>
-              </div>
-            </details>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-</section>
+              </details>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </section>
+<% end %>

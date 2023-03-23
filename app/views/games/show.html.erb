@@ -2,8 +2,10 @@
   <%= render Links::BackToComponent.new(root_path, t("shared.buttons.back_to_dashboard")) %>
 <% end %>
 
+<%= turbo_stream_from @game %>
+
 <div class="px-8 flex flex-col gap-y-8">
-  <h1 class="text-5xl mb-8"><%= @game.group_name %></h1>
+  <%= render Games::GroupNameComponent.new(game: @game) %>
 
   <%= render Games::CurrentPhaseSectionComponent.new(game: @game, user: Current.user) %>
 

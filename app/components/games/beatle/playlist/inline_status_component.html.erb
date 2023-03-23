@@ -1,14 +1,7 @@
 <%= turbo_frame_tag to_dom_id do %>
   <div class="flex gap-x-1">
-    <% case phase %>
-    <% when "collecting" %>
-      <% playlist.song_urls.each do |song_url| %>
-        <%= render Games::Beatle::Playlist::SongUrlBadgeComponent.new(song_url:, **args) %>
-      <% end %>
-    <% when "guessing" %>
-      [GUESSING]
-    <% when "ended" %>
-      [ENDED]
+    <% playlist.song_urls.each do |song_url| %>
+      <%= render Games::Beatle::Playlist::SongUrlBadgeComponent.new(song_url:, **args) %>
     <% end %>
   </div>
 <% end %>

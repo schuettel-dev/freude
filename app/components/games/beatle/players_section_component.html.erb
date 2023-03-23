@@ -1,19 +1,27 @@
-<%= turbo_stream_from @game, :players_section %>
-<section>
-  <%= render CardComponent.new(padding: false) do %>
-    <div class="flex flex-col gap-y-4">
-      <h2 class="px-4 pt-4 text-xl uppercase tracking-wide text-gray-600">
-        <%= t("players.shared.players_with_count", count: @game.players.size) %>
-      </h2>
+<%= turbo_frame_tag to_dom_id do %>
+  <section>
+    <%= render CardComponent.new(padding: false) do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="px-4 pt-4 text-xl uppercase tracking-wide text-gray-600">
+          <%= t("players.shared.players_with_count", count: @game.players.size) %>
+        </h2>
 
-      <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
-        <% @game.players.ordered_by_user_name.each do |player| %>
-          <li class="p-4 flex items-center justify-between">
-            <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
-            <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-</section>
+        <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
+          <% @game.players.ordered_by_user_name.each do |player| %>
+            <li class="p-4 flex items-center justify-between">
+              <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+
+              <% if game.collecting? %>
+                <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
+              <% elsif game.guessing? %>
+                [guessing]
+              <% elsif game.ended? %>
+                [POINTS]
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </section>
+<% end %>

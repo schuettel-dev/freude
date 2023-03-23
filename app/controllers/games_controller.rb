@@ -14,6 +14,7 @@ class GamesController < ApplicationController
 
   def update
     if @game.update(game_params)
+      @game.broadcast_group_names
       redirect_to @game.becomes(Game)
     else
       render :edit, status: :unprocessable_entity

@@ -62,6 +62,11 @@ class Game < ApplicationRecord
     players.count >= (game_template.minimum_players || Float::INFINITY)
   end
 
+  def broadcast_group_names
+    comp = Games::GroupNameComponent.new(game: self)
+    broadcast_replace_to(self, target: comp.to_dom_id, html: ApplicationController.render(comp, layout: false))
+  end
+
   private
 
   def initialize_url_identifier
