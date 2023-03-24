@@ -35,7 +35,7 @@ class Games::Beatle::Game::PhaseIconComponent < ApplicationComponent
 
     return nil unless game.transition_allowed?(to_phase: phase)
 
-    return :proceed if game.minimal_requirements_met_for_phase?(to_phase: phase)
+    return :proceed if game.requirements_met_for_phase?(to_phase: phase)
 
     :blocked
   end

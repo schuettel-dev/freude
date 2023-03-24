@@ -17,7 +17,7 @@ class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
   end
 
   def transition_blocked?
-    !game.minimal_requirements_met_for_phase?(to_phase: phase)
+    !game.requirements_met_for_phase?(to_phase: phase)
   end
 
   private

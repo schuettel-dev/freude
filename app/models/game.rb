@@ -30,12 +30,21 @@ class Game < ApplicationRecord
     end
   end
 
-  def change_phase(to_phase)
-    update(phase: to_phase) if transition_allowed?(to_phase:) && minimal_requirements_met_for_phase?(to_phase:)
+  def requirements_met_for_phase?(to_phase:)
+    call_phase_method(to_phase:, method_type: :requirements_met)
+  end
+
+  def transit_to_phase(to_phase)
+    if transition_allowed?(to_phase:) && requirements_met_for_phase?(to_phase:) # rubocop:disable Style/GuardClause
+      self.class.transaction do
+        call_phase_method(to_phase:, method_type: :prepare)
+        update(phase: to_phase)
+      end
+    end
   end
 
   def transition_allowed?(to_phase:)
-    phase.to_sym == to_phase.to_sym || self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
+    phase == to_phase.to_s || self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
   end
 
   def phases
@@ -75,5 +84,24 @@ class Game < ApplicationRecord
 
   def initialize_join_token
     self.join_token ||= SecureRandom.alphanumeric(5)
+  end
+
+  def call_phase_method(to_phase:, method_type:) # rubocop:disable Metrics/MethodLength
+    return unless to_phase.to_s.in?(phases.keys)
+
+    method_name = case method_type.to_sym
+                  when :requirements_met
+                    "requirements_met_for_#{to_phase}_phase?"
+                  when :prepare
+                    "prepare_#{to_phase}_phase"
+                  else
+                    raise "Unknown method type '#{method_type}'"
+                  end
+
+    if respond_to?(method_name)
+      send(method_name)
+    else
+      true
+    end
   end
 end
