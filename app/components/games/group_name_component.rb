@@ -1,6 +1,7 @@
 class Games::GroupNameComponent < ApplicationComponent
   def initialize(game:)
     @game = game
+    super()
   end
 
   def call

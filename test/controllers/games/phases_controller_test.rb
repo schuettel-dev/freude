@@ -19,6 +19,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_changes -> { game.reload.phase }, from: "collecting", to: "guessing" do
       put game_phase_path(game), params: { phase: :guessing }
       follow_redirect!
+
       assert_response :success
     end
   end
@@ -30,6 +31,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_no_changes -> { game.reload.phase } do
       put game_phase_path(game), params: { phase: :guessing }
       follow_redirect!
+
       assert_response :success
     end
   end
@@ -42,6 +44,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_changes -> { game.reload.phase }, from: "guessing", to: "collecting" do
       put game_phase_path(game), params: { phase: :collecting }
       follow_redirect!
+
       assert_response :success
     end
   end
@@ -55,6 +58,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     assert_no_changes -> { game.reload.phase } do
       put game_phase_path(game), params: { phase: :guessing }
       follow_redirect!
+
       assert_response :success
     end
   end

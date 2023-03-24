@@ -5,6 +5,7 @@ class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
     @game = game
     @phase = phase
     @user = user
+    super()
   end
 
   def render?
