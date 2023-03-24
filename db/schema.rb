@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
     t.index ["game_template_id"], name: "index_games_on_game_template_id"
     t.index ["url_identifier"], name: "index_games_on_url_identifier", unique: true
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "games_beatle_playlist_guesses", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "guessing_player_id", null: false
+    t.bigint "guessed_player_id"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guessed_player_id"], name: "index_games_beatle_playlist_guesses_on_guessed_player_id"
+    t.index ["guessing_player_id"], name: "index_games_beatle_playlist_guesses_on_guessing_player_id"
+    t.index ["player_id"], name: "index_games_beatle_playlist_guesses_on_player_id"
   end
 
   create_table "games_beatle_playlists", force: :cascade do |t|
@@ -76,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_064745) do
 
   add_foreign_key "games", "game_templates"
   add_foreign_key "games", "users"
+  add_foreign_key "games_beatle_playlist_guesses", "players", column: "guessed_player_id"
+  add_foreign_key "games_beatle_playlist_guesses", "players", column: "guessing_player_id"
   add_foreign_key "games_beatle_playlists", "players"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"

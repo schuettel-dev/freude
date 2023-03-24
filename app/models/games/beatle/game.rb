@@ -24,7 +24,17 @@ module Games
       end
 
       def prepare_guessing_phase
-        raise "TODO"
+        PlaylistGuess.of_game(self).destroy_all
+
+        players.find_each do |player|
+          next unless player.playlist.ready?
+
+          Playlist.where(player: players.without(player)).find_each do |guessing_playlist|
+            next unless guessing_playlist.ready?
+
+            PlaylistGuess.create(player:, guessing_player: guessing_playlist.player)
+          end
+        end
       end
 
       def prepare_ended_phase

@@ -92,23 +92,35 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     assert game.transition_allowed?(to_phase: :ended)
   end
 
-  test "#minimal_requirements_met_for_phase?, :guessing" do
+  test "#requirements_met_for_guessing_phase?" do
+    assert_not games(:beatle_mario_bros).requirements_met_for_guessing_phase?
+    assert_predicate games(:beatle_seinfeld), :requirements_met_for_guessing_phase?
+  end
+
+  test "#requirements_met_for_ended_phase?" do
     skip "to be implemented"
   end
 
-  test "#minimal_requirements_met_for_phase?, :ended" do
+  test "#transit_to_phase, from: :collecting, to: :guessing" do
+    game = games(:beatle_seinfeld)
+    game.collecting!
+
+    assert_changes -> { game.reload.phase }, from: "collecting", to: "guessing" do
+      assert_changes -> { Games::Beatle::PlaylistGuess.of_game(game).reload.count }, from: 0, to: 6 do
+        game.transit_to_phase(:guessing)
+      end
+    end
+  end
+
+  test "#transit_to_phase, from: :guessing, to: :ended" do
     skip "to be implemented"
   end
 
-  test "#transit_to!, from: :collecting, to: :guessing" do
-    skip "to be implemented"
-  end
+  test "#transit_to_phase, from: :guessing, to: :collecting" do
+    game = games(:beatle_seinfeld)
 
-  test "#transit_to!, from: :guessing, to: :ended" do
-    skip "to be implemented"
-  end
-
-  test "#transit_to!, from: :guessing, to: :collecting" do
-    skip "to be implemented"
+    assert_changes -> { game.reload.phase }, from: "guessing", to: "collecting" do
+      game.transit_to_phase(:collecting)
+    end
   end
 end
