@@ -12,8 +12,6 @@ class Games::AdminSectionComponentTest < ViewComponent::TestCase
   end
 
   test "render, not joining phase" do
-    skip "to be implemented"
-
     game = games(:beatle_mario_bros)
     user = users(:mario)
     render_inline new_component(game:, user:)
