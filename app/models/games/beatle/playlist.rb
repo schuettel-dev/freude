@@ -39,16 +39,11 @@ module Games
 
       delegate :game, :user, to: :player
 
+      before_validation :set_ready_to_guess
+
       scope :of_game, ->(game) { joins(:player).where(players: { game: }) }
       scope :for_user, ->(user) { joins(:player).where(players: { user: }) }
-
-      def valid_urls
-        song_urls.count(&:valid?)
-      end
-
-      def ready?
-        song_urls.any?(&:valid?)
-      end
+      scope :ready_to_guess, -> { where(ready_to_guess: true) }
 
       def song_urls
         [
@@ -77,6 +72,10 @@ module Games
       end
 
       private
+
+      def set_ready_to_guess
+        self.ready_to_guess = song_urls.any?(&:valid?)
+      end
 
       def to_song_url(song_url_attribute)
         SongUrl.new(self, song_url_attribute)

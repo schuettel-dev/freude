@@ -1,15 +1,6 @@
 require "test_helper"
 
 class Games::Beatle::PlaylistTest < ActiveSupport::TestCase
-  test "#valid_urls" do
-    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
-
-    assert_changes -> { playlist.valid_urls }, from: 1, to: 3 do
-      playlist.song_2_url = playlist.song_1_url
-      playlist.song_3_url = playlist.song_1_url
-    end
-  end
-
   test "#song_urls" do
     playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
 
@@ -28,5 +19,13 @@ class Games::Beatle::PlaylistTest < ActiveSupport::TestCase
     assert_nil playlist.song_1_url
     assert_nil playlist.song_2_url
     assert_nil playlist.song_3_url
+  end
+
+  test "#set_ready_to_guess, #ready_to_guess" do
+    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+
+    assert_changes -> { playlist.reload.ready_to_guess? }, to: false do
+      playlist.update!(song_1_url: "https://wrong")
+    end
   end
 end

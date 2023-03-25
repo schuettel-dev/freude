@@ -5,6 +5,7 @@ class CreateGamesBeatlePlaylists < ActiveRecord::Migration[7.0]
       t.string :song_1_url, null: true
       t.string :song_2_url, null: true
       t.string :song_3_url, null: true
+      t.boolean :ready_to_guess, null: false, default: false
 
       t.timestamps
     end

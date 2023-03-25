@@ -6,39 +6,46 @@ mario_player_in_beatle_mario_bros_playlist:
   song_1_url: "https://open.spotify.com/track/6lDyt5CQQAWnHhJyGczaBM?si=6a49db56dadc4a7c"
   song_2_url: "https://todo"
   song_3_url:
+  ready_to_guess: true
 
 luigi_player_in_beatle_mario_bros_playlist:
   player: luigi_player_in_beatle_mario_bros
   song_1_url: "https://todo"
   song_2_url: "https://todo"
   song_3_url: "https://todo"
+  ready_to_guess: false
 
 peach_player_in_beatle_mario_bros_playlist:
   player: peach_player_in_beatle_mario_bros
   song_1_url: "https://todo"
   song_2_url: "https://todo"
   song_3_url: "https://todo"
+  ready_to_guess: false
 
 jerry_player_in_beatle_seinfeld_playlist:
   player: jerry_player_in_beatle_seinfeld
   song_1_url: "https://open.spotify.com/track/JERRY1"
   song_2_url: "https://open.spotify.com/track/JERRY2"
   song_3_url: "https://open.spotify.com/track/JERRY3"
+  ready_to_guess: true
 
 elaine_player_in_beatle_seinfeld_playlist:
   player: elaine_player_in_beatle_seinfeld
   song_1_url: "https://open.spotify.com/track/ELAINE1"
   song_2_url: "https://open.spotify.com/track/ELAINE2"
   song_3_url: "https://open.spotify.com/track/ELAINE3"
+  ready_to_guess: true
 
 george_player_in_beatle_seinfeld_playlist:
   player: george_player_in_beatle_seinfeld
   song_1_url: "https://open.spotify.com/track/GEORGE1"
   song_2_url: "https://open.spotify.com/track/GEORGE2"
   song_3_url: "https://open.spotify.com/track/GEORGE3"
+  ready_to_guess: true
 
 kramer_player_in_beatle_seinfeld_playlist:
   player: kramer_player_in_beatle_seinfeld
   song_1_url: "https://open.spotify.com/track/KRAMER1"
   song_2_url: "https://open.spotify.com/track/KRAMER2"
   song_3_url: "https://open.spotify.com/track/KRAMER3"
+  ready_to_guess: true

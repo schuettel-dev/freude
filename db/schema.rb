@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
     t.string "song_1_url"
     t.string "song_2_url"
     t.string "song_3_url"
+    t.boolean "ready_to_guess", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_games_beatle_playlists_on_player_id", unique: true

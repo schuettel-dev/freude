@@ -19,6 +19,18 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     assert_match(/^[[:alnum:]]{5,}$/, game.join_token)
   end
 
+  test "#new_player" do
+    game = games(:beatle_mario_bros)
+    user = users(:toad)
+
+    assert_difference -> { Games::Beatle::Playlist.count }, +1 do
+      assert_difference -> { Games::Beatle::Player.count }, +1 do
+        game.new_player(user:)
+        game.save!
+      end
+    end
+  end
+
   test "not #save!" do
     game = Games::Beatle::Game.new
 
