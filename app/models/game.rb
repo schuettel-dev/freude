@@ -44,7 +44,7 @@ class Game < ApplicationRecord
   end
 
   def transition_allowed?(to_phase:)
-    phase == to_phase.to_s || self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
+    self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
   end
 
   def phases

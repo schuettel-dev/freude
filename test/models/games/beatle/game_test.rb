@@ -69,7 +69,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     game = games(:beatle_mario_bros)
     game.phase = :collecting
 
-    assert game.transition_allowed?(to_phase: :collecting)
+    assert_not game.transition_allowed?(to_phase: :collecting)
     assert game.transition_allowed?(to_phase: :guessing)
     assert_not game.transition_allowed?(to_phase: :ended)
   end
@@ -79,7 +79,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     game.phase = :guessing
 
     assert game.transition_allowed?(to_phase: :collecting)
-    assert game.transition_allowed?(to_phase: :guessing)
+    assert_not game.transition_allowed?(to_phase: :guessing)
     assert game.transition_allowed?(to_phase: :ended)
   end
 
@@ -89,7 +89,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
 
     assert_not game.transition_allowed?(to_phase: :collecting)
     assert_not game.transition_allowed?(to_phase: :guessing)
-    assert game.transition_allowed?(to_phase: :ended)
+    assert_not game.transition_allowed?(to_phase: :ended)
   end
 
   test "#requirements_met_for_guessing_phase?" do
@@ -118,6 +118,16 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
       assert_changes -> { Games::Beatle::PlaylistGuess.of_game(game).reload.count }, from: 0, to: 6 do
         game.transit_to_phase(:guessing)
       end
+    end
+  end
+
+  test "#transit_to_phase, from: :guessing, to: :guessing" do
+    game = games(:beatle_seinfeld)
+    playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
+
+    assert_predicate playlist_guess.guessed_player, :present?
+    assert_no_changes -> { playlist_guess.reload.guessed_player } do
+      game.transit_to_phase(:guessing)
     end
   end
 
