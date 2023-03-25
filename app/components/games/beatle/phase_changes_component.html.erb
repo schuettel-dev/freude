@@ -1,3 +1,0 @@
-<% if game.transition_allowed?(to_phase: :guessing) %>
-  <%= button_to t("game.beatle.proceed_to_guessing_phase"), game_phase_path(game), method: :put, class: "attractive-button", "data-turbo-frame": "_top", params: { phase: :guessing } %>
-<% end %>
