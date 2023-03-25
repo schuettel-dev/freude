@@ -47,11 +47,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
     t.bigint "player_id"
     t.bigint "guessing_player_id", null: false
     t.bigint "guessed_player_id"
-    t.integer "points"
+    t.integer "points", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guessed_player_id"], name: "index_games_beatle_playlist_guesses_on_guessed_player_id"
     t.index ["guessing_player_id"], name: "index_games_beatle_playlist_guesses_on_guessing_player_id"
+    t.index ["player_id", "guessing_player_id"], name: "indx_player_guessing_player", unique: true
     t.index ["player_id"], name: "index_games_beatle_playlist_guesses_on_player_id"
   end
 
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
     t.string "type", null: false
+    t.integer "final_points"
     t.integer "final_rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

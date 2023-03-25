@@ -150,7 +150,24 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#transit_to_phase, from: :guessing, to: :ended" do
-    skip "to be implemented"
+    game = games(:beatle_seinfeld)
+    game.guessing!
+
+    jerry, elaine, george, kramer = players(
+      :jerry_player_in_beatle_seinfeld,
+      :elaine_player_in_beatle_seinfeld,
+      :george_player_in_beatle_seinfeld,
+      :kramer_player_in_beatle_seinfeld
+    ).each do |player|
+      player.update!(final_points: 999, final_rank: 1)
+    end
+
+    game.transit_to_phase(:ended)
+
+    assert_equal [1, 2], jerry.reload.values_at(:final_points, :final_rank)
+    assert_equal [3, 1], elaine.reload.values_at(:final_points, :final_rank)
+    assert_equal [0, 4], george.reload.values_at(:final_points, :final_rank)
+    assert_equal [1, 2], kramer.reload.values_at(:final_points, :final_rank)
   end
 
   test "#transit_to_phase, from: :guessing, to: :collecting" do

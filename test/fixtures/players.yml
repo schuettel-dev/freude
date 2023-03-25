@@ -2,33 +2,47 @@ mario_player_in_beatle_mario_bros:
   user: mario
   game: beatle_mario_bros
   type: "Games::Beatle::Player"
+  final_points:
+  final_rank:
 
 luigi_player_in_beatle_mario_bros:
   user: luigi
   game: beatle_mario_bros
   type: "Games::Beatle::Player"
+  final_points:
+  final_rank:
 
 peach_player_in_beatle_mario_bros:
   user: peach
   game: beatle_mario_bros
   type: "Games::Beatle::Player"
+  final_points:
+  final_rank:
 
 jerry_player_in_beatle_seinfeld:
   user: jerry
   game: beatle_seinfeld
   type: "Games::Beatle::Player"
+  final_points: 1
+  final_rank: 2
 
 elaine_player_in_beatle_seinfeld:
   user: elaine
   game: beatle_seinfeld
   type: "Games::Beatle::Player"
+  final_points: 3
+  final_rank: 1
 
 george_player_in_beatle_seinfeld:
   user: george
   game: beatle_seinfeld
   type: "Games::Beatle::Player"
+  final_points: 0
+  final_rank: 4
 
 kramer_player_in_beatle_seinfeld:
   user: kramer
   game: beatle_seinfeld
   type: "Games::Beatle::Player"
+  final_points: 1
+  final_rank: 2
