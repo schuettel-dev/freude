@@ -39,6 +39,6 @@ george_player_in_beatle_seinfeld_playlist:
 
 kramer_player_in_beatle_seinfeld_playlist:
   player: kramer_player_in_beatle_seinfeld
-  song_1_url: "https://wrong"
-  song_2_url:
-  song_3_url:
+  song_1_url: "https://open.spotify.com/track/KRAMER1"
+  song_2_url: "https://open.spotify.com/track/KRAMER2"
+  song_3_url: "https://open.spotify.com/track/KRAMER3"

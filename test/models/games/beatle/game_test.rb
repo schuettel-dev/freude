@@ -105,6 +105,15 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
     game = games(:beatle_seinfeld)
     game.collecting!
 
+    kramers_playlist = games_beatle_playlists(:kramer_player_in_beatle_seinfeld_playlist)
+    kramers_playlist.update!(
+      song_1_url: "https://wrong",
+      song_2_url: nil,
+      song_3_url: nil
+    )
+
+    Games::Beatle::PlaylistGuess.of_game(game).delete_all
+
     assert_changes -> { game.reload.phase }, from: "collecting", to: "guessing" do
       assert_changes -> { Games::Beatle::PlaylistGuess.of_game(game).reload.count }, from: 0, to: 6 do
         game.transit_to_phase(:guessing)

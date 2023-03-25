@@ -1,0 +1,68 @@
+_fixture:
+  model_class: Games::Beatle::PlaylistGuess
+
+# Jerry's guesses (1 right, 2 wrong)
+jerry_player_in_beatle_seinfeld_guessing_elaine:
+  player: jerry_player_in_beatle_seinfeld
+  guessing_player: elaine_player_in_beatle_seinfeld
+  guessed_player: kramer_player_in_beatle_seinfeld
+
+jerry_player_in_beatle_seinfeld_guessing_george:
+  player: jerry_player_in_beatle_seinfeld
+  guessing_player: george_player_in_beatle_seinfeld
+  guessed_player: george_player_in_beatle_seinfeld
+
+jerry_player_in_beatle_seinfeld_guessing_kramer:
+  player: jerry_player_in_beatle_seinfeld
+  guessing_player: kramer_player_in_beatle_seinfeld
+  guessed_player: elaine_player_in_beatle_seinfeld
+
+
+# Elaine's guesses (all right)
+elaine_player_in_beatle_seinfeld_guessing_jerry:
+  player: elaine_player_in_beatle_seinfeld
+  guessing_player: jerry_player_in_beatle_seinfeld
+  guessed_player: jerry_player_in_beatle_seinfeld
+
+elaine_player_in_beatle_seinfeld_guessing_george:
+  player: elaine_player_in_beatle_seinfeld
+  guessing_player: george_player_in_beatle_seinfeld
+  guessed_player: george_player_in_beatle_seinfeld
+
+elaine_player_in_beatle_seinfeld_guessing_kramer:
+  player: elaine_player_in_beatle_seinfeld
+  guessing_player: kramer_player_in_beatle_seinfeld
+  guessed_player: kramer_player_in_beatle_seinfeld
+
+
+# George's guesses (all wrong)
+george_player_in_beatle_seinfeld_guessing_jerry:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: jerry_player_in_beatle_seinfeld
+  guessed_player: elaine_player_in_beatle_seinfeld
+
+george_player_in_beatle_seinfeld_guessing_elaine:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: elaine_player_in_beatle_seinfeld
+  guessed_player: kramer_player_in_beatle_seinfeld
+
+george_player_in_beatle_seinfeld_guessing_kramer:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: kramer_player_in_beatle_seinfeld
+  guessed_player: jerry_player_in_beatle_seinfeld
+
+# Kramer's guesses (2 right, 1 not guessed)
+kramer_player_in_beatle_seinfeld_guessing_jerry:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: jerry_player_in_beatle_seinfeld
+  guessed_player: jerry_player_in_beatle_seinfeld
+
+kramer_player_in_beatle_seinfeld_guessing_elaine:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: elaine_player_in_beatle_seinfeld
+  guessed_player: elaine_player_in_beatle_seinfeld
+
+kramer_player_in_beatle_seinfeld_guessing_george:
+  player: george_player_in_beatle_seinfeld
+  guessing_player: george_player_in_beatle_seinfeld
+  guessed_player:
