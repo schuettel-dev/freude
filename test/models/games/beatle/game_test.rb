@@ -105,12 +105,18 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#requirements_met_for_guessing_phase?" do
-    assert_not games(:beatle_mario_bros).requirements_met_for_guessing_phase?
+    assert_not_predicate games(:beatle_mario_bros), :requirements_met_for_guessing_phase?
     assert_predicate games(:beatle_seinfeld), :requirements_met_for_guessing_phase?
   end
 
   test "#requirements_met_for_ended_phase?" do
-    skip "to be implemented"
+    game = games(:beatle_seinfeld)
+    playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_george)
+    playlist_guess.update!(guessed_player: nil)
+
+    assert_changes -> { game.reload.requirements_met_for_ended_phase? }, from: false do
+      playlist_guess.update!(guessed_player: playlist_guess.guessing_player)
+    end
   end
 
   test "#transit_to_phase, from: :collecting, to: :guessing" do
@@ -149,6 +155,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
 
   test "#transit_to_phase, from: :guessing, to: :collecting" do
     game = games(:beatle_seinfeld)
+    game.guessing!
 
     assert_changes -> { game.reload.phase }, from: "guessing", to: "collecting" do
       game.transit_to_phase(:collecting)

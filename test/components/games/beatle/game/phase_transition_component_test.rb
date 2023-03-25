@@ -30,6 +30,7 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
 
   test "render, transition back" do
     game = games(:beatle_seinfeld)
+    game.guessing!
     phase = :collecting
     user = users(:jerry)
     render_inline new_component(game:, phase:, user:)

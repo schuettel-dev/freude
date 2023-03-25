@@ -51,6 +51,7 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "from guessing to collecting" do
     game = games(:beatle_seinfeld)
+    game.guessing!
     playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
 
     sign_in :jerry

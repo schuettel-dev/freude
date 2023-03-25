@@ -4,4 +4,7 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
   belongs_to :guessed_player, class_name: "Player", optional: true
 
   scope :of_game, ->(game) { where(guessing_player: game.players) }
+  scope :unguessed, -> { where(guessed_player: nil) }
+
+  validates :points, inclusion: [0, 1], allow_nil: true
 end

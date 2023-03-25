@@ -30,7 +30,7 @@ module Games
       end
 
       def requirements_met_for_ended_phase?
-        false # TODO
+        playlist_guesses.unguessed.none?
       end
 
       def prepare_guessing_phase

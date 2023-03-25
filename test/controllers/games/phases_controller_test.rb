@@ -38,6 +38,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "admin, transition backward, allowed" do
     game = games(:beatle_seinfeld)
+    game.guessing!
 
     sign_in :jerry
 

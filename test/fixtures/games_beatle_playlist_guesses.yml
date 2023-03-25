@@ -6,16 +6,19 @@ jerry_player_in_beatle_seinfeld_guessing_elaine:
   player: jerry_player_in_beatle_seinfeld
   guessing_player: elaine_player_in_beatle_seinfeld
   guessed_player: kramer_player_in_beatle_seinfeld
+  points: 0
 
 jerry_player_in_beatle_seinfeld_guessing_george:
   player: jerry_player_in_beatle_seinfeld
   guessing_player: george_player_in_beatle_seinfeld
   guessed_player: george_player_in_beatle_seinfeld
+  points: 1
 
 jerry_player_in_beatle_seinfeld_guessing_kramer:
   player: jerry_player_in_beatle_seinfeld
   guessing_player: kramer_player_in_beatle_seinfeld
   guessed_player: elaine_player_in_beatle_seinfeld
+  points: 0
 
 
 # Elaine's guesses (all right)
@@ -23,16 +26,19 @@ elaine_player_in_beatle_seinfeld_guessing_jerry:
   player: elaine_player_in_beatle_seinfeld
   guessing_player: jerry_player_in_beatle_seinfeld
   guessed_player: jerry_player_in_beatle_seinfeld
+  points: 1
 
 elaine_player_in_beatle_seinfeld_guessing_george:
   player: elaine_player_in_beatle_seinfeld
   guessing_player: george_player_in_beatle_seinfeld
   guessed_player: george_player_in_beatle_seinfeld
+  points: 1
 
 elaine_player_in_beatle_seinfeld_guessing_kramer:
   player: elaine_player_in_beatle_seinfeld
   guessing_player: kramer_player_in_beatle_seinfeld
   guessed_player: kramer_player_in_beatle_seinfeld
+  points: 1
 
 
 # George's guesses (all wrong)
@@ -40,29 +46,36 @@ george_player_in_beatle_seinfeld_guessing_jerry:
   player: george_player_in_beatle_seinfeld
   guessing_player: jerry_player_in_beatle_seinfeld
   guessed_player: elaine_player_in_beatle_seinfeld
+  points: 0
 
 george_player_in_beatle_seinfeld_guessing_elaine:
   player: george_player_in_beatle_seinfeld
   guessing_player: elaine_player_in_beatle_seinfeld
   guessed_player: kramer_player_in_beatle_seinfeld
+  points: 0
 
 george_player_in_beatle_seinfeld_guessing_kramer:
   player: george_player_in_beatle_seinfeld
   guessing_player: kramer_player_in_beatle_seinfeld
   guessed_player: jerry_player_in_beatle_seinfeld
+  points: 0
 
-# Kramer's guesses (2 right, 1 not guessed)
+
+# Kramer's guesses (1 right, 2 wrong)
 kramer_player_in_beatle_seinfeld_guessing_jerry:
   player: george_player_in_beatle_seinfeld
   guessing_player: jerry_player_in_beatle_seinfeld
   guessed_player: jerry_player_in_beatle_seinfeld
+  points: 1
 
 kramer_player_in_beatle_seinfeld_guessing_elaine:
   player: george_player_in_beatle_seinfeld
   guessing_player: elaine_player_in_beatle_seinfeld
-  guessed_player: elaine_player_in_beatle_seinfeld
+  guessed_player: george_player_in_beatle_seinfeld
+  points: 0
 
 kramer_player_in_beatle_seinfeld_guessing_george:
   player: george_player_in_beatle_seinfeld
   guessing_player: george_player_in_beatle_seinfeld
-  guessed_player:
+  guessed_player: elaine_player_in_beatle_seinfeld
+  points: 0
