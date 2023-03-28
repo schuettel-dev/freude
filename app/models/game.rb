@@ -104,4 +104,8 @@ class Game < ApplicationRecord
       true
     end
   end
+
+  def rank_players_with(&)
+    Game::RankPlayersWith.new(self).call(&)
+  end
 end

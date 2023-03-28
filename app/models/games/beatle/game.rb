@@ -44,48 +44,36 @@ module Games
       end
 
       def prepare_ended_phase
-        players.update_all("final_points = NULL, final_rank = NULL")
-        playlist_guesses.update_all("points = CASE WHEN guessed_player_id = guessing_player_id THEN 1 ELSE 0 END")
-
-        self.class.connection.execute(
-          <<~SQL.squish
-            WITH with_players_final_points AS (
-              SELECT p.id            AS player_id
-                   , sum(pg.points)  AS final_points
-                FROM players p
-               INNER JOIN games_beatle_playlist_guesses pg ON pg.player_id = p.id
-               WHERE p.game_id = #{id}
-               GROUP BY p.id
-            )
-
-            UPDATE players p
-               SET final_points = fp.final_points
-              FROM with_players_final_points fp
-             WHERE fp.player_id = p.id
-          SQL
-        )
-
-        self.class.connection.execute(
-          <<~SQL.squish
-            WITH with_players_final_rank AS (
-              SELECT p.id                                           AS player_id
-                   , RANK() OVER (PARTITION BY p.game_id
-                                      ORDER BY p.final_points DESC) AS final_rank
-                FROM players p
-               WHERE p.final_points IS NOT NULL
-                 AND p.game_id = #{id}
-            )
-
-            UPDATE players p
-               SET final_rank = fr.final_rank
-              FROM with_players_final_rank fr
-             WHERE fr.player_id = p.id
-          SQL
-        )
+        rank_players_with do
+          allocate_points_on_guesses!
+          allocate_final_points_for_players!
+        end
       end
 
       def minimum_players_playlists_ready?
         playlists.ready_to_guess.count >= game_template.minimum_players
+      end
+
+      private
+
+      def allocate_points_on_guesses!
+        playlist_guesses.update_all(allocate_points_on_guesses_sql) # rubocop:disable Rails/SkipsModelValidations
+      end
+
+      def allocate_final_points_for_players!
+        players.find_each do |player|
+          player.update(final_points: player.playlist_guesses.sum(:points))
+        end
+      end
+
+      def allocate_points_on_guesses_sql
+        <<~SQL.squish
+          points = CASE
+                     WHEN guessed_player_id = guessing_player_id
+                     THEN 1
+                     ELSE 0
+                   END
+        SQL
       end
     end
   end
