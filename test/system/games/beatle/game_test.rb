@@ -6,27 +6,33 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
     sign_in :mario
     goto_game "Mario Bros"
 
-    within_game_section "Admin" do
-      assert_no_link_or_button "Proceed to Guessing phase"
+    within_game_section "Phases" do
+      assert_current_phase "Collecting"
+
+      within_phase_details "Guessing" do
+        assert_text "This phase can't be started yet. Make sure enough players have submitted their songs."
+        assert_button "Start this phase", disabled: true
+      end
     end
   end
 
   test "owner changes phase to guessing" do
-    skip "to be implemented"
+    game = games(:beatle_seinfeld)
+    game.collecting!
 
-    sign_in :mario
-    goto_game "Mario Bros"
-
-    within_game_section "Phases" do
-      assert_selector "details[open]", text: "Collecting"
-    end
-
-    within_game_section "Admin" do
-      click_on "Proceed to Guessing phase"
-    end
+    sign_in :jerry
+    goto_game "Seinfeld"
 
     within_game_section "Phases" do
-      assert_selector "details[open]", text: "Guessing"
+      assert_current_phase "Collecting"
+
+      within_phase_details "Guessing" do
+        click_on "Start this phase"
+      end
+    end
+
+    within_game_section "Phases" do
+      assert_current_phase "Guessing"
     end
   end
 
@@ -70,5 +76,21 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
     assert_selector css_selector, text: "URL is blank", exact_text: true, count: blank
     assert_selector css_selector, text: "URL is valid", exact_text: true, count: valid
     assert_selector css_selector, text: "URL is invalid", exact_text: true, count: invalid
+  end
+
+  def assert_current_phase(phase)
+    assert_selector "[title='Current']" do |element|
+      element.ancestor("summary").has_text?(phase)
+    end
+  end
+
+  def find_current_phase
+    find("[title='Current']")
+  end
+
+  def within_phase_details(phase, &)
+    phase_li_element = find("summary", text: phase).ancestor("li")
+    phase_li_element.click # opens "details" element
+    within(phase_li_element, &)
   end
 end
