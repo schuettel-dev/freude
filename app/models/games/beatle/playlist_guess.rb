@@ -6,6 +6,6 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
   scope :of_game, ->(game) { where(guessing_player: game.players) }
   scope :unguessed, -> { where(guessed_player: nil) }
 
-  validates :points, inclusion: [0, 1], allow_nil: true
+  validates :points, inclusion: [0, 1]
   validates :guessing_player_id, uniqueness: { scope: :player_id }
 end
