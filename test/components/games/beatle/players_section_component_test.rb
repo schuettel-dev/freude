@@ -2,9 +2,8 @@ require "test_helper"
 
 class Games::PlayersSectionComponentTest < ViewComponent::TestCase
   test "render" do
-    game = games(:beatle_mario_bros)
-    user = users(:luigi)
-    render_inline new_component(game:, user:)
+    player = players(:luigi_player_in_beatle_mario_bros)
+    render_inline new_component(player:)
 
     assert_selector "li", count: 3
     assert_selector "li", text: "Luigi"

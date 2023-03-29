@@ -21,7 +21,7 @@
                     <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
                   </div>
 
-                    <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user: Current.user) %>
+                    <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user:) %>
                 </div>
               </details>
             </li>

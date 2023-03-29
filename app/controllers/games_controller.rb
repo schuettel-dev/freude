@@ -8,11 +8,17 @@ class GamesController < ApplicationController
     @games = policy_scope(Game).ordered
   end
 
-  def show; end
+  def show
+    @player = find_game.players.find_by!(user: Current.user)
+  end
 
-  def edit; end
+  def edit
+    @game = find_game
+  end
 
   def update
+    @game = find_game
+
     if @game.update(game_params)
       @game.broadcast_group_names
       redirect_to @game.becomes(Game)
@@ -22,7 +28,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    @game.destroy
+    find_game.destroy
     redirect_to root_path
   end
 
@@ -38,9 +44,12 @@ class GamesController < ApplicationController
 
   private
 
+  def find_game
+    @find_game ||= policy_scope(Game).find_by!(url_identifier: params[:id])
+  end
+
   def set_and_authorize_game
-    @game = policy_scope(Game).find_by!(url_identifier: params[:id])
-    authorize @game
+    authorize find_game
   end
 
   def set_and_authorize_game_for_join

@@ -5,13 +5,13 @@
 <%= turbo_stream_from @game %>
 
 <div class="px-8 flex flex-col gap-y-8">
-  <%= render Games::GroupNameComponent.new(game: @game) %>
+  <%= render Games::GroupNameComponent.new(game: @player.game) %>
 
-  <%= render Games::CurrentPhaseSectionComponent.new(game: @game, user: Current.user) %>
+  <%= render Games::CurrentPhaseSectionComponent.new(player: @player) %>
 
-  <%= render Games::PhasesSectionComponent.new(game: @game, user: Current.user) %>
+  <%= render Games::PhasesSectionComponent.new(player: @player) %>
 
-  <%= render Games::PlayersSectionComponent.new(game: @game, user: Current.user) %>
+  <%= render Games::PlayersSectionComponent.new(player: @player) %>
 
-  <%= render Games::AdminSectionComponent.new(game: @game, user: Current.user) %>
+  <%= render Games::AdminSectionComponent.new(player: @player) %>
 </div>

@@ -1,6 +1,6 @@
 class Games::PhasesSectionComponent < Games::ProxyComponent
   def phases
-    @game.class.phases.keys
+    game.phases.keys
   end
 
   def to_dom_id

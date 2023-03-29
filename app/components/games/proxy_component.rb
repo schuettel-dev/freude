@@ -1,14 +1,15 @@
 class Games::ProxyComponent < ApplicationComponent
-  attr_reader :game, :user
+  attr_reader :player
 
-  def initialize(game:, user:)
-    @game = game
-    @user = user
+  delegate :game, :user, to: :player
+
+  def initialize(player:)
+    @player = player
     super()
   end
 
   def call
-    render target_component_klass.new(game:, user:)
+    render target_component_klass.new(player:)
   end
 
   def game_owner?
