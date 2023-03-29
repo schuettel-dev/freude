@@ -1,21 +1,37 @@
 <%= turbo_frame_tag to_dom_id do %>
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-8">
-        <h2 class="text-normal uppercase tracking-wide text-gray-600">
-          <%= t("games.beatle.shared.my_playlist") %>
-        </h2>
+  <div class="flex flex-col gap-y-8">
+    <section>
+      <%= render CardComponent.new do %>
+        <div class="flex flex-col gap-y-8">
+          <h2 class="text-normal uppercase tracking-wide text-gray-600">
+            <%= t("games.beatle.shared.my_playlist") %>
+          </h2>
 
-        <div class="flex justify-center">
-          <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist:, class: "h-8 w-8") %>
-        </div>
+          <% if game.collecting? %>
+            <div class="flex justify-center">
+              <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist:, class: "h-8 w-8") %>
+            </div>
+          <% end %>
 
-        <div class="flex gap-x-4">
-          <div class="w-full">
-            <%= link_to t("games.beatle.shared.buttons.show_playlist"), game_beatle_playlist_path(game), class: "button" %>
+          <div class="flex gap-x-4">
+            <div class="w-full">
+              <%= link_to t("games.beatle.shared.buttons.show_playlist"), game_beatle_playlist_path(game), class: "button" %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
+    </section>
+
+    <% if game.guessing? %>
+      <section>
+        [GUESSING SECTION]
+      </section>
     <% end %>
-  </section>
+
+    <% if game.ended? %>
+      <section>
+        [RANKING SECTION]
+      </section>
+    <% end %>
+  </div>
 <% end %>

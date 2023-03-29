@@ -1,5 +1,5 @@
 <%= turbo_frame_tag to_dom_id do %>
-  <div class="flex gap-x-1">
+  <div class="flex gap-x-1 <%= to_css_class %>">
     <% playlist.song_urls.each do |song_url| %>
       <%= render Games::Beatle::Playlist::SongUrlBadgeComponent.new(song_url:, **args) %>
     <% end %>
