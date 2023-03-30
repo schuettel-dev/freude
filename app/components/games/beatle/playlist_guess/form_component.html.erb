@@ -1,39 +1,16 @@
-<div class="flex flex-col gap-y-8">
-  <%= form_with(url: game_beatle_playlist_guess_path(game, playlist_guess), class: "flex flex-col gap-y-2") do |f| %>
-    <%= f.select :guessed_player_id, game.players.without(player).map(&:to_label), { include_blank: t("games.beatle.shared.pick_your_guess") },{  class: "input" } %>
-    <%= f.submit t("games.beatle.shared.save_guess"), class: "button" %>
-  <% end %>
-
-  <div class="flex justify-between">
-    <% prev_playlist = params[:playlist].to_i.pred %>
-    <%= link_to_unless prev_playlist.negative?, "Previous" do |name| %>
-      <%= link_to url_for(playlist: prev_playlist), class: "flex gap-x-1 items-center" do %>
-        <%= render HeroiconComponent.new(:"chevron-left", class: "w-4 h-4") %>
-        <% name %>
-      <% end %>
-    <% end %>
-
-    <% next_playlist = params[:playlist].to_i.next %>
-    <%= link_to_unless (next_playlist >= ordered_playlist_guesses.size), url_for(playlist: next_playlist) do %>
-      <div class="flex gap-x-1 items-center">
-        Next
-        <%= render HeroiconComponent.new(:"chevron-right", class: "w-4 h-4") %>
-      </div>
-    <% end %>
-  </div>
-
+<div class="flex flex-col gap-y-12">
   <div class="flex flex-col gap-y-4">
     <% playlist_guess.guessing_player.playlist.song_urls.each do |song_url| %>
       <%= render EmbeddedPlayerComponent.new(song_url:) %>
     <% end %>
   </div>
 
-  <div class="flex gap-4 justify-center">
-    <% ordered_playlist_guesses.each_with_index do |pg, index| %>
-      <% playlist_guess_css_class = class_names("outline outline-offset-2 outline-4 outline-blue-500": pg == playlist_guess) %>
-      <% bg_css_class = pg.guessed? ? "bg-blue-300" : "bg-gray-200" %>
+  <%= form_with(model: playlist_guess, url: game_beatle_playlist_guess_path(game, playlist_guess), class: "flex flex-col gap-y-2") do |f| %>
+    <%= f.select :guessed_player_id, guessed_player_options, { include_blank: t("games.beatle.shared.pick_your_guess") },{  class: "input" } %>
+    <%= f.submit t("games.beatle.shared.save_guess"), class: "button" %>
+  <% end %>
 
-      <span class="flex justify-center items-center text-xs w-8 h-8 rounded-full <%= bg_css_class %> <%= playlist_guess_css_class %>"><%= index.next %></span>
-    <% end %>
+  <div>
+    <%= render Games::Beatle::PlaylistGuess::PaginationComponent.new(ordered_playlist_guesses, playlist_guess) %>
   </div>
 </div>

@@ -37,7 +37,7 @@ module Games
         playlist_guesses.destroy_all
 
         players.having_playlist_ready_to_guess.find_each do |player|
-          playlists.ready_to_guess.where(player: players.without(player)).find_each do |guessing_playlist|
+          playlists.ready_to_guess.order_by_random.where(player: players.without(player)).find_each do |guessing_playlist|
             PlaylistGuess.create(player:, guessing_player: guessing_playlist.player)
           end
         end

@@ -1,9 +1,12 @@
 class Games::Beatle::PlaylistGuess < ApplicationRecord
+  delegate :game, :user, to: :player
+
   belongs_to :player, class_name: "Player"
   belongs_to :guessing_player, class_name: "Player"
   belongs_to :guessed_player, class_name: "Player", optional: true
 
-  scope :of_game, ->(game) { where(guessing_player: game.players) }
+  scope :of_game, ->(game) { joins(:player).where(players: { game: }) }
+  scope :for_user, ->(user) { joins(:player).where(players: { user: }) }
   scope :unguessed, -> { where(guessed_player: nil) }
   scope :ordered, -> { order(:id) }
 

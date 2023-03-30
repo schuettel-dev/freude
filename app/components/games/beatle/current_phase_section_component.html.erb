@@ -1,18 +1,8 @@
 <%= turbo_frame_tag to_dom_id do %>
   <div class="flex flex-col gap-y-8">
     <% if game.guessing? %>
-      <section>
-        <%= render CardComponent.new do %>
-          <div class="flex flex-col gap-y-4">
-            <h2 class="text-normal uppercase tracking-wide text-gray-600">
-              <%= t("games.beatle.shared.whos_behind_this_playlist") %>
-            </h2>
+      <%= turbo_frame_tag dom_id(player, :playlist_guess), src: edit_game_beatle_playlist_guess_path(game, player.playlist_guesses.ordered.first) %>
 
-            <% playlist_guess = player.playlist_guesses.ordered[params[:playlist].to_i] %>
-            <%= render Games::Beatle::PlaylistGuess::FormComponent.new(playlist_guess:) %>
-          </div>
-        <% end %>
-      </section>
     <% end %>
 
     <% if game.ended? %>

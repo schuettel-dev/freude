@@ -1,9 +1,8 @@
 class Player < ApplicationRecord
-  delegate :to_label, to: :decorate
-
   belongs_to :user
   belongs_to :game
 
+  scope :of_game, ->(game) { where(game:) }
   scope :for_user, ->(user) { where(user:) }
   scope :ordered_by_user_name, -> { joins(:user).order("users.name ASC") }
 

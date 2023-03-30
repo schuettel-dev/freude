@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Game::BeatlePolicyTest < ActiveSupport::TestCase
+class Games::Beatle::GamePolicyTest < ActiveSupport::TestCase
   test "policy" do
     assert_permit users(:mario), Game, :index?
     assert_permit users(:mario), Game.new, :new?
@@ -43,5 +43,9 @@ class Game::BeatlePolicyTest < ActiveSupport::TestCase
     game.phase = :ended
 
     assert_not_permit users(:toad), game, :join?
+  end
+
+  test "#guess?" do
+    assert false
   end
 end

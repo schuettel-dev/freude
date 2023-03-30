@@ -78,6 +78,9 @@ en:
         my_playlist: My playlist
         pick_your_guess: Pick your guess...
         save_guess: Save guess
+        selected_n_times:
+          one: Selected 1 time
+          other: Selected %{count} times
         whos_behind_this_playlist: Who's behind this playlist?
     index:
       my_games: My games

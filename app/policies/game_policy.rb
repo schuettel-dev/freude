@@ -35,6 +35,10 @@ class GamePolicy < ApplicationPolicy
     raise "implement in subclass"
   end
 
+  def guess?
+    record.guessing?
+  end
+
   def admin?
     record.user == user
   end
