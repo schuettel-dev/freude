@@ -1,0 +1,5 @@
+<div class="flex justify-end gap-1">
+  <% ordered_playlist_guesses.each do |playlist_guess| %>
+    <span class="<%= css_classes(playlist_guess.guessed?) %>"></span>
+  <% end %>
+</div>
