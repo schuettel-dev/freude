@@ -4,7 +4,7 @@ class Games::Beatle::PlaylistsControllerTest < ActionDispatch::IntegrationTest
   test "GET show" do
     sign_in(:mario)
     game = games(:beatle_mario_bros)
-    get game_beatle_playlist_path(game)
+    get edit_game_beatle_playlist_path(game)
 
     assert_response :success
   end

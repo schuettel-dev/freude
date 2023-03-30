@@ -1,13 +1,13 @@
 class Games::Beatle::PlaylistsController < ApplicationController
   before_action :set_and_authorize_playlist
 
-  def show; end
+  def edit; end
 
   def update
     @playlist.update(player_beatle_playlist_params)
     @playlist.broadcast_inline_statuses
 
-    redirect_to game_beatle_playlist_path(@playlist.game)
+    redirect_to edit_game_beatle_playlist_path(@playlist.game)
   end
 
   private
