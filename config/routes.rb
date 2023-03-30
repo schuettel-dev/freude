@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resource :playlist, module: :beatle, only: [:edit, :update]
       resources :playlist_guesses, module: :beatle, only: [:edit, :update]
     end
+
+    resources :players, only: [:index], module: :games
   end
 
   resources :game_templates, only: %i[index] do

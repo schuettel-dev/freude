@@ -66,7 +66,6 @@ en:
         reason_for_proceeding_to_guessing_phase_is_blocked: "This phase can't be started yet. Make sure enough players have submitted their songs."
       shared:
         buttons:
-          back_to_game: Back to game
           back_to_playlist: Back to playlist
           close_playlist: Close playlist
           save_playlist: Save playlist
@@ -128,6 +127,7 @@ en:
       update_profile: Update profile
   shared:
     actions:
+      back_to_game: Back to game
       next: Next
       previous: Previous
     admin: Admin
