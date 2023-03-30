@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     resource :beatle, only: [], module: :games do
       resource :playlist, module: :beatle, only: [:show, :edit, :update]
+      resources :playlist_guesses, module: :beatle, only: [:update]
     end
   end
 

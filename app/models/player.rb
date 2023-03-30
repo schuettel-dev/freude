@@ -1,4 +1,6 @@
 class Player < ApplicationRecord
+  delegate :to_label, to: :decorate
+
   belongs_to :user
   belongs_to :game
 

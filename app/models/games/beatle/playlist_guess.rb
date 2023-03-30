@@ -5,7 +5,12 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
 
   scope :of_game, ->(game) { where(guessing_player: game.players) }
   scope :unguessed, -> { where(guessed_player: nil) }
+  scope :ordered, -> { order(:id) }
 
   validates :points, inclusion: [0, 1]
   validates :guessing_player_id, uniqueness: { scope: :player_id }
+
+  def guessed?
+    guessed_player.present?
+  end
 end

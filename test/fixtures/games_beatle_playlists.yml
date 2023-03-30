@@ -24,28 +24,28 @@ peach_player_in_beatle_mario_bros_playlist:
 
 jerry_player_in_beatle_seinfeld_playlist:
   player: jerry_player_in_beatle_seinfeld
-  song_1_url: "https://open.spotify.com/track/JERRY1"
-  song_2_url: "https://open.spotify.com/track/JERRY2"
-  song_3_url: "https://open.spotify.com/track/JERRY3"
+  song_1_url: "https://open.spotify.com/track/64VP3skE86iTvdOlbzuIcO?si=4975357312494fb8"
+  song_2_url: "https://open.spotify.com/track/5jw1zzcYFivmuJK52JrnMK?si=6ea281b5eaf94a87"
+  song_3_url: "https://open.spotify.com/track/6wO13Xb3EdHUNixFOEJ0KV?si=2b82b9ac33e34e1e"
   ready_to_guess: true
 
 elaine_player_in_beatle_seinfeld_playlist:
   player: elaine_player_in_beatle_seinfeld
-  song_1_url: "https://open.spotify.com/track/ELAINE1"
-  song_2_url: "https://open.spotify.com/track/ELAINE2"
-  song_3_url: "https://open.spotify.com/track/ELAINE3"
+  song_1_url: "https://open.spotify.com/track/4fxwbUSI6jF4XdnvCUVG97?si=e3a7f957b9da44e5"
+  song_2_url: "https://open.spotify.com/track/3wnvVFi4YQrMQBar9mjr2x?si=2b375ebf8a59492b"
+  song_3_url: "https://open.spotify.com/track/06TDTjD7efqsLwhXKv0bci?si=583d1386112a4eaa"
   ready_to_guess: true
 
 george_player_in_beatle_seinfeld_playlist:
   player: george_player_in_beatle_seinfeld
-  song_1_url: "https://open.spotify.com/track/GEORGE1"
-  song_2_url: "https://open.spotify.com/track/GEORGE2"
-  song_3_url: "https://open.spotify.com/track/GEORGE3"
+  song_1_url: "https://open.spotify.com/track/4N5s8lPTsjI9EGP7K4SXzB?si=e99c7fb968be4be3"
+  song_2_url: "https://open.spotify.com/track/2ixsaeFioXJmMgkkbd4uj1?si=473d61d3777c4efa"
+  song_3_url: "https://open.spotify.com/track/4ofwffwvvnbSkrMSCKQDaC?si=178bf0f4387346e1"
   ready_to_guess: true
 
 kramer_player_in_beatle_seinfeld_playlist:
   player: kramer_player_in_beatle_seinfeld
-  song_1_url: "https://open.spotify.com/track/KRAMER1"
-  song_2_url: "https://open.spotify.com/track/KRAMER2"
-  song_3_url: "https://open.spotify.com/track/KRAMER3"
+  song_1_url: "https://open.spotify.com/track/11z5LZg0FdAMxyF7LwWddi?si=09fbf161f4df4438"
+  song_2_url: "https://open.spotify.com/track/1dRdOB6yNX83j9xEqK22Fj?si=8ff813a5dd4f48ca"
+  song_3_url: "https://open.spotify.com/track/5h08BX2dg98qWpxI1UZQ7s?si=e717152c4e7847c6"
   ready_to_guess: true

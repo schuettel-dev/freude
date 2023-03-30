@@ -76,6 +76,9 @@ en:
           invalid: URL is invalid
           valid: URL is valid
         my_playlist: My playlist
+        pick_your_guess: Pick your guess...
+        save_guess: Save guess
+        whos_behind_this_playlist: Who's behind this playlist?
     index:
       my_games: My games
       new_game: New game
@@ -121,6 +124,9 @@ en:
       edit_profile: Edit profile
       update_profile: Update profile
   shared:
+    actions:
+      next: Next
+      previous: Previous
     admin: Admin
     all_games: All games
     buttons:
