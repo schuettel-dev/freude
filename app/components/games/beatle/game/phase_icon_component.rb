@@ -1,8 +1,8 @@
 class Games::Beatle::Game::PhaseIconComponent < ApplicationComponent
   PHASE_ICONS = {
-    current: { icon: :clock, class: "w-6 h-6 text-indigo-500", title: I18n.t("games.shared.current") },
+    current: { icon: :play, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.current") },
     completed: { icon: :check, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.completed") },
-    proceed: { icon: :play, class: "w-6 h-6 text-emerald-500", title: I18n.t("games.shared.proceed") },
+    proceed: { icon: :clock, class: "w-6 h-6 text-indigo-500", title: I18n.t("games.shared.proceed") },
     blocked: { icon: :"play-pause", class: "w-6 h-6 text-gray-500", title: I18n.t("games.shared.blocked") }
   }.freeze
 
