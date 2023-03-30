@@ -7,8 +7,9 @@
         </h2>
 
         <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
-          <% game.players.ordered_by_user_name.each do |player| %>
-            <li class="p-4 flex items-center justify-between">
+          <% ordered_players = game.ended? ? game.players.ordered_by_final_rank : game.players.ordered_by_name %>
+          <% ordered_players.each do |player| %>
+            <li class="p-4 flex items-center justify-between gap-x-4">
               <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
 
               <% if game.collecting? %>
@@ -16,7 +17,12 @@
               <% elsif game.guessing? %>
                 <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
               <% elsif game.ended? %>
-                [POINTS]
+                <div class="flex gap-x-4 items-center">
+                  <span class="text-sm text-gray-400">
+                    <%= t("games.shared.n_points", count: player.final_points) %>
+                  </span>
+                  <%= render Players::FinalRankComponent.new(player:) %>
+                </div>
               <% end %>
             </li>
           <% end %>

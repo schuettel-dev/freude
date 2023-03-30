@@ -107,6 +107,9 @@ en:
       qr_code: QR code
       update_game: Update game
       proceed: Proceed
+      n_points:
+        one: 1 point
+        other: "%{count} points"
   game_templates:
     game_template:
       start_this_game: Start this game
