@@ -12,9 +12,9 @@
               <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
 
               <% if game.collecting? %>
-                <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
+                <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:) %>
               <% elsif game.guessing? %>
-                [guessing]
+                <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
               <% elsif game.ended? %>
                 [POINTS]
               <% end %>

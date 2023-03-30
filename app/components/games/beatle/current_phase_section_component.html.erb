@@ -20,7 +20,7 @@
 
           <% if game.collecting? %>
             <div class="flex justify-center">
-              <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist:, class: "h-8 w-8") %>
+              <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:, class: "h-8 w-8") %>
             </div>
           <% end %>
 
