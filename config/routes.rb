@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resource :beatle, only: [], module: :games do
       resource :playlist, module: :beatle, only: [:edit, :update]
       resources :playlist_guesses, module: :beatle, only: [:edit, :update]
+      resource :results, module: :beatle, only: [:show]
     end
 
     resources :players, only: [:index], module: :games

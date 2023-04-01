@@ -2,35 +2,32 @@
   <div class="flex flex-col gap-y-8">
     <% if game.guessing? %>
       <%= turbo_frame_tag dom_id(player, :playlist_guess), src: edit_game_beatle_playlist_guess_path(game, player.playlist_guesses.ordered.first) %>
-
     <% end %>
 
     <% if game.ended? %>
+      <%= turbo_frame_tag dom_id(game, :results), src: game_beatle_results_path(game) %>
+    <% else %>
       <section>
-        [RANKING SECTION]
-      </section>
-    <% end %>
+        <%= render CardComponent.new do %>
+          <div class="flex flex-col gap-y-4">
+            <h2 class="text-xl uppercase tracking-wide text-gray-600">
+              <%= t("games.beatle.shared.my_playlist") %>
+            </h2>
 
-    <section>
-      <%= render CardComponent.new do %>
-        <div class="flex flex-col gap-y-4">
-          <h2 class="text-normal uppercase tracking-wide text-gray-600">
-            <%= t("games.beatle.shared.my_playlist") %>
-          </h2>
+            <% if game.collecting? %>
+              <div class="flex justify-center">
+                <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:, class: "h-8 w-8") %>
+              </div>
+            <% end %>
 
-          <% if game.collecting? %>
-            <div class="flex justify-center">
-              <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:, class: "h-8 w-8") %>
-            </div>
-          <% end %>
-
-          <div class="flex gap-x-4">
-            <div class="w-full">
-              <%= link_to t("games.beatle.shared.buttons.show_playlist"), edit_game_beatle_playlist_path(game), class: "button" %>
+            <div class="flex gap-x-4">
+              <div class="w-full">
+                <%= link_to t("games.beatle.shared.buttons.show_playlist"), edit_game_beatle_playlist_path(game), class: "button" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </section>
+        <% end %>
+      </section>
+    <% end %>
   </div>
 <% end %>

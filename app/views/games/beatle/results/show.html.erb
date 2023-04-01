@@ -1,0 +1,44 @@
+<% content_for :navigation do %>
+  <%= render Links::BackToComponent.new(game_path(@game), t("shared.buttons.back_to_game")) %>
+<% end %>
+
+<div class="px-8 flex flex-col gap-y-8">
+  <%= turbo_frame_tag dom_id(@game, :results) do %>
+    <section>
+      <%= render CardComponent.new do %>
+        <div class="flex flex-col gap-y-4">
+          <h2 class="text-xl uppercase tracking-wide text-gray-600">
+            <%= t("games.beatle.shared.results") %>
+          </h2>
+
+          <div>
+            <table class="w-full">
+              <thead>
+                <tr>
+                  <th class="p-2 "></th>
+                  <th class="p-2 w-full"></th>
+                  <th class="p-2 text-right text-xs text-gray-400 font-normal">Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @game.players.ordered_by_final_rank.each do |player| %>
+                  <tr>
+                    <td class="p-2">
+                      <%= render Players::FinalRankComponent.new(player:) %>
+                    </td>
+                    <td class="p-2 text-2xl">
+                      <%= player.decorate.display_name %>
+                    </td>
+                    <td class="p-2 text-right text-gray-400">
+                      <%= player.decorate.display_final_points %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  <% end %>
+</div>

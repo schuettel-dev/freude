@@ -4,6 +4,14 @@ module Games
       def join?
         record.collecting?
       end
+
+      def guess?
+        record.guessing?
+      end
+
+      def results?
+        record.ended?
+      end
     end
   end
 end
