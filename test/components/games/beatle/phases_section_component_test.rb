@@ -16,12 +16,10 @@ class Games::PhasesSectionComponentTest < ViewComponent::TestCase
     assert_current_phase "Guessing"
   end
 
-  test "render, ended" do
+  test "not render" do
     games(:beatle_mario_bros).ended!
     player = players(:luigi_player_in_beatle_mario_bros)
-    render_inline new_component(player:)
-
-    assert_selector "[title='Current']", count: 0
+    assert_not_predicate new_component(player:), :render?
   end
 
   private

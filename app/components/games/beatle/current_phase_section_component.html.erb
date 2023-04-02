@@ -5,7 +5,49 @@
     <% end %>
 
     <% if game.ended? %>
-      <%= turbo_frame_tag dom_id(game, :results), src: game_beatle_results_path(game) %>
+      <section>
+        <%= render CardComponent.new do %>
+          <div class="flex flex-col gap-y-6">
+            <h2 class="text-xl uppercase tracking-wide text-gray-600">
+              <%= t("games.beatle.shared.final_ranking") %>
+            </h2>
+
+            <div class="flex flex-col gap-y-2">
+              <h3 class="flex justify-center uppercase text-sm text-gray-400"><%= t("games.beatle.shared.your_ranking") %></h3>
+              <div class="flex justify-center">
+                <%= render Players::FinalRankComponent.new(player:, size: :lg) %>
+              </div>
+            </div>
+
+            <div>
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th class="p-2 "></th>
+                    <th class="p-2 w-full"></th>
+                    <th class="p-2 text-right text-xs text-gray-400 font-normal">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% player.game.players.ordered_by_final_rank.each do |player| %>
+                    <tr>
+                      <td class="p-2">
+                        <%= render Players::FinalRankComponent.new(player:) %>
+                      </td>
+                      <td class="p-2 text-2xl">
+                        <%= player.decorate.display_name %>
+                      </td>
+                      <td class="p-2 text-right text-gray-400">
+                        <%= player.decorate.display_final_points %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <% end %>
+      </section>
     <% else %>
       <section>
         <%= render CardComponent.new do %>

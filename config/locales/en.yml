@@ -81,6 +81,8 @@ en:
           one: Selected 1 time
           other: Selected %{count} times
         whos_behind_this_playlist: Who's behind this playlist?
+        final_ranking: Final ranking
+        your_ranking: Your ranking
     index:
       my_games: My games
       new_game: New game

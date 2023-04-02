@@ -11,7 +11,7 @@
 
   <%= render Games::PhasesSectionComponent.new(player: @player) %>
 
-  <%= turbo_frame_tag dom_id(@player.game, :players_section), src: game_players_path(@player.game) %>
+  <%= render Games::PlayersSectionComponent.new(player: @player) %>
 
   <%= render Games::AdminSectionComponent.new(player: @player) %>
 </div>

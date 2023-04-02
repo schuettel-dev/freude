@@ -5,10 +5,16 @@ class Players::FinalRankComponent < ApplicationComponent
     3 => "bg-amber-700 text-white"
   }.freeze
 
+  SIZES = {
+    xs: 'text-xs w-8 h-8',
+    lg: 'text-lg w-16 h-16'
+  }.freeze
+
   DEFAULT_BG_COLOR = "bg-gray-200".freeze
 
-  def initialize(player:)
+  def initialize(player:, size: :xs)
     @player = player
+    @size = size
     super()
   end
 
@@ -18,16 +24,21 @@ class Players::FinalRankComponent < ApplicationComponent
 
   private
 
-  attr_reader :player
+  attr_reader :player, :size
 
   def css_classes
     class_names(
-      "inline-flex w-8 h-8 rounded-full text-xs items-center justify-center",
+      "inline-flex rounded-full items-center justify-center",
+      size_classes,
       bg_color_classes
     )
   end
 
   def bg_color_classes
     RANK_COLORS[player.final_rank] || DEFAULT_BG_COLOR
+  end
+
+  def size_classes
+    SIZES.fetch(size)
   end
 end

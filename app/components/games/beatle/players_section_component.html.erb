@@ -16,13 +16,6 @@
                 <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:) %>
               <% elsif game.guessing? %>
                 <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
-              <% elsif game.ended? %>
-                <div class="flex gap-x-4 items-center">
-                  <span class="text-sm text-gray-400">
-                    <%= t("games.shared.n_points", count: player.final_points) %>
-                  </span>
-                  <%= render Players::FinalRankComponent.new(player:) %>
-                </div>
               <% end %>
             </li>
           <% end %>
