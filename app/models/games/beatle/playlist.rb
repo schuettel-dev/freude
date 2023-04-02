@@ -72,6 +72,10 @@ module Games
         )
       end
 
+      def guesses
+        Games::Beatle::PlaylistGuess.where(player:)
+      end
+
       private
 
       def set_ready_to_guess

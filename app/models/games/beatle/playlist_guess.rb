@@ -8,6 +8,8 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
   scope :of_game, ->(game) { joins(:player).where(players: { game: }) }
   scope :for_user, ->(user) { joins(:player).where(players: { user: }) }
   scope :unguessed, -> { where(guessed_player: nil) }
+  scope :right_guessed, -> { where("guessed_player_id = guessing_player_id") }
+  scope :wrong_guessed, -> { where("guessed_player_id != guessing_player_id") }
   scope :ordered, -> { order(:id) }
 
   validates :points, inclusion: [0, 1]
