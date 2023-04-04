@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(playlist.game, :current_phase_section) do %>
   <%= render CardComponent.new(padding: false) do %>
-    <%= form_with(model: playlist, url: game_beatle_playlist_path(playlist.game)) do |f| %>
+    <%= form_with(model: playlist, url: game_beatle_playlist_path(playlist.game, playlist)) do |f| %>
       <div class="flex flex-col divide-y-2 divide-indigo-600">
         <% playlist.song_urls.each do |song_url| %>
 

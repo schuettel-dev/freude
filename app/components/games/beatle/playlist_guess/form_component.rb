@@ -13,7 +13,7 @@ class Games::Beatle::PlaylistGuess::FormComponent < ApplicationComponent
   end
 
   def guessed_player_options
-    game.players.without(player).ordered_by_user_name.map do |option_player|
+    game.players.without(player).order_by_user_name.map do |option_player|
       [to_label(option_player), option_player.id]
     end
   end

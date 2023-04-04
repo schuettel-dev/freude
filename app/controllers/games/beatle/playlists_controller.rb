@@ -2,7 +2,9 @@ class Games::Beatle::PlaylistsController < ApplicationController
   before_action :set_and_authorize_game
   before_action :set_and_authorize_playlist
 
-  def show; end
+  def show
+    @player = @game.players.find_by!(user: Current.user)
+  end
 
   def edit; end
 

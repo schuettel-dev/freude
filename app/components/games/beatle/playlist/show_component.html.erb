@@ -31,15 +31,29 @@
             <div class="flex justify-center text-lg text-blue-500">
               <% if wrong_guesses.size.zero? %>
                 <%= t("games.beatle.shared.everyone_got_that_right") %>
+              <% elsif right_guesses.size.zero? %>
+                <%= t("games.beatle.shared.no_one_got_that_right") %>
               <% else %>
-                <%= t("games.beatle.shared.n_players_got_that_right", count: right_guesses.count) %>
+                <% if players_playlist? %>
+                  <%= t("games.beatle.shared.n_players_got_that_right", count: right_guesses.size) %>
+                <% else %>
+                  <% if true %>
+                    <%= t("games.beatle.shared.n_players_got_that_right_including_you", count: right_guesses.size) %>
+                  <% else %>
+                    <%= t("games.beatle.shared.n_players_got_that_right_excluding_you", count: right_guesses.size) %>
+                  <% end %>
+                <% end %>
               <% end %>
             </div>
 
             <% if wrong_guesses.size.positive? %>
               <div class="flex flex-col gap-y-2">
                 <div class="flex justify-center text-gray-400">
-                  <%= t("games.beatle.shared.the_rest_thought_it_belonged_to") %>
+                  <% if right_guesses.size.zero? %>
+                    <%= t("games.beatle.shared.they_thought_it_belonged_to") %>
+                  <% else %>
+                    <%= t("games.beatle.shared.the_rest_thought_it_belonged_to") %>
+                  <% end %>
                 </div>
 
                 <ul>

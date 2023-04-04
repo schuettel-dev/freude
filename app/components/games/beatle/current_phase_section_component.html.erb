@@ -29,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% player.game.players.ordered_by_final_rank.each do |player| %>
+                  <% player.game.players.order_by_final_rank.each do |player| %>
                     <tr>
                       <td class="p-2">
                         <%= render Players::FinalRankComponent.new(player:) %>

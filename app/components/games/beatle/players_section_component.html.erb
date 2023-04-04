@@ -7,7 +7,7 @@
         </h2>
 
         <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
-          <% ordered_players = game.ended? ? game.players.ordered_by_final_rank : game.players.ordered_by_name %>
+          <% ordered_players = game.ended? ? game.players.order_by_final_rank : game.players.order_by_user_name %>
           <% ordered_players.each do |player| %>
             <li class="p-4 flex items-center justify-between gap-x-4">
               <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>

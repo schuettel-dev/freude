@@ -1,10 +1,11 @@
 class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
-  attr_reader :playlist, :pagy
+  attr_reader :playlist, :player
 
   delegate :game, to: :playlist
 
-  def initialize(playlist:)
+  def initialize(playlist:, player:)
     @playlist = playlist
+    @player = player
     super()
   end
 
@@ -26,6 +27,10 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
 
   def ordered_playlists
     game.playlists.order_by_user_name
+  end
+
+  def players_playlist?
+    playlist.player == player
   end
 
   private

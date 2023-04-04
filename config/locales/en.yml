@@ -86,10 +86,19 @@ en:
         belongs_to: belongs to
         results: Results
         the_rest_thought_it_belonged_to: The rest thought it belonged to
+        they_thought_it_belonged_to: They thought it belonged to
         everyone_got_that_right: Everyone got that right!
+        no_one_got_that_right: No one got that right!
         n_players_got_that_right:
-          one: Only 1 player got that right
-          other: "%{count} players got that right"
+          one: Only someone got that right!
+          other: "%{count} players got that right!"
+        n_players_got_that_right_excluding_you:
+          one: Only someone got that right, but not you!
+          other: "%{count} players got that right, but not you!"
+        n_players_got_that_right_including_you:
+          one: Only you got that right!
+          two: Only you and someone else got that right!
+          other: "%{count} players got that right, including you!"
     index:
       my_games: My games
       new_game: New game
