@@ -45,6 +45,7 @@ module Games
       scope :for_user, ->(user) { joins(:player).where(players: { user: }) }
       scope :ready_to_guess, -> { where(ready_to_guess: true) }
       scope :order_by_random, -> { order("RANDOM()") }
+      scope :order_by_user_name, -> { joins(player: :user).order("users.name ASC") }
 
       def song_urls
         [

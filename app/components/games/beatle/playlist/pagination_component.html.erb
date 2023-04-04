@@ -1,0 +1,29 @@
+<div class="grid grid-cols-2 gap-4">
+  <div class="flex justify-start">
+    <% if previous_playlist.present? %>
+      <%= link_to game_beatle_playlist_path(game, previous_playlist), class: "flex items-center gap-x-1" do %>
+        <%= render HeroiconComponent.new(:"chevron-left", class: "w-4 h-4") %>
+        <%= t("shared.actions.previous") %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="flex justify-end">
+    <% if next_playlist.present? %>
+      <%= link_to game_beatle_playlist_path(game, next_playlist), class: "flex items-center gap-x-1" do %>
+        <%= t("shared.actions.next") %>
+        <%= render HeroiconComponent.new(:"chevron-right", class: "w-4 h-4") %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-span-2 flex justify-center">
+    <div class="flex gap-4">
+      <% ordered_playlists.each_with_index do |playlist| %>
+        <%= render Games::Beatle::Playlist::DotComponent.new(playlist:, current_playlist:) do %>
+          <%= playlist.player.decorate.display_name.first %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

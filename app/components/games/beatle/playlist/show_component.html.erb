@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(game, :results) do %>
+<%= turbo_frame_tag dom_id(game, :show_playlist) do %>
   <section>
     <%= render CardComponent.new do %>
       <div class="flex flex-col gap-y-6">
@@ -7,6 +7,10 @@
         </h2>
 
         <div class="flex flex-col gap-y-4">
+          <div>
+            <%= render Games::Beatle::Playlist::PaginationComponent.new(ordered_playlists:, current_playlist: playlist) %>
+          </div>
+
           <ul class="flex flex-col gap-y-4">
             <% playlist.song_urls.each do |song_url| %>
               <li>

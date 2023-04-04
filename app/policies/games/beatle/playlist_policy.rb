@@ -2,15 +2,19 @@ module Games
   module Beatle
     class PlaylistPolicy < ApplicationPolicy
       def show?
-        record.user == user
+        record.game.ended?
       end
 
       def edit?
-        show? && record.game.collecting?
+        own? && record.game.collecting?
       end
 
       def update?
         edit?
+      end
+
+      def own?
+        record.user == user
       end
 
       class Scope < Scope

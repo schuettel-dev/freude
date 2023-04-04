@@ -1,5 +1,8 @@
 class Games::Beatle::PlaylistsController < ApplicationController
+  before_action :set_and_authorize_game
   before_action :set_and_authorize_playlist
+
+  def show; end
 
   def edit; end
 
@@ -7,14 +10,18 @@ class Games::Beatle::PlaylistsController < ApplicationController
     @playlist.update(player_beatle_playlist_params)
     @playlist.broadcast_inline_statuses
 
-    redirect_to edit_game_beatle_playlist_path(@playlist.game)
+    redirect_to edit_game_beatle_playlist_path(@playlist.game, @playlist)
   end
 
   private
 
+  def set_and_authorize_game
+    @game = policy_scope(Game).find_by!(url_identifier: params[:game_id])
+    authorize @game, :show?
+  end
+
   def set_and_authorize_playlist
-    game = policy_scope(Game).find_by!(url_identifier: params[:game_id])
-    @playlist = policy_scope(Games::Beatle::Playlist).of_game(game).first
+    @playlist = @game.playlists.find_by!(id: params[:id])
     authorize @playlist
   end
 

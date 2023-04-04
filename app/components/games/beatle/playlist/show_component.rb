@@ -1,10 +1,11 @@
-class Games::Beatle::Game::ResultsComponent < ApplicationComponent
-  attr_reader :playlist
+class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
+  attr_reader :playlist, :pagy
 
   delegate :game, to: :playlist
 
   def initialize(playlist:)
     @playlist = playlist
+    super()
   end
 
   def right_guesses
@@ -21,6 +22,10 @@ class Games::Beatle::Game::ResultsComponent < ApplicationComponent
 
   def wrong_guess_count_for_player_id(player_id)
     tallied_wrong_guessed_player_ids[player_id]
+  end
+
+  def ordered_playlists
+    game.playlists.order_by_user_name
   end
 
   private

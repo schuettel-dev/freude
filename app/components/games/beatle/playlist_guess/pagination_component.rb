@@ -1,6 +1,4 @@
 class Games::Beatle::PlaylistGuess::PaginationComponent < ApplicationComponent
-  renders_many :playlist_guess_dots, Games::Beatle::PlaylistGuess::DotComponent
-
   delegate :game, to: :current_playlist_guess
 
   attr_reader :ordered_playlist_guesses, :current_playlist_guess
