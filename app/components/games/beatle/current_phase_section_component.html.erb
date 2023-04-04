@@ -49,56 +49,7 @@
         <% end %>
       </section>
 
-      <section>
-        <%= render CardComponent.new do %>
-          <div class="flex flex-col gap-y-6">
-            <h2 class="text-xl uppercase tracking-wide text-gray-600">
-              <%= t("games.beatle.shared.final_results") %>
-            </h2>
-
-            <div class="flex flex-col gap-y-4">
-              <div class="flex justify-center text-normal text-gray-400">
-                <%= t("games.beatle.shared.this_playlist_dotdotdot") %>
-              </div>
-
-              <% playlist = game.playlists.order(:id).first %>
-
-              <ul class="flex flex-col gap-y-4">
-                <% playlist.song_urls.each do |song_url| %>
-                  <li>
-                    <%= render EmbeddedPlayerComponent.new(song_url:) %>
-                  </li>
-                <% end %>
-              </ul>
-
-              <div class="flex justify-center text-normal text-gray-400">
-                <%= t("games.beatle.shared.dotdotdot_belongs_to") %>
-              </div>
-
-              <div class="flex justify-center text-2xl">
-                <%= playlist.player.decorate.display_name %>
-              </div>
-
-              <div>
-                <% wrong_guesses = playlist.guesses.wrong_guessed %>
-                Guessed right: <%= playlist.guesses.right_guessed.count %>
-                Guessed wrong: <%= wrong_guesses.count %>
-
-                <% wrong_guessed_player_ids = wrong_guesses.pluck(:guessed_player_id).tally %>
-
-                <% wrong_guessed_players = Player.joins(:user).where(id: wrong_guessed_player_ids.keys) %>
-
-                <% sorted_players = wrong_guessed_players.sort_by { -wrong_guessed_player_ids[_1.id] } %>
-
-                <% sorted_players.each do |player| %>
-                  <%= player.decorate.display_name %>
-                  (<%= t("games.beatle.shared.n_times", count: wrong_guessed_player_ids[player.id]) %>)
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </section>
+      <%= turbo_frame_tag dom_id(player.game, :results), src: game_beatle_results_path(game) %>
     <% else %>
       <section>
         <%= render CardComponent.new do %>

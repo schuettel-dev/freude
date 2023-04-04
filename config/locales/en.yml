@@ -83,11 +83,13 @@ en:
         whos_behind_this_playlist: Who's behind this playlist?
         final_ranking: Final ranking
         your_ranking: Your ranking
-        this_playlist_dotdotdot: "This playlist..."
-        dotdotdot_belongs_to: "...belongs to"
-        n_times:
-          one: 1 time
-          other: "%{count} times"
+        belongs_to: belongs to
+        results: Results
+        the_rest_thought_it_belonged_to: The rest thought it belonged to
+        everyone_got_that_right: Everyone got that right!
+        n_players_got_that_right:
+          one: Only 1 player got that right
+          other: "%{count} players got that right"
     index:
       my_games: My games
       new_game: New game

@@ -1,0 +1,60 @@
+<%= turbo_frame_tag dom_id(game, :results) do %>
+  <section>
+    <%= render CardComponent.new do %>
+      <div class="flex flex-col gap-y-6">
+        <h2 class="text-xl uppercase tracking-wide text-gray-600">
+          <%= t("games.beatle.shared.final_results") %>
+        </h2>
+
+        <div class="flex flex-col gap-y-4">
+          <ul class="flex flex-col gap-y-4">
+            <% playlist.song_urls.each do |song_url| %>
+              <li>
+                <%= render EmbeddedPlayerComponent.new(song_url:) %>
+              </li>
+            <% end %>
+          </ul>
+
+          <div class="flex justify-center text-normal text-gray-400">
+            <%= t("games.beatle.shared.belongs_to") %>
+          </div>
+
+          <div class="flex justify-center text-3xl">
+            <%= playlist.player.decorate.display_name %>
+          </div>
+
+          <div class="flex flex-col gap-y-4">
+            <div class="flex justify-center text-lg text-blue-500">
+              <% if wrong_guesses.size.zero? %>
+                <%= t("games.beatle.shared.everyone_got_that_right") %>
+              <% else %>
+                <%= t("games.beatle.shared.n_players_got_that_right", count: right_guesses.count) %>
+              <% end %>
+            </div>
+
+            <% if wrong_guesses.size.positive? %>
+              <div class="flex flex-col gap-y-2">
+                <div class="flex justify-center text-gray-400">
+                  <%= t("games.beatle.shared.the_rest_thought_it_belonged_to") %>
+                </div>
+
+                <ul>
+                  <% wrong_guesses_grouped_by_guessed_player.each do |player| %>
+                    <li class="flex justify-center items-baseline gap-x-1">
+                      <span class="text-xl">
+                        <%= player.decorate.display_name %>
+                      </span>
+                      <span class="text-sm text-gray-400">
+                        <%= "#{wrong_guess_count_for_player_id(player.id)}x" %>
+                      </span>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </section>
+<% end %>
