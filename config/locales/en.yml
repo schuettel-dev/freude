@@ -99,6 +99,7 @@ en:
           one: Only you got that right!
           two: Only you and someone else got that right!
           other: "%{count} players got that right, including you!"
+        x_out_of_y_guessed: "%{x} / %{y} guessed"
     index:
       my_games: My games
       new_game: New game

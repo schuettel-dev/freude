@@ -59,3 +59,20 @@ body {
     #ffffff 20px
   );
 }
+
+.conic-pie {
+  --conic-pie-color-base: theme(colors.gray.200);
+  --conic-pie-color-completed: theme(colors.green.500);
+  --conic-pie-percent: 0%;
+  --conic-pie-hole-scale: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--conic-pie-color-completed) var(--conic-pie-percent), var(--conic-pie-color-base) 0);
+}
+
+.conic-pie::before {
+  --conic-pie-hole-color: white;
+  @apply rounded-full w-full h-full inline-block origin-center;
+  content: '';
+  transform: scale(var(--conic-pie-hole-scale));
+  background-color: var(--conic-pie-hole-color);
+}
