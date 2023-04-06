@@ -8,12 +8,13 @@ class Games::Beatle::Playlist::DotComponent < ApplicationComponent
 
   def call
     if current_playlist?
-      tag.span(content, class: span_css_classes)
+      tag.span(content, class: span_css_classes, title:)
     else
       link_to(
         content,
         game_beatle_playlist_path(playlist.game, playlist),
-        class: link_to_css_classes
+        class: link_to_css_classes,
+        title:
       )
     end
   end
@@ -22,6 +23,10 @@ class Games::Beatle::Playlist::DotComponent < ApplicationComponent
 
   def current_playlist?
     playlist == current_playlist
+  end
+
+  def title
+    playlist.player.decorate.display_name
   end
 
   def span_css_classes

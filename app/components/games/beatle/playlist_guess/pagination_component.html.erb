@@ -1,7 +1,7 @@
 <div class="grid grid-cols-2 gap-4">
   <div class="flex justify-start">
-    <% if previous_playlist_guess.present? %>
-      <%= link_to edit_game_beatle_playlist_guess_path(game, previous_playlist_guess), class: "flex items-center gap-x-1" do %>
+    <% if previous_item.present? %>
+      <%= link_to edit_game_beatle_playlist_guess_path(current_item.game, previous_item), class: "flex items-center gap-x-1" do %>
         <%= render HeroiconComponent.new(:"chevron-left", class: "w-4 h-4") %>
         <%= t("shared.actions.previous") %>
       <% end %>
@@ -9,8 +9,8 @@
   </div>
 
   <div class="flex justify-end">
-    <% if next_playlist_guess.present? %>
-      <%= link_to edit_game_beatle_playlist_guess_path(game, next_playlist_guess), class: "flex items-center gap-x-1" do %>
+    <% if next_item.present? %>
+      <%= link_to edit_game_beatle_playlist_guess_path(current_item.game, next_item), class: "flex items-center gap-x-1" do %>
         <%= t("shared.actions.next") %>
         <%= render HeroiconComponent.new(:"chevron-right", class: "w-4 h-4") %>
       <% end %>
@@ -19,8 +19,8 @@
 
   <div class="col-span-2 flex justify-center">
     <div class="flex gap-4">
-      <% ordered_playlist_guesses.each_with_index do |playlist_guess, index| %>
-        <%= render Games::Beatle::PlaylistGuess::DotComponent.new(playlist_guess:, current_playlist_guess:) do %>
+      <% ordered_items.each_with_index do |playlist_guess, index| %>
+        <%= render Games::Beatle::PlaylistGuess::DotComponent.new(playlist_guess:, current_playlist_guess: current_item) do %>
           <%= index.next %>
         <% end %>
       <% end %>
