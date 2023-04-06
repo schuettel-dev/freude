@@ -19,7 +19,7 @@ class Players::FinalRankComponent < ApplicationComponent
   end
 
   def call
-    tag.span(player.final_rank.ordinalize, class: css_classes)
+    tag.span(player.decorate.display_final_rank, class: css_classes)
   end
 
   private
