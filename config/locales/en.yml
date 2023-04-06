@@ -100,6 +100,7 @@ en:
           two: Only you and someone else got that right!
           other: "%{count} players got that right, including you!"
         x_out_of_y_guessed: "%{x} / %{y} guessed"
+        you_thought_it_was_name_html: "You thought it was <em>%{name}</em>."
     index:
       my_games: My games
       new_game: New game

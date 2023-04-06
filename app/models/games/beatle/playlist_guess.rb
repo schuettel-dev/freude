@@ -1,7 +1,7 @@
 class Games::Beatle::PlaylistGuess < ApplicationRecord
   delegate :game, :user, to: :player
 
-  belongs_to :player, class_name: "Player"
+  belongs_to :player
   belongs_to :guessing_player, class_name: "Player"
   belongs_to :guessed_player, class_name: "Player", optional: true
 

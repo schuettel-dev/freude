@@ -74,7 +74,7 @@ module Games
       end
 
       def guesses
-        Games::Beatle::PlaylistGuess.where(player:)
+        Games::Beatle::PlaylistGuess.where(guessing_player: player)
       end
 
       private

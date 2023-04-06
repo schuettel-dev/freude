@@ -33,6 +33,14 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
     playlist.player == player
   end
 
+  def only_player_guessed_it_right?
+    right_guesses.size == 1 && right_guesses.first.player == player
+  end
+
+  def players_guess
+    @players_guess ||= playlist.guesses.find_by(player:)
+  end
+
   private
 
   def find_wrong_guesses_grouped_by_guessed_player
@@ -40,8 +48,6 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
 
     wrong_guessed_players.sort_by { -tallied_wrong_guessed_player_ids[_1.id] }
   end
-
-
 
   def tallied_wrong_guessed_player_ids
     @tallied_wrong_guessed_player_ids ||= wrong_guesses.pluck(:guessed_player_id).tally

@@ -8,7 +8,7 @@
 
         <div class="flex flex-col gap-y-4">
           <div>
-            <%= render Games::Beatle::Playlist::PaginationComponent.new(ordered_playlists:, current_playlist: playlist) %>
+            <%= render Games::Beatle::Playlist::PaginationComponent.new(ordered_playlists, playlist) %>
           </div>
 
           <ul class="flex flex-col gap-y-4">
@@ -32,15 +32,26 @@
               <% if wrong_guesses.size.zero? %>
                 <%= t("games.beatle.shared.everyone_got_that_right") %>
               <% elsif right_guesses.size.zero? %>
-                <%= t("games.beatle.shared.no_one_got_that_right") %>
+                <span>
+                  <%= t("games.beatle.shared.no_one_got_that_right") %>
+
+                  <% if !players_playlist? %>
+                    <%= t("games.beatle.shared.you_thought_it_was_name_html", name: players_guess.guessed_player.decorate.display_name) %>
+                  <% end %>
+                </span>
               <% else %>
                 <% if players_playlist? %>
                   <%= t("games.beatle.shared.n_players_got_that_right", count: right_guesses.size) %>
                 <% else %>
-                  <% if true %>
+                  <% if only_player_guessed_it_right? %>
+                    <%= t("games.beatle.shared.n_players_got_that_right_including_you", count: right_guesses.size) %>
+                  <% elsif right_guesses.find_by(player:).present? %>
                     <%= t("games.beatle.shared.n_players_got_that_right_including_you", count: right_guesses.size) %>
                   <% else %>
-                    <%= t("games.beatle.shared.n_players_got_that_right_excluding_you", count: right_guesses.size) %>
+                    <span>
+                      <%= t("games.beatle.shared.n_players_got_that_right_excluding_you", count: right_guesses.size) %>
+                      <%= t("games.beatle.shared.you_thought_it_was_name_html", name: players_guess.guessed_player.decorate.display_name) %>
+                    </span>
                   <% end %>
                 <% end %>
               <% end %>
@@ -49,7 +60,7 @@
             <% if wrong_guesses.size.positive? %>
               <div class="flex flex-col gap-y-2">
                 <div class="flex justify-center text-gray-400">
-                  <% if right_guesses.size.zero? %>
+                  <% if right_guesses.size.zero? && players_playlist? %>
                     <%= t("games.beatle.shared.they_thought_it_belonged_to") %>
                   <% else %>
                     <%= t("games.beatle.shared.the_rest_thought_it_belonged_to") %>
