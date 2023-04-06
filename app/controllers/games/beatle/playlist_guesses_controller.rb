@@ -14,7 +14,8 @@ class Games::Beatle::PlaylistGuessesController < ApplicationController
   private
 
   def set_and_authorize_game
-    @game = policy_scope(Games::Beatle::Game).guessing.find_by!(url_identifier: params[:game_id])
+    @game = policy_scope(Games::Beatle::Game).find_by!(url_identifier: params[:game_id])
+    authorize @game, :show?
   end
 
   def set_and_authorize_playlist_guess
