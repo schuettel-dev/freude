@@ -31,10 +31,6 @@ class GamePolicy < ApplicationPolicy
     admin?
   end
 
-  def join?
-    raise "implement in subclass"
-  end
-
   def admin?
     record.user == user
   end

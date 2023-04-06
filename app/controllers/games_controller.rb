@@ -54,7 +54,7 @@ class GamesController < ApplicationController
 
   def set_and_authorize_game_for_join
     @game = Game.find_by!(url_identifier: params[:game_id])
-    authorize @game
+    raise Pundit::NotAuthorizedError unless @game.collecting?
   end
 
   def game_params
