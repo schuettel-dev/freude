@@ -1,7 +1,7 @@
 require "test_helper"
 
 class Games::AdminSectionComponentTest < ViewComponent::TestCase
-  test "render, joining phase" do
+  test "render, collecting phase" do
     player = players(:mario_player_in_beatle_mario_bros)
     render_inline new_component(player:)
 
@@ -10,10 +10,12 @@ class Games::AdminSectionComponentTest < ViewComponent::TestCase
     assert_button "Delete game"
   end
 
-  test "render, not joining phase" do
+  test "render, not collecting phase" do
+    games(:beatle_mario_bros).guessing!
     player = players(:mario_player_in_beatle_mario_bros)
     render_inline new_component(player:)
 
+    assert_no_field "URL to join", with: "http://test.host/games/MARIOBROSURLIDENTIFIER/join/MARIOBROSJOINTOKEN"
     assert_link "Edit game"
     assert_button "Delete game"
   end
