@@ -23,7 +23,7 @@ class Games::Beatle::PlaylistsController < ApplicationController
   end
 
   def set_and_authorize_playlist
-    @playlist = @game.playlists.find_by!(id: params[:id])
+    @playlist = @game.playlists.find(params[:id])
     authorize @playlist
   end
 

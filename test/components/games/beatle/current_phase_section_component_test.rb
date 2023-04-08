@@ -39,6 +39,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
 
   def assert_show_playlist_link(player)
     playlist = player.playlist
+
     assert_link "Show playlist", href: url_helpers.edit_game_beatle_playlist_path(playlist.game, playlist)
   end
 

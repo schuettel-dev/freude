@@ -6,8 +6,8 @@ class Players::FinalRankComponent < ApplicationComponent
   }.freeze
 
   SIZES = {
-    xs: 'text-xs w-8 h-8',
-    lg: 'text-lg w-16 h-16'
+    xs: "text-xs w-8 h-8",
+    lg: "text-lg w-16 h-16"
   }.freeze
 
   DEFAULT_BG_COLOR = "bg-gray-200".freeze

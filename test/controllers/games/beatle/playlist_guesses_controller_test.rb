@@ -10,6 +10,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
     sign_in :jerry
 
     get edit_game_beatle_playlist_guess_path(game, playlist_guess)
+
     assert_response :success
   end
 
@@ -54,6 +55,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
     end
 
     follow_redirect!
+
     assert_response :success
   end
 

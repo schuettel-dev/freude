@@ -29,7 +29,7 @@ class Games::Beatle::PlaylistGuess::DotComponent < ApplicationComponent
       common_css_classes,
       bg_css_classes,
       "outline outline-offset-2 outline-4",
-      (playlist_guess.guessed? ? "outline-blue-600" : "outline-gray-500"),
+      (playlist_guess.guessed? ? "outline-blue-600" : "outline-gray-500")
     )
   end
 

@@ -21,7 +21,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "No one got that right!"
     assert_text "They thought it belonged to"
-    assert_match /George[\n ]*3x/, page.native.text
+    assert_match(/George[\n ]*3x/, page.native.text)
   end
 
   test "render, own playlist, one guessed it right" do
@@ -35,7 +35,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "Only someone got that right!"
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*2x/, page.native.text
+    assert_match(/George[\n ]*2x/, page.native.text)
   end
 
   test "render, own playlist, multiple guessed it right" do
@@ -49,7 +49,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "2 players got that right!"
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*1x/, page.native.text
+    assert_match(/George[\n ]*1x/, page.native.text)
   end
 
   test "render, own playlist, all guessed it right" do
@@ -75,7 +75,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "No one got that right!"
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*3x/, page.native.text
+    assert_match(/George[\n ]*3x/, page.native.text)
   end
 
   test "render, other playlist, one guessed it right, not current player" do
@@ -90,7 +90,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     assert_text "Only someone got that right, but not you!"
     assert_text "You thought it was George."
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*2x/, page.native.text
+    assert_match(/George[\n ]*2x/, page.native.text)
   end
 
   test "render, other playlist, one guessed it right, current player" do
@@ -104,7 +104,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "Only you got that right!"
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*2x/, page.native.text
+    assert_match(/George[\n ]*2x/, page.native.text)
   end
 
   test "render, other playlist, multiple guessed it right, excluding current player" do
@@ -119,7 +119,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     assert_text "2 players got that right, but not you!"
     assert_text "You thought it was George."
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*1x/, page.native.text
+    assert_match(/George[\n ]*1x/, page.native.text)
   end
 
   test "render, other playlist, multiple guessed it right, including current player" do
@@ -133,7 +133,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
 
     assert_text "2 players got that right, including you!"
     assert_text "The rest thought it belonged to"
-    assert_match /George[\n ]*1x/, page.native.text
+    assert_match(/George[\n ]*1x/, page.native.text)
   end
 
   test "render, other playlist, all guessed it right" do
