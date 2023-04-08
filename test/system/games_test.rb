@@ -32,10 +32,10 @@ class GamesTest < ApplicationSystemTestCase
   end
 
   test "owner does not see invitation section, if joining is not possible" do
-    games(:beatle_mario_bros).guessing!
-    sign_in :mario
+    games(:beatle_seinfeld).guessing!
+    sign_in :jerry
 
-    goto_game "Mario Bros"
+    goto_game "Seinfeld"
 
     assert_no_selector "h2", text: "Invite"
   end
