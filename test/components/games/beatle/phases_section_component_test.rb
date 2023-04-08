@@ -19,6 +19,7 @@ class Games::PhasesSectionComponentTest < ViewComponent::TestCase
   test "not render" do
     games(:beatle_mario_bros).ended!
     player = players(:luigi_player_in_beatle_mario_bros)
+
     assert_not_predicate new_component(player:), :render?
   end
 
