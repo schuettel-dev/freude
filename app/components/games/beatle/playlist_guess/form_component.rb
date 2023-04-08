@@ -6,6 +6,7 @@ class Games::Beatle::PlaylistGuess::FormComponent < ApplicationComponent
 
   def initialize(playlist_guess:)
     @playlist_guess = playlist_guess
+    super()
   end
 
   def ordered_playlist_guesses

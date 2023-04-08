@@ -4,6 +4,7 @@ class Games::Beatle::Playlist::DotComponent < ApplicationComponent
   def initialize(playlist:, current_playlist:)
     @playlist = playlist
     @current_playlist = current_playlist
+    super()
   end
 
   def call

@@ -8,6 +8,7 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
   def initialize(player:, **args)
     @player = player
     @args = DEFAULTS.dup.merge(args)
+    super()
   end
 
   def call
@@ -51,6 +52,6 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
   end
 
   def playlist_guesses
-    @ordered_playlist ||= player.playlist_guesses
+    @playlist_guesses ||= player.playlist_guesses
   end
 end

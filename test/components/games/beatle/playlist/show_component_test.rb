@@ -15,7 +15,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: other_player.id)
+    playlist.guesses.update_all(guessed_player_id: other_player.id) # rubocop:disable Rails/SkipsModelValidations
 
     render_inline new_component(playlist:, player:)
 
@@ -28,7 +28,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: other_player.id)
+    playlist.guesses.update_all(guessed_player_id: other_player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.first.update!(guessed_player: playlist.player)
 
     render_inline new_component(playlist:, player:)
@@ -42,7 +42,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: player.id)
+    playlist.guesses.update_all(guessed_player_id: player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.first.update!(guessed_player: other_player)
 
     render_inline new_component(playlist:, player:)
@@ -55,8 +55,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
   test "render, own playlist, all guessed it right" do
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
-    other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: player.id)
+    playlist.guesses.update_all(guessed_player_id: player.id) # rubocop:disable Rails/SkipsModelValidations
 
     render_inline new_component(playlist:, player:)
 
@@ -69,7 +68,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: other_player.id)
+    playlist.guesses.update_all(guessed_player_id: other_player.id) # rubocop:disable Rails/SkipsModelValidations
 
     render_inline new_component(playlist:, player:)
 
@@ -82,7 +81,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: other_player.id)
+    playlist.guesses.update_all(guessed_player_id: other_player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.where.not(player:).first.update!(guessed_player: playlist.player)
 
     render_inline new_component(playlist:, player:)
@@ -97,7 +96,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: other_player.id)
+    playlist.guesses.update_all(guessed_player_id: other_player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.find_by(player:).update!(guessed_player: playlist.player)
 
     render_inline new_component(playlist:, player:)
@@ -111,7 +110,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: playlist.player.id)
+    playlist.guesses.update_all(guessed_player_id: playlist.player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.find_by(player:).update!(guessed_player: other_player)
 
     render_inline new_component(playlist:, player:)
@@ -126,7 +125,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
     other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: playlist.player.id)
+    playlist.guesses.update_all(guessed_player_id: playlist.player.id) # rubocop:disable Rails/SkipsModelValidations
     playlist.guesses.where.not(player:).first.update!(guessed_player: other_player)
 
     render_inline new_component(playlist:, player:)
@@ -139,8 +138,7 @@ class Games::Beatle::Playlist::ShowComponentTest < ViewComponent::TestCase
   test "render, other playlist, all guessed it right" do
     playlist = games_beatle_playlists(:elaine_player_in_beatle_seinfeld_playlist)
     player = players(:jerry_player_in_beatle_seinfeld)
-    other_player = players(:george_player_in_beatle_seinfeld)
-    playlist.guesses.update_all(guessed_player_id: playlist.player.id)
+    playlist.guesses.update_all(guessed_player_id: playlist.player.id) # rubocop:disable Rails/SkipsModelValidations
 
     render_inline new_component(playlist:, player:)
 

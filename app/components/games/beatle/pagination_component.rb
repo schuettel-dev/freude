@@ -4,6 +4,7 @@ class Games::Beatle::PaginationComponent < ApplicationComponent
   def initialize(ordered_items, current_item)
     @ordered_items = ordered_items
     @current_item = current_item
+    super()
   end
 
   def render?
@@ -33,6 +34,6 @@ class Games::Beatle::PaginationComponent < ApplicationComponent
   end
 
   def next_item_index
-    @current_item_index ||= current_item_index.next
+    @next_item_index ||= current_item_index.next
   end
 end

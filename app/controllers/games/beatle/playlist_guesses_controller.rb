@@ -5,7 +5,9 @@ class Games::Beatle::PlaylistGuessesController < ApplicationController
   def edit; end
 
   def update
-    guessed_player = @game.players.where.not(user: Current.user).find_by(id: games_beatle_playlist_guess_params[:guessed_player_id])
+    guessed_player = @game.players
+                          .where.not(user: Current.user)
+                          .find_by(id: games_beatle_playlist_guess_params[:guessed_player_id])
     @playlist_guess.update(guessed_player:)
 
     redirect_to edit_game_beatle_playlist_guess_path(@game, @playlist_guess)
