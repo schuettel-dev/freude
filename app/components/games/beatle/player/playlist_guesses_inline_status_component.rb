@@ -2,7 +2,7 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
   DEFAULTS = {
     class: "w-8 h-8",
     hole_scale: 0,
-    hole_scale: "#fff",
+    hole_color: "#fff"
   }.freeze
 
   def initialize(player:, **args)
@@ -24,7 +24,7 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
 
   def style
     [
-      "--conic-pie-percent: #{guessed_percentage}%;",
+      "--conic-pie-percent: #{guessed_percentage.round(5)}%;",
       "--conic-pie-hole-scale: #{args[:hole_scale]};",
       "--conic-pie-hole-color: #{args[:hole_color]};"
     ].join
