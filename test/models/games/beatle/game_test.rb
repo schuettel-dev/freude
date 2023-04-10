@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::GameTest < ActiveSupport::TestCase
   test "#save!" do
-    user = users(:mario)
+    user = users(:jerry)
 
     game = Games::Beatle::Game.new(
       group_name: "Group game",
@@ -20,8 +20,8 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#new_player" do
-    game = games(:beatle_mario_bros)
-    user = users(:toad)
+    game = games(:beatle_seinfeld)
+    user = users(:newman)
 
     assert_difference -> { Games::Beatle::Playlist.count }, +1 do
       assert_difference -> { Games::Beatle::Player.count }, +1 do
@@ -68,17 +68,16 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#minimum_players_reached?" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
+    excluding_players = players(:jerry_player_in_beatle_seinfeld, :elaine_player_in_beatle_seinfeld)
 
     assert_changes -> { game.minimum_players_reached? }, to: false do
-      game.players.excluding(
-        players(:mario_player_in_beatle_mario_bros, :luigi_player_in_beatle_mario_bros)
-      ).destroy_all
+      game.players.excluding(excluding_players).destroy_all
     end
   end
 
   test "#transition_allowed?, from: :collecting" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
     game.phase = :collecting
 
     assert_not game.transition_allowed?(to_phase: :collecting)
@@ -87,7 +86,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#transition_allowed?, from: :guessing" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
     game.phase = :guessing
 
     assert game.transition_allowed?(to_phase: :collecting)
@@ -96,7 +95,7 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#transition_allowed?, from: :ended" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
     game.phase = :ended
 
     assert_not game.transition_allowed?(to_phase: :collecting)
@@ -105,8 +104,15 @@ class Games::Beatle::GameTest < ActiveSupport::TestCase
   end
 
   test "#requirements_met_for_guessing_phase?" do
-    assert_not_predicate games(:beatle_mario_bros), :requirements_met_for_guessing_phase?
-    assert_predicate games(:beatle_seinfeld), :requirements_met_for_guessing_phase?
+    game = games(:beatle_seinfeld)
+    game.collecting!
+
+    assert_changes -> { game.reload.requirements_met_for_guessing_phase? }, to: false do
+      players(
+        :george_player_in_beatle_seinfeld,
+        :kramer_player_in_beatle_seinfeld
+      ).map(&:destroy!)
+    end
   end
 
   test "#requirements_met_for_ended_phase?" do

@@ -2,23 +2,23 @@ require "test_helper"
 
 class Games::PhasesSectionComponentTest < ViewComponent::TestCase
   test "render, collecting" do
-    player = players(:luigi_player_in_beatle_mario_bros)
+    games(:beatle_seinfeld).collecting!
+    player = players(:elaine_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
     assert_current_phase "Collecting"
   end
 
   test "render, guessing" do
-    games(:beatle_mario_bros).guessing!
-    player = players(:luigi_player_in_beatle_mario_bros)
+    games(:beatle_seinfeld).guessing!
+    player = players(:elaine_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
     assert_current_phase "Guessing"
   end
 
   test "not render" do
-    games(:beatle_mario_bros).ended!
-    player = players(:luigi_player_in_beatle_mario_bros)
+    player = players(:elaine_player_in_beatle_seinfeld)
 
     assert_not_predicate new_component(player:), :render?
   end

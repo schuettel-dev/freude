@@ -6,7 +6,7 @@ class SessionsTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Sign in"
 
-    fill_in "Token", with: "LUIGITOKEN"
+    fill_in "Token", with: "ELAINETOKEN"
     click_on "Join games"
 
     assert_selector "h1", text: "My games"

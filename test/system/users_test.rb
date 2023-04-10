@@ -6,7 +6,7 @@ class UsersTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Join the games"
 
-    fill_in "Name", with: "Toad"
+    fill_in "Name", with: "Newman"
     click_on "Sign up"
 
     assert_selector "h1", text: "My games"
@@ -15,10 +15,10 @@ class UsersTest < ApplicationSystemTestCase
   test "rejoin" do
     visit root_path
 
-    fill_in "Name", with: "Yoshi"
+    fill_in "Name", with: "Babu"
     click_on "Sign up"
     sign_out
-    click_on "Rejoin as Yoshi"
+    click_on "Rejoin as Babu"
 
     assert_selector "h1", text: "My games"
   end

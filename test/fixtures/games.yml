@@ -1,12 +1,3 @@
-beatle_mario_bros:
-  group_name: "Mario Bros"
-  game_template: beatle
-  type: "Games::Beatle::Game"
-  phase: "collecting"
-  user: mario
-  url_identifier: "MARIOBROSURLIDENTIFIER"
-  join_token: "MARIOBROSJOINTOKEN"
-
 beatle_seinfeld:
   group_name: "Seinfeld"
   game_template: beatle

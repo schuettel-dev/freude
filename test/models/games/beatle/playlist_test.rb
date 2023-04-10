@@ -2,7 +2,11 @@ require "test_helper"
 
 class Games::Beatle::PlaylistTest < ActiveSupport::TestCase
   test "#song_urls" do
-    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
+    playlist.update!(
+      song_2_url: "https://something",
+      song_3_url: ""
+    )
 
     playlist.song_urls.tap do |song_urls|
       assert_equal :valid, song_urls[0].status
@@ -12,7 +16,7 @@ class Games::Beatle::PlaylistTest < ActiveSupport::TestCase
   end
 
   test "#reset_song_urls" do
-    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
 
     playlist.reset_song_urls
 
@@ -22,10 +26,10 @@ class Games::Beatle::PlaylistTest < ActiveSupport::TestCase
   end
 
   test "#set_ready_to_guess, #ready_to_guess" do
-    playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
 
     assert_changes -> { playlist.reload.ready_to_guess? }, to: false do
-      playlist.update!(song_1_url: "https://wrong")
+      playlist.reset_song_urls
     end
   end
 end

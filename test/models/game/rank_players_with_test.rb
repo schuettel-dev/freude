@@ -2,15 +2,19 @@ require "test_helper"
 
 class Game::RankPlayersWithTest < ActiveSupport::TestCase
   test "ranking not influenced by other games players" do
+    other_game = game_templates(:beatle).new_game(user: users(:jerry), group_name: "FELDSEIN")
+    other_game.save!
+    other_jerry = other_game.new_player(user: users(:jerry))
+    other_jerry.save!
+
     game = games(:beatle_seinfeld)
 
-    mario, jerry, elaine = players(
-      :mario_player_in_beatle_mario_bros,
+    jerry, elaine = players(
       :jerry_player_in_beatle_seinfeld,
       :elaine_player_in_beatle_seinfeld
     )
 
-    mario.update!(final_points: 5, final_rank: 99)
+    other_jerry.update!(final_points: 5, final_rank: 99)
     jerry.update!(final_rank: 72)
     elaine.update!(final_rank: 71)
 
@@ -19,10 +23,10 @@ class Game::RankPlayersWithTest < ActiveSupport::TestCase
       elaine.reload.update!(final_points: 3)
     end
 
-    [mario, jerry, elaine].each(&:reload)
+    [other_jerry, jerry, elaine].each(&:reload)
 
-    assert_equal 5, mario.final_points
-    assert_equal 99, mario.final_rank
+    assert_equal 5, other_jerry.final_points
+    assert_equal 99, other_jerry.final_rank
 
     assert_equal 4, jerry.final_points
     assert_equal 1, jerry.final_rank

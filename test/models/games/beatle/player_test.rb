@@ -2,8 +2,8 @@ require "test_helper"
 
 class Games::Beatle::PlayerTest < ActiveSupport::TestCase
   test "save" do
-    user = users(:toad)
-    game = games(:beatle_mario_bros)
+    user = users(:newman)
+    game = games(:beatle_seinfeld)
 
     player = Games::Beatle::Player.new(user:, game:)
 

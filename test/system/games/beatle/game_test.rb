@@ -2,9 +2,13 @@ require "application_system_test_case"
 
 class Games::Beatle::GameTest < ApplicationSystemTestCase
   test "owner cannot change phase to :guessing if not enough players" do
-    players(:peach_player_in_beatle_mario_bros).destroy!
-    sign_in :mario
-    goto_game "Mario Bros"
+    players(
+      :george_player_in_beatle_seinfeld,
+      :kramer_player_in_beatle_seinfeld
+    ).map(&:destroy!)
+    games(:beatle_seinfeld).collecting!
+    sign_in :jerry
+    goto_game "Seinfeld"
 
     within_game_section "Phases" do
       assert_current_phase "Collecting"
@@ -37,11 +41,12 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
   end
 
   test "player submits their songs" do
-    player = players(:luigi_player_in_beatle_mario_bros)
+    games(:beatle_seinfeld).collecting!
+    player = players(:elaine_player_in_beatle_seinfeld)
     player.playlist.reset_song_urls
 
-    sign_in :luigi
-    goto_game "Mario Bros"
+    sign_in :elaine
+    goto_game "Seinfeld"
 
     within_game_section "My playlist" do
       click_on "Show playlist"

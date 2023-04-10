@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::Playlist::SongUrlBadgeComponentTest < ViewComponent::TestCase
   setup do
-    @playlist = games_beatle_playlists(:mario_player_in_beatle_mario_bros_playlist)
+    @playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
   end
 
   test "render, valid spotify" do
@@ -12,13 +12,15 @@ class Games::Beatle::Playlist::SongUrlBadgeComponentTest < ViewComponent::TestCa
   end
 
   test "render, invalid" do
-    render_inline new_component(song_url: @playlist.song_urls.second)
+    @playlist.song_1_url = "https://something"
+    render_inline new_component(song_url: @playlist.song_urls.first)
 
     assert_selector "div", class: "text-red-400"
   end
 
   test "render, blank" do
-    render_inline new_component(song_url: @playlist.song_urls.third)
+    @playlist.song_1_url = ""
+    render_inline new_component(song_url: @playlist.song_urls.first)
 
     assert_selector "div", class: "text-gray-500"
   end

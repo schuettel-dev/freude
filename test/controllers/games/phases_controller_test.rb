@@ -2,8 +2,8 @@ require "test_helper"
 
 class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
   test "non-admin" do
-    game = games(:beatle_mario_bros)
-    sign_in :luigi
+    game = games(:beatle_seinfeld)
+    sign_in :elaine
 
     assert_raises(Pundit::NotAuthorizedError) do
       put game_phase_path(game), params: { phase: :irrelevant }
@@ -25,8 +25,8 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "admin, transition forward, not allowed" do
-    game = games(:beatle_mario_bros)
-    sign_in :mario
+    game = games(:beatle_seinfeld)
+    sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
       put game_phase_path(game), params: { phase: :guessing }

@@ -8,7 +8,7 @@ class SignUpsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET new, redirected when already signed in" do
-    sign_in :mario
+    sign_in :jerry
     get new_sign_up_path
 
     assert_redirected_to(root_path)
@@ -19,7 +19,7 @@ class SignUpsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST create" do
     assert_difference -> { User.count }, +1 do
-      post sign_up_path, params: { user: { name: "Peach" } }
+      post sign_up_path, params: { user: { name: "Babu" } }
     end
 
     follow_redirect!

@@ -2,7 +2,7 @@ require "test_helper"
 
 class SessionFormTest < ActiveSupport::TestCase
   test "valid" do
-    params = ActionController::Parameters.new(session: { token: "MARIOTOKEN" })
+    params = ActionController::Parameters.new(session: { token: "JERRYTOKEN" })
     form = SessionForm.new(params:)
 
     assert_predicate form, :valid?

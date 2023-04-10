@@ -2,27 +2,28 @@ require "test_helper"
 
 class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCase
   test "not render, if not owner" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
     phase = :irrelevant
-    user = users(:luigi)
+    user = users(:elaine)
     component = new_component(game:, phase:, user:)
 
     assert_not component.render?
   end
 
   test "not render, current phase" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
+    game.collecting!
     phase = :collecting
-    user = users(:mario)
+    user = users(:jerry)
     component = new_component(game:, phase:, user:)
 
     assert_not component.render?
   end
 
   test "not render, transition not allowed" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
     phase = :ended
-    user = users(:mario)
+    user = users(:jerry)
     component = new_component(game:, phase:, user:)
 
     assert_not component.render?
@@ -40,9 +41,14 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
   end
 
   test "render, transition forward, blocked" do
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
+    game.collecting!
+    players(
+      :george_player_in_beatle_seinfeld,
+      :kramer_player_in_beatle_seinfeld
+    ).map(&:destroy!)
     phase = :guessing
-    user = users(:mario)
+    user = users(:jerry)
     render_inline new_component(game:, phase:, user:)
 
     assert_selector "button", text: "Start this phase" do |element|

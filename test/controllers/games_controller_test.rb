@@ -2,30 +2,30 @@ require "test_helper"
 
 class GamesControllerTest < ActionDispatch::IntegrationTest
   test "GET index" do
-    sign_in :mario
+    sign_in :jerry
     get games_path
 
     assert_response :success
   end
 
   test "GET show" do
-    sign_in :mario
-    get game_path(games(:beatle_mario_bros))
+    sign_in :jerry
+    get game_path(games(:beatle_seinfeld))
 
     assert_response :success
   end
 
   test "GET edit" do
-    sign_in :mario
-    get edit_game_path(games(:beatle_mario_bros))
+    sign_in :jerry
+    get edit_game_path(games(:beatle_seinfeld))
 
     assert_response :success
   end
 
   test "PUT update" do
-    sign_in :mario
+    sign_in :jerry
 
-    game = games(:beatle_mario_bros)
+    game = games(:beatle_seinfeld)
 
     assert_changes -> { game.group_name }, to: "Another group name" do
       put game_path(game), params: { game: { group_name: "Another group name" } }
@@ -38,9 +38,9 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "DELETE destroy" do
-    sign_in :mario
+    sign_in :jerry
     assert_difference -> { Game.count }, -1 do
-      delete game_path(games(:beatle_mario_bros))
+      delete game_path(games(:beatle_seinfeld))
     end
     follow_redirect!
 
@@ -48,8 +48,9 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET join" do
-    game = games(:beatle_mario_bros)
-    sign_in :toad
+    game = games(:beatle_seinfeld)
+    game.collecting!
+    sign_in :newman
 
     assert_difference -> { game.players.count }, +1 do
       get game_join_url(game, token: game.join_token, host: "www.example.com")
@@ -58,12 +59,13 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_response :success
-    assert_predicate game.players.find_by(user: users(:toad)).playlist, :present?
+    assert_predicate game.players.find_by(user: users(:newman)).playlist, :present?
   end
 
   test "GET join, wrong token" do
-    game = games(:beatle_mario_bros)
-    sign_in :toad
+    game = games(:beatle_seinfeld)
+    game.collecting!
+    sign_in :newman
 
     assert_no_difference -> { game.players.count } do
       get game_join_url(game, token: "WRONGTOKEN", host: "www.example.com")

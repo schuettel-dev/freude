@@ -2,18 +2,18 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   test "initializes token" do
-    koopa = User.new(name: "Koopa")
+    user = User.new(name: "Babu")
 
-    assert koopa.save!
-    assert_match(/^[[:alnum:]]{16}$/, koopa.token)
-    assert_equal 7, koopa.color.size
+    assert user.save!
+    assert_match(/^[[:alnum:]]{16}$/, user.token)
+    assert_equal 7, user.color.size
   end
 
   test "token is readonly" do
-    user = users(:mario)
+    user = users(:jerry)
     user.update!(token: "ANOTHERTOKEN")
     user.reload
 
-    assert_equal "MARIOTOKEN", user.token
+    assert_equal "JERRYTOKEN", user.token
   end
 end

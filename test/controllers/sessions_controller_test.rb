@@ -11,7 +11,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET show" do
-    sign_in :mario
+    sign_in :jerry
     get root_path
 
     assert_response :success
@@ -24,7 +24,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET new, already signed in" do
-    sign_in :mario
+    sign_in :jerry
     get new_session_path
 
     assert_redirected_to(root_path)
@@ -34,7 +34,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST create" do
-    sign_in :mario
+    sign_in :jerry
 
     assert_equal "/", request.path
     assert_equal "games", request.params[:controller]
@@ -56,7 +56,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "DELETE destroy" do
-    sign_in :mario
+    sign_in :jerry
     delete session_path
 
     assert_redirected_to(new_sign_up_path)
