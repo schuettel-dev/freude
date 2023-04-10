@@ -2,7 +2,8 @@ require "test_helper"
 
 class Game::RankPlayersWithTest < ActiveSupport::TestCase
   test "ranking not influenced by other games players" do
-    other_game = game_templates(:beatle).new_game(user: users(:jerry), group_name: "FELDSEIN")
+    other_game = games(:beatle_seinfeld).dup
+    other_game.url_identifier = nil
     other_game.save!
     other_jerry = other_game.new_player(user: users(:jerry))
     other_jerry.save!

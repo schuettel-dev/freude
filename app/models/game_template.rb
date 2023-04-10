@@ -1,7 +1,10 @@
 class GameTemplate < ApplicationRecord
   has_many :games, dependent: :destroy
 
-  validates :name, :image_path, :description, :minimum_players, :url_identifier, :namespace, presence: true
+  validates :name, :description,
+            :minimum_players, :free_players, :maximum_players,
+            :url_identifier, :namespace,
+            presence: true
   validates :name, :url_identifier, :namespace, uniqueness: true
 
   scope :ordered, -> { order(name: :asc) }
@@ -12,7 +15,12 @@ class GameTemplate < ApplicationRecord
 
   def new_game(...)
     append_to_namespace(Game).new(...).tap do |game|
+      game.name = name
+      game.description = description
       game.game_template = self
+      game.minimum_players = minimum_players
+      game.activated_players = free_players
+      game.maximum_players = maximum_players
     end
   end
 

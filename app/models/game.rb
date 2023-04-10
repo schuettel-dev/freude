@@ -14,7 +14,9 @@ class Game < ApplicationRecord
     )
   end
 
-  validates :group_name, :phase, :type, :join_token, presence: true
+  validates :name, :description, :group_name, :phase, :type,
+            :minimum_players, :activated_players, :maximum_players, :join_token,
+            presence: true
 
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }

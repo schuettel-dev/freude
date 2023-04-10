@@ -16,9 +16,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
 
   create_table "game_templates", force: :cascade do |t|
     t.string "name", null: false
-    t.string "image_path", null: false
     t.string "description", null: false
     t.integer "minimum_players", null: false
+    t.integer "free_players", null: false
+    t.integer "maximum_players", null: false
     t.string "url_identifier", null: false
     t.string "namespace", null: false
     t.datetime "created_at", null: false
@@ -34,6 +35,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_153755) do
     t.bigint "user_id", null: false
     t.string "phase", null: false
     t.string "type", null: false
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "minimum_players", null: false
+    t.integer "activated_players", null: false
+    t.integer "maximum_players", null: false
     t.string "url_identifier", null: false
     t.string "join_token", null: false
     t.datetime "created_at", null: false

@@ -9,7 +9,12 @@ en:
   activerecord:
     attributes:
       game:
+        name: Name
+        description: Description
         group_name: Group name
+        maximum_players: Maximum players
+        activated_players: Activated players
+        minimum_players: Minimum players
         phase: Phase
         type: Type
         token: Token
@@ -25,6 +30,8 @@ en:
       game_template:
         description: Description
         image_path: Image
+        maximum_players: Maximum players
+        free_players: Free players
         minimum_players: Minimum players
         name: Name
         namespace: Namespace

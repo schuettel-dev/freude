@@ -1,8 +1,13 @@
 beatle_seinfeld:
   group_name: "Seinfeld"
   game_template: beatle
-  type: "Games::Beatle::Game"
-  phase: "ended"
   user: jerry
+  phase: "ended"
+  type: "Games::Beatle::Game"
+  name: "Beatle"
+  description: "Guess who's behind a playlist of 3 songs"
+  minimum_players: 3
+  activated_players: 10
+  maximum_players: 30
   url_identifier: "BEATLEJERRYURLIDENTIFIER"
   join_token: "BEATLEJERRYJOINTOKEN"

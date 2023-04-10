@@ -1,7 +1,8 @@
 beatle:
   name: "Beatle"
-  image_path: "games/beatle.png"
   description: "Guess who's behind a playlist of 3 songs"
   minimum_players: 3
+  free_players: 10
+  maximum_players: 30
   url_identifier: "beatle"
   namespace: "Games::Beatle"

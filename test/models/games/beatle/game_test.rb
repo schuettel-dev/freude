@@ -2,12 +2,15 @@ require "test_helper"
 
 class Games::Beatle::GameTest < ActiveSupport::TestCase
   test "#save!" do
-    user = users(:jerry)
-
     game = Games::Beatle::Game.new(
+      name: "name",
+      description: "Description",
       group_name: "Group game",
       game_template: game_templates(:beatle),
-      user:
+      user: users(:jerry),
+      minimum_players: 3,
+      activated_players: 10,
+      maximum_players: 30
     )
 
     assert_difference -> { Game.count }, +1 do
