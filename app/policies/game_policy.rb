@@ -23,10 +23,6 @@ class GamePolicy < ApplicationPolicy
     admin?
   end
 
-  def update_phase?
-    admin?
-  end
-
   def destroy?
     admin?
   end

@@ -9,7 +9,7 @@
         <ul class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
           <% phases.each do |phase| %>
             <li>
-              <details class="open:bg-indigo-50" %>
+              <details class="open:bg-indigo-50" open>
                 <summary class="text-lg p-4 hover:bg-indigo-100 transition flex items-center gap-x-2 justify-between">
                   <%= Games::Beatle::Game.human_enum_name(:phase, phase) %>
 
@@ -21,7 +21,9 @@
                     <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
                   </div>
 
-                    <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, phase:, user:) %>
+                    <% if game.current_phase?(phase) %>
+                      <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, user:) %>
+                    <% end %>
                 </div>
               </details>
             </li>

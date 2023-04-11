@@ -1,0 +1,9 @@
+<% content_for :navigation do %>
+  <%= render Links::BackToComponent.new(game_path(@game), t("games.shared.back_to_game")) %>
+<% end %>
+
+<div class="px-8 flex flex-col gap-y-8">
+  <h1 class="text-5xl mb-8"><%= t("shared.phases") %></h1>
+
+  <%= render Games::PhasesSectionComponent.new(player: @player) %>
+</div>

@@ -1,28 +1,34 @@
 class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
-  attr_reader :game, :phase, :user
+  attr_reader :game, :user
 
-  def initialize(game:, phase:, user:)
+  def initialize(game:, user:)
     @game = game
-    @phase = phase
     @user = user
+    @transition_error_messages = {}
     super()
   end
 
   def render?
-    game.user == user && game.phase != phase.to_s && game.transition_allowed?(to_phase: phase)
+    game.user == user
   end
 
-  def texts
-    @texts ||= transition_backwards? ? t("games.phase_transitions.backward") : t("games.phase_transitions.forward")
+  def display_error_messages_for(phase)
+    return if transition_error_messages(:ended).none?
+
+    tag.span(transition_error_messages(:ended).to_a.join(", "), class: "flex justify-center text-sm text-red-500")
   end
 
-  def transition_blocked?
-    !game.requirements_met_for_phase?(to_phase: phase)
+  def transition_error_messages(phase)
+    @transition_error_messages[phase.to_sym] ||= errors_if_transitioned_to_phase(phase.to_sym)
   end
 
   private
 
-  def transition_backwards?
-    game.completed_phase?(phase)
+  def errors_if_transitioned_to_phase(phase)
+    game.phase = phase
+    game.validate
+    errors = game.errors
+    game.restore_attributes
+    errors
   end
 end

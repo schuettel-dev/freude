@@ -51,6 +51,17 @@ en:
         name: Name
         token: Token
         color: Color
+    errors:
+      models:
+        game:
+          attributes:
+            base:
+              minimum_players_not_reached: "There aren't enough players."
+        games/beatle/game:
+          attributes:
+            base:
+              not_enough_playlists_ready: "Not enough players have guessed playlists."
+              still_unguessed_playlists: "Not all players have casted all of their guesses."
     models:
       game:
         one: Game
@@ -69,8 +80,13 @@ en:
         other: Users
   games:
     beatle:
-      phase_transitions:
-        reason_for_proceeding_to_guessing_phase_is_blocked: "This phase can't be started yet. Make sure enough players have submitted their songs."
+      phase_actions:
+        end_game: End game
+        end_game_confirm: "This will end the game, you cannot undo this."
+        start_guessing_phase: Start guessing phase
+        start_guessing_phase_confirm: "Are you sure?"
+        back_to_collecting_phase: Go back to collecting phase
+        back_to_collecting_phase_confirm: "Are you sure? Player's guesses will reset."
       shared:
         buttons:
           back_to_playlist: Back to playlist
@@ -113,16 +129,8 @@ en:
       new_game: New game
     join:
       could_not_join_game_due_to_wrong_token: Game couldn't be joined, the token was wrong.
-    phase_transitions:
-      backward:
-        button: "Return to this phase"
-        info: "All data from this phase will be lost"
-      forward:
-        button: "Start this phase"
-        info: ""
     shared:
       back_to_game: Back to game
-      blocked: Blocked
       coming_up_next: Coming up next
       completed: Completed
       current: Current
@@ -133,7 +141,6 @@ en:
       join_url: URL to join
       qr_code: QR code
       update_game: Update game
-      proceed: Proceed
       n_points:
         one: 1 point
         other: "%{count} points"

@@ -11,7 +11,7 @@ class Games::Beatle::Game::PhaseIconComponentTest < ViewComponent::TestCase
 
   test "render, game collecting against guessing, blocked" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     players(
       :george_player_in_beatle_seinfeld,
       :kramer_player_in_beatle_seinfeld

@@ -8,15 +8,19 @@ class Game < ApplicationRecord
   has_many :players_users, through: :players, source: :user
 
   with_options if: :new_record? do
-    before_validation(
-      :initialize_url_identifier,
-      :initialize_join_token
-    )
+    before_validation :initialize_url_identifier, :initialize_join_token
   end
 
   validates :name, :description, :group_name, :phase, :type,
             :minimum_players, :activated_players, :maximum_players, :join_token,
             presence: true
+
+  with_options if: :phase_changed? do
+    validate :validate_phase_transition_allowed
+    validate :validate_phase_requirements
+
+    before_save :transit_to_phase
+  end
 
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }
@@ -32,21 +36,12 @@ class Game < ApplicationRecord
     end
   end
 
-  def requirements_met_for_phase?(to_phase:)
-    call_phase_method(to_phase:, method_type: :requirements_met)
+  def phase_changed_callback
+    raise "TODO"
   end
 
-  def transit_to_phase(to_phase)
-    if transition_allowed?(to_phase:) && requirements_met_for_phase?(to_phase:) # rubocop:disable Style/GuardClause
-      self.class.transaction do
-        call_phase_method(to_phase:, method_type: :prepare)
-        update(phase: to_phase)
-      end
-    end
-  end
-
-  def transition_allowed?(to_phase:)
-    self.class::ALLOWED_TRANSITIONS[phase.to_sym].include?(to_phase.to_sym)
+  def transition_allowed?(from_phase: phase, to_phase:)
+    self.class::ALLOWED_TRANSITIONS[from_phase.to_sym].include?(to_phase.to_sym)
   end
 
   def phases
@@ -70,7 +65,7 @@ class Game < ApplicationRecord
   end
 
   def minimum_players_reached?
-    players.count >= (game_template.minimum_players || Float::INFINITY)
+    players.count >= (minimum_players || Float::INFINITY)
   end
 
   def broadcast_group_names
@@ -86,6 +81,18 @@ class Game < ApplicationRecord
 
   def initialize_join_token
     self.join_token ||= SecureRandom.alphanumeric(5)
+  end
+
+  def validate_phase_transition_allowed
+    transition_allowed?(from_phase: phase_was, to_phase: phase)
+  end
+
+  def validate_phase_requirements
+    validate_phase_requirements_for(phase)
+  end
+
+  def validate_phase_requirements_for(phase)
+    raise "implement in subclass"
   end
 
   def call_phase_method(to_phase:, method_type:) # rubocop:disable Metrics/MethodLength

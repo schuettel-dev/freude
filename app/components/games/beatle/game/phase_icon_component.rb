@@ -1,9 +1,7 @@
 class Games::Beatle::Game::PhaseIconComponent < ApplicationComponent
   PHASE_ICONS = {
-    current: { icon: :play, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.current") },
-    completed: { icon: :check, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.completed") },
-    proceed: { icon: :clock, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.proceed") },
-    blocked: { icon: :clock, class: "w-6 h-6 text-gray-400", title: I18n.t("games.shared.blocked") }
+    current: { icon: :clock, class: "w-6 h-6 text-blue-500", title: I18n.t("games.shared.current") },
+    completed: { icon: :check, class: "w-6 h-6 text-green-500", title: I18n.t("games.shared.completed") }
   }.freeze
 
   def initialize(game:, phase:)
@@ -30,14 +28,7 @@ class Games::Beatle::Game::PhaseIconComponent < ApplicationComponent
 
   def find_icon
     return :completed if completed_phase?
-
     return :current if current_phase?
-
-    return nil unless game.transition_allowed?(to_phase: phase)
-
-    return :proceed if game.requirements_met_for_phase?(to_phase: phase)
-
-    :blocked
   end
 
   def current_phase?

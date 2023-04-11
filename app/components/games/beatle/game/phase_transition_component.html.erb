@@ -1,19 +1,20 @@
-<div class="flex flex-col gap-y-2">
-  <%= button_to texts[:button], game_phase_path(game), disabled: transition_blocked?, method: :put, params: { phase: phase }, class: "button" %>
+<div class="flex flex-col gap-y-4">
+  <% if game.collecting? %>
+    <div class="flex flex-col gap-y-2">
+      <%= button_to t("games.beatle.phase_actions.start_guessing_phase"), game_phases_path(game), method: :put, params: { phase: :guessing }, disabled: transition_error_messages(:guessing).any?, class: "button", "data-turbo-confirm": t("games.beatle.phase_actions.start_guessing_phase_confirm") %>
 
-  <% if texts[:info].present? %>
-    <p class="text-gray-500 text-sm flex justify-center">
-      <%= texts[:info] %>
-    </p>
-  <% end %>
+      <%= display_error_messages_for(:guessing) %>
+    </div>
 
-  <% if transition_blocked? %>
-    <p>
-      <% if phase.to_sym == :guessing %>
-        <p class="text-gray-500 text-sm flex justify-center">
-          <%= t("games.beatle.phase_transitions.reason_for_proceeding_to_guessing_phase_is_blocked") %>
-        </p>
-      <% end %>
-    </p>
+  <% elsif game.guessing? %>
+    <div class="flex flex-col gap-y-2">
+      <%= button_to t("games.beatle.phase_actions.end_game"), game_phases_path(game), method: :put, params: { phase: :ended }, disabled: transition_error_messages(:ended).any?, class: "button", "data-turbo-confirm": t("games.beatle.phase_actions.end_game_confirm") %>
+
+      <%= display_error_messages_for(:ended) %>
+    </div>
+
+    <div>
+      <%= button_to t("games.beatle.phase_actions.back_to_collecting_phase"), game_phases_path(game), method: :put, params: { phase: :collecting }, class: "dangerous-ghost-button", "data-turbo-confirm": t("games.beatle.phase_actions.back_to_collecting_phase_confirm") %>
+    </div>
   <% end %>
 </div>
