@@ -10,7 +10,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "admin, transition forward, allowed" do
+  test "admin, transition allowed" do
     game = games(:beatle_seinfeld)
     game.update_column(:phase, :collecting)
 
@@ -24,40 +24,13 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "admin, transition forward, not allowed" do
+  test "admin, transition not allowed" do
     game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      put game_phases_path(game), params: { phase: :guessing }
-      follow_redirect!
-
-      assert_response :success
-    end
-  end
-
-  test "admin, transition backward, allowed" do
-    game = games(:beatle_seinfeld)
-    game.update_column(:phase, :guessing)
-
-    sign_in :jerry
-
-    assert_changes -> { game.reload.phase }, from: "guessing", to: "collecting" do
-      put game_phases_path(game), params: { phase: :collecting }
-      follow_redirect!
-
-      assert_response :success
-    end
-  end
-
-  test "admin, transition backward, not allowed" do
-    game = games(:beatle_seinfeld)
-    game.update_column(:phase, :ended)
-
-    sign_in :jerry
-
-    assert_no_changes -> { game.reload.phase } do
-      put game_phases_path(game), params: { phase: :guessing }
+      put game_phases_path(game), params: { phase: :ended }
       follow_redirect!
 
       assert_response :success

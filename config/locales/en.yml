@@ -2,6 +2,13 @@ en:
   activemodel:
     errors:
       models:
+        games/beatle/game/phase_change_form:
+          attributes:
+            base:
+              minimum_players_not_reached: "There aren't enough players"
+              not_enough_playlists_ready: "Not enough players have guessed playlists"
+              still_unguessed_playlists: "Not all players have casted all of their guesses"
+              transition_not_allowed: "Transition is not allowed"
         session_form:
           attributes:
             token:
@@ -51,18 +58,6 @@ en:
         name: Name
         token: Token
         color: Color
-    errors:
-      models:
-        game:
-          attributes:
-            base:
-              transition_not_allowed: "Transition is not allowed"
-              minimum_players_not_reached: "There aren't enough players"
-        games/beatle/game:
-          attributes:
-            base:
-              not_enough_playlists_ready: "Not enough players have guessed playlists"
-              still_unguessed_playlists: "Not all players have casted all of their guesses"
     models:
       game:
         one: Game

@@ -25,10 +25,8 @@ class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
   private
 
   def errors_if_transitioned_to_phase(phase)
-    game.phase = phase
-    game.validate
-    errors = game.errors
-    game.restore_attributes
-    errors
+    form = Games::Beatle::Game::PhaseChangeForm.new(game:, params: { phase: })
+    form.validate
+    form.errors
   end
 end

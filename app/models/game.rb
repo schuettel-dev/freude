@@ -15,13 +15,6 @@ class Game < ApplicationRecord
             :minimum_players, :activated_players, :maximum_players, :join_token,
             presence: true
 
-  with_options if: :phase_changed? do
-    validate :validate_phase_transition_allowed
-    validate :validate_phase_requirements
-
-    before_save :transit_to_phase
-  end
-
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }
 
@@ -91,42 +84,5 @@ class Game < ApplicationRecord
 
   def initialize_join_token
     self.join_token ||= SecureRandom.alphanumeric(5)
-  end
-
-  def validate_phase_transition_allowed
-    return if self.class.transition_allowed?(from_phase: phase_was, to_phase: phase)
-
-    errors.add(:base, :transition_not_allowed)
-  end
-
-  def validate_phase_requirements
-    validate_phase_requirements_for(phase)
-  end
-
-  def validate_phase_requirements_for(_phase)
-    raise "implement in subclass"
-  end
-
-  def call_phase_method(to_phase:, method_type:) # rubocop:disable Metrics/MethodLength
-    return unless to_phase.to_s.in?(phases.keys)
-
-    method_name = case method_type.to_sym
-                  when :requirements_met
-                    "requirements_met_for_#{to_phase}_phase?"
-                  when :prepare
-                    "prepare_#{to_phase}_phase"
-                  else
-                    raise "Unknown method type '#{method_type}'"
-                  end
-
-    if respond_to?(method_name)
-      send(method_name)
-    else
-      true
-    end
-  end
-
-  def rank_players_with(&)
-    Game::RankPlayersWith.new(self).call(&)
   end
 end

@@ -6,7 +6,8 @@ class Games::PhasesController < ApplicationController
   end
 
   def update
-    @game.update(phase: params[:phase])
+    form = Games::Beatle::Game::PhaseChangeForm.new(game: @game, params:)
+    form.save
 
     redirect_to game_path(@game)
   end

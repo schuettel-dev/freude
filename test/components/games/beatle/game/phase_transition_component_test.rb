@@ -34,7 +34,7 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
 
     assert_button "Start guessing phase", disabled: true
 
-    assert_text "There aren't enough players."
+    assert_text "There aren't enough players"
   end
 
   test "render, guessing phase, valid" do
@@ -69,6 +69,6 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
 
     assert_button "End game", disabled: true
 
-    assert_text "Not all players have casted all of their guesses."
+    assert_text "Not all players have casted all of their guesses"
   end
 end

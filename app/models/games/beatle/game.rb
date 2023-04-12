@@ -1,9 +1,6 @@
 module Games
   module Beatle
     class Game < Game
-      include Game::PhaseTransitions
-      include Game::PhaseRequirements
-
       attribute :phase, default: :collecting
 
       has_many :players, class_name: "Games::Beatle::Player", dependent: :destroy

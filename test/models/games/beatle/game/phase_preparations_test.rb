@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Games::Beatle::Game::PhaseTransitionsTest < ActiveSupport::TestCase
+class Games::Beatle::Game::PhasePreparationsTest < ActiveSupport::TestCase
   test "#transit_to_phase, from: :collecting, to: :guessing" do
     game = games(:beatle_seinfeld)
     game.update_column(:phase, :collecting)
@@ -14,10 +14,8 @@ class Games::Beatle::Game::PhaseTransitionsTest < ActiveSupport::TestCase
 
     Games::Beatle::PlaylistGuess.of_game(game).delete_all
 
-    assert_changes -> { game.reload.phase }, to: "guessing" do
-      assert_changes -> { Games::Beatle::PlaylistGuess.of_game(game).reload.count }, from: 0, to: 6 do
-        game.guessing!
-      end
+    assert_changes -> { Games::Beatle::PlaylistGuess.of_game(game).reload.count }, from: 0, to: 6 do
+      Games::Beatle::Game::PhasePreparations.new(game:, phase: :guessing).prepare!
     end
   end
 
@@ -34,7 +32,7 @@ class Games::Beatle::Game::PhaseTransitionsTest < ActiveSupport::TestCase
       player.update!(final_points: 999, final_rank: 1)
     end
 
-    game.ended!
+    Games::Beatle::Game::PhasePreparations.new(game:, phase: :ended).prepare!
 
     assert_equal [1, 2], jerry.reload.values_at(:final_points, :final_rank)
     assert_equal [3, 1], elaine.reload.values_at(:final_points, :final_rank)
