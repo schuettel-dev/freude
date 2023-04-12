@@ -13,9 +13,9 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
     within_game_section "Phases" do
       assert_current_phase "Collecting"
 
-      within_phase_details "Guessing" do
-        assert_text "This phase can't be started yet. Make sure enough players have submitted their songs."
-        assert_button "Start this phase", disabled: true
+      within_phase_details "Collecting" do
+        assert_text "There aren't enough players and Not enough players have guessed playlists"
+        assert_button "Start guessing phase", disabled: true
       end
     end
   end
@@ -30,8 +30,8 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
     within_game_section "Phases" do
       assert_current_phase "Collecting"
 
-      within_phase_details "Guessing" do
-        click_on "Start this phase"
+      within_phase_details "Collecting" do
+        click_on "Start guessing phase"
       end
     end
 
@@ -94,8 +94,8 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
   end
 
   def within_phase_details(phase, &)
-    phase_li_element = find("summary", text: phase).ancestor("li")
-    phase_li_element.click # opens "details" element
-    within(phase_li_element, &)
+    phase_details_element = find("summary", text: phase).ancestor("details")
+    phase_details_element.click # opens the dialog
+    within(phase_details_element, &)
   end
 end

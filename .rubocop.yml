@@ -442,6 +442,10 @@ Rails/RootPublicPath:
 Rails/ShortI18n:
   Enabled: true
 
+Rails/SkipsModelValidations:
+  Exclude:
+  - test/**/*
+
 Rails/SquishedSQLHeredocs:
   Enabled: true
 

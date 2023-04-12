@@ -44,7 +44,6 @@ class Games::Beatle::Game::PhaseTransitionComponentTest < ViewComponent::TestCas
       :george_player_in_beatle_seinfeld,
       :kramer_player_in_beatle_seinfeld
     ).map(&:destroy!)
-    phase = :guessing
     user = users(:jerry)
     render_inline new_component(game:, user:)
 

@@ -9,6 +9,7 @@ class Games::Beatle::Game::TransitionAllowedTest < ActiveSupport::TestCase
 
   test ".transition_allowed?, from_phase: :collecting" do
     from_phase = :collecting
+
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :collecting)
     assert Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :guessing)
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :ended)
@@ -16,6 +17,7 @@ class Games::Beatle::Game::TransitionAllowedTest < ActiveSupport::TestCase
 
   test ".transition_allowed?, from_phase: :guessing" do
     from_phase = :guessing
+
     assert Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :collecting)
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :guessing)
     assert Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :ended)
@@ -23,6 +25,7 @@ class Games::Beatle::Game::TransitionAllowedTest < ActiveSupport::TestCase
 
   test ".transition_allowed?, from_phase: :ended" do
     from_phase = :ended
+
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :collecting)
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :guessing)
     assert_not Games::Beatle::Game.transition_allowed?(from_phase:, to_phase: :ended)

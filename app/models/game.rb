@@ -36,11 +36,7 @@ class Game < ApplicationRecord
     end
   end
 
-  def phase_changed_callback
-    raise "TODO"
-  end
-
-  def self.transition_allowed?(from_phase: nil, to_phase:)
+  def self.transition_allowed?(to_phase:, from_phase: nil)
     return first_phase.to_sym == to_phase.to_sym if from_phase.nil?
 
     self::ALLOWED_TRANSITIONS[from_phase.to_sym].include?(to_phase.to_sym)
@@ -107,7 +103,7 @@ class Game < ApplicationRecord
     validate_phase_requirements_for(phase)
   end
 
-  def validate_phase_requirements_for(phase)
+  def validate_phase_requirements_for(_phase)
     raise "implement in subclass"
   end
 
