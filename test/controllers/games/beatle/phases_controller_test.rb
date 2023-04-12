@@ -3,12 +3,12 @@ require "test_helper"
 class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
   test "from collecting to collecting" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
 
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      patch game_phase_path(game), params: { phase: "collecting" }
+      patch game_phases_path(game), params: { phase: "collecting" }
     end
 
     follow_redirect!
@@ -18,14 +18,14 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "from collecting to guessing" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     game.playlist_guesses.delete_all
 
     sign_in :jerry
 
     assert_changes -> { game.playlist_guesses.reload.count }, from: 0 do
       assert_changes -> { game.reload.phase }, to: "guessing" do
-        patch game_phase_path(game), params: { phase: "guessing" }
+        patch game_phases_path(game), params: { phase: "guessing" }
       end
     end
 
@@ -36,12 +36,12 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "from collecting to ended" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
 
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      patch game_phase_path(game), params: { phase: "ended" }
+      patch game_phases_path(game), params: { phase: "ended" }
     end
 
     follow_redirect!
@@ -51,14 +51,14 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "from guessing to collecting" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
 
     sign_in :jerry
 
     assert_no_changes -> { playlist_guess.reload.guessed_player } do
       assert_changes -> { game.reload.phase }, to: "collecting" do
-        patch game_phase_path(game), params: { phase: "collecting" }
+        patch game_phases_path(game), params: { phase: "collecting" }
       end
     end
 
@@ -75,7 +75,7 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_changes -> { playlist_guess.reload.guessed_player } do
       assert_no_changes -> { game.reload.phase } do
-        patch game_phase_path(game), params: { phase: "guessing" }
+        patch game_phases_path(game), params: { phase: "guessing" }
       end
     end
 
@@ -86,7 +86,7 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "from guessing to ended" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
 
     player = players(:jerry_player_in_beatle_seinfeld)
     player.update!(final_points: nil, final_rank: nil)
@@ -100,7 +100,7 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
       assert_changes -> { player.reload.final_points }, to: 1 do
         assert_changes -> { playlist_guess.reload.points }, to: 1 do
           assert_changes -> { game.reload.phase }, to: "ended" do
-            patch game_phase_path(game), params: { phase: "ended" }
+            put game_phases_path(game), params: { phase: "ended" }
           end
         end
       end
@@ -134,7 +134,7 @@ class Games::Beatle::PhasesControllerTest < ActionDispatch::IntegrationTest
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      patch game_phase_path(game), params: { phase: to_phase }
+      patch game_phases_path(game), params: { phase: to_phase }
     end
 
     follow_redirect!

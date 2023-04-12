@@ -49,7 +49,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
   test "GET join" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     sign_in :newman
 
     assert_difference -> { game.players.count }, +1 do
@@ -64,7 +64,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
   test "GET join, wrong token" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     sign_in :newman
 
     assert_no_difference -> { game.players.count } do

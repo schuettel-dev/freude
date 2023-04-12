@@ -22,7 +22,7 @@ class GamesTest < ApplicationSystemTestCase
   end
 
   test "owner sees invitation section, if joining is still possible" do
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
 
     sign_in :jerry
 
@@ -34,7 +34,7 @@ class GamesTest < ApplicationSystemTestCase
   end
 
   test "owner does not see invitation section, if joining is not possible" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
     sign_in :jerry
 
     goto_game "Seinfeld"
@@ -73,7 +73,7 @@ class GamesTest < ApplicationSystemTestCase
 
   test "user joins game" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     sign_in :newman
     visit game_join_url(game, token: game.join_token, host: "www.example.com")
 
@@ -82,7 +82,7 @@ class GamesTest < ApplicationSystemTestCase
 
   test "user tries to join game, has a wrong token" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     sign_in :newman
     visit game_join_url(game, token: "WRONGTOKEN", host: "www.example.com")
 
@@ -92,7 +92,7 @@ class GamesTest < ApplicationSystemTestCase
 
   test "guest opens joins game url, signs up first" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     visit game_join_url(game, token: game.join_token, host: "www.example.com")
     fill_in "Name", with: "Babu"
     click_on "Sign up"
@@ -102,7 +102,7 @@ class GamesTest < ApplicationSystemTestCase
 
   test "user opens joins game url, rejoins first" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     sign_in :newman
     sign_out
     visit game_join_url(game, token: game.join_token, host: "www.example.com")

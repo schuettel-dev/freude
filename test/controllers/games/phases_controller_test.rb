@@ -6,18 +6,18 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     sign_in :elaine
 
     assert_raises(Pundit::NotAuthorizedError) do
-      put game_phase_path(game), params: { phase: :irrelevant }
+      put game_phases_path(game), params: { phase: :irrelevant }
     end
   end
 
   test "admin, transition forward, allowed" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
 
     sign_in :jerry
 
     assert_changes -> { game.reload.phase }, from: "collecting", to: "guessing" do
-      put game_phase_path(game), params: { phase: :guessing }
+      put game_phases_path(game), params: { phase: :guessing }
       follow_redirect!
 
       assert_response :success
@@ -29,7 +29,7 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      put game_phase_path(game), params: { phase: :guessing }
+      put game_phases_path(game), params: { phase: :guessing }
       follow_redirect!
 
       assert_response :success
@@ -38,12 +38,12 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "admin, transition backward, allowed" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
 
     sign_in :jerry
 
     assert_changes -> { game.reload.phase }, from: "guessing", to: "collecting" do
-      put game_phase_path(game), params: { phase: :collecting }
+      put game_phases_path(game), params: { phase: :collecting }
       follow_redirect!
 
       assert_response :success
@@ -52,12 +52,12 @@ class Games::PhasesControllerTest < ActionDispatch::IntegrationTest
 
   test "admin, transition backward, not allowed" do
     game = games(:beatle_seinfeld)
-    game.ended!
+    game.update_column(:phase, :ended)
 
     sign_in :jerry
 
     assert_no_changes -> { game.reload.phase } do
-      put game_phase_path(game), params: { phase: :guessing }
+      put game_phases_path(game), params: { phase: :guessing }
       follow_redirect!
 
       assert_response :success

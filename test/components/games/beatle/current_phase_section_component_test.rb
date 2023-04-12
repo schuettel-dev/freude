@@ -4,7 +4,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
   delegate :url_helpers, to: "Rails.application.routes"
 
   test "render, collecting phase" do
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
     player = players(:jerry_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
@@ -14,7 +14,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
   end
 
   test "render, guessing phase" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
     player = players(:jerry_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
@@ -25,7 +25,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
   end
 
   test "render, ended phase" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
     player = players(:jerry_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 

@@ -4,6 +4,7 @@ class Games::Beatle::Game::PhaseRequirementsTest < ActiveSupport::TestCase
   # to collecting
   test "transition to collecting, valid" do
     game = games(:beatle_seinfeld)
+    game.update_column(:phase, :guessing)
     game.phase = :collecting
 
     assert_predicate game, :valid?
@@ -12,6 +13,7 @@ class Games::Beatle::Game::PhaseRequirementsTest < ActiveSupport::TestCase
   # to guessing
   test "transition to guessing, valid" do
     game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
     game.phase = :guessing
 
     assert_predicate game, :valid?
@@ -24,6 +26,7 @@ class Games::Beatle::Game::PhaseRequirementsTest < ActiveSupport::TestCase
     ).map(&:destroy!)
 
     game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
     game.phase = :guessing
 
     assert_not_predicate game, :valid?
@@ -38,7 +41,7 @@ class Games::Beatle::Game::PhaseRequirementsTest < ActiveSupport::TestCase
   # to ended
   test "transition to ended, valid" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     game.phase = :ended
 
     assert_predicate game, :valid?
@@ -47,14 +50,14 @@ class Games::Beatle::Game::PhaseRequirementsTest < ActiveSupport::TestCase
   test "transition to ended, invalid" do
     games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine).update!(guessed_player: nil)
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     game.phase = :ended
 
     assert_not_predicate game, :valid?
 
     game.errors.to_a.tap do |errors|
       assert_equal 1, errors.count
-      assert_includes errors, "Not all players have casted alle their guesses."
+      assert_includes errors, "Not all players have casted all of their guesses."
     end
   end
 end

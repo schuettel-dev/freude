@@ -40,12 +40,26 @@ class Game < ApplicationRecord
     raise "TODO"
   end
 
-  def transition_allowed?(from_phase: phase, to_phase:)
-    self.class::ALLOWED_TRANSITIONS[from_phase.to_sym].include?(to_phase.to_sym)
+  def self.transition_allowed?(from_phase: nil, to_phase:)
+    return first_phase.to_sym == to_phase.to_sym if from_phase.nil?
+
+    self::ALLOWED_TRANSITIONS[from_phase.to_sym].include?(to_phase.to_sym)
+  end
+
+  def transition_allowed?(to_phase:)
+    self.class.transition_allowed?(from_phase: phase, to_phase:)
   end
 
   def phases
     self.class.phases
+  end
+
+  def self.first_phase
+    phases.keys.first
+  end
+
+  def self.last_phase
+    phases.keys.last
   end
 
   def current_phase?(other)
@@ -84,7 +98,9 @@ class Game < ApplicationRecord
   end
 
   def validate_phase_transition_allowed
-    transition_allowed?(from_phase: phase_was, to_phase: phase)
+    return if self.class.transition_allowed?(from_phase: phase_was, to_phase: phase)
+
+    errors.add(:base, :transition_not_allowed)
   end
 
   def validate_phase_requirements

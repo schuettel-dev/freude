@@ -4,7 +4,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
   # GET
   test "GET edit" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
 
     sign_in :jerry
@@ -27,7 +27,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
 
   test "not GET edit, not owner of playlist guess" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     playlist_guess = games_beatle_playlist_guesses(:elaine_player_in_beatle_seinfeld_guessing_jerry)
 
     sign_in :jerry
@@ -40,7 +40,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
   # PUT
   test "PUT update" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
     other_player = players(:george_player_in_beatle_seinfeld)
 
@@ -72,7 +72,7 @@ class Games::Beatle::PlaylistsGuessesControllerTest < ActionDispatch::Integratio
 
   test "not PUT update, not player of playlist guess" do
     game = games(:beatle_seinfeld)
-    game.guessing!
+    game.update_column(:phase, :guessing)
     playlist_guess = games_beatle_playlist_guesses(:elaine_player_in_beatle_seinfeld_guessing_jerry)
 
     sign_in :jerry

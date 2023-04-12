@@ -4,7 +4,7 @@ class Games::Beatle::PlaylistsControllerTest < ActionDispatch::IntegrationTest
   test "GET show" do
     sign_in :jerry
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     get edit_game_beatle_playlist_path(game, playlist)
 
@@ -14,7 +14,7 @@ class Games::Beatle::PlaylistsControllerTest < ActionDispatch::IntegrationTest
   test "PUT update" do
     sign_in :jerry
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
 
     assert_changes -> { playlist.song_2_url }, to: "https://something.else" do

@@ -13,9 +13,9 @@ class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
   end
 
   def display_error_messages_for(phase)
-    return if transition_error_messages(:ended).none?
+    return if transition_error_messages(phase).none?
 
-    tag.span(transition_error_messages(:ended).to_a.join(", "), class: "flex justify-center text-sm text-red-500")
+    tag.span(transition_error_messages(phase).to_a.join(", "), class: "flex justify-center text-sm text-red-500")
   end
 
   def transition_error_messages(phase)

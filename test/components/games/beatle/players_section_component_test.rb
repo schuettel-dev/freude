@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::PlayersSectionComponentTest < ViewComponent::TestCase
   test "render" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
 
     player = players(:elaine_player_in_beatle_seinfeld)
     render_inline new_component(player:)
@@ -15,7 +15,7 @@ class Games::Beatle::PlayersSectionComponentTest < ViewComponent::TestCase
   end
 
   test "not render" do
-    games(:beatle_seinfeld).ended!
+    games(:beatle_seinfeld).update_column(:phase, :ended)
     player = players(:elaine_player_in_beatle_seinfeld)
 
     assert_not_predicate new_component(player:), :render?

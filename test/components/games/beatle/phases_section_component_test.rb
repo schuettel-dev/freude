@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::PhasesSectionComponentTest < ViewComponent::TestCase
   test "render, collecting" do
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
     player = players(:elaine_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
@@ -10,7 +10,7 @@ class Games::PhasesSectionComponentTest < ViewComponent::TestCase
   end
 
   test "render, guessing" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
     player = players(:elaine_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 

@@ -56,6 +56,7 @@ en:
         game:
           attributes:
             base:
+              transition_not_allowed: "Transition is not allowed."
               minimum_players_not_reached: "There aren't enough players."
         games/beatle/game:
           attributes:

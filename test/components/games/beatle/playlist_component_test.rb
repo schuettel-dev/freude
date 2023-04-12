@@ -2,7 +2,7 @@ require "test_helper"
 
 class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
   test "render, phase collecting" do
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     playlist.update!(
       song_2_url: "https://something",
@@ -28,7 +28,7 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
   end
 
   test "render, phase guessing" do
-    games(:beatle_seinfeld).guessing!
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
 
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
     user = users(:jerry)

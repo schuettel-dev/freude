@@ -6,7 +6,7 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
       :george_player_in_beatle_seinfeld,
       :kramer_player_in_beatle_seinfeld
     ).map(&:destroy!)
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
     sign_in :jerry
     goto_game "Seinfeld"
 
@@ -22,7 +22,7 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
 
   test "owner changes phase to guessing" do
     game = games(:beatle_seinfeld)
-    game.collecting!
+    game.update_column(:phase, :collecting)
 
     sign_in :jerry
     goto_game "Seinfeld"
@@ -41,7 +41,7 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
   end
 
   test "player submits their songs" do
-    games(:beatle_seinfeld).collecting!
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
     player = players(:elaine_player_in_beatle_seinfeld)
     player.playlist.reset_song_urls
 
