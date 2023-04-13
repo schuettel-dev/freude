@@ -102,34 +102,25 @@ en:
         whos_behind_this_playlist: Who's behind this playlist?
         final_ranking: Final ranking
         your_ranking: Your ranking
-        belongs_to: belongs to
-        results: Results
-        the_rest_thought_it_belonged_to: The rest thought it belonged to
-        they_thought_it_belonged_to: They thought it belonged to
-        everyone_got_that_right: Everyone got that right!
-        no_one_got_that_right: No one got that right!
-        n_players_got_that_right:
-          one: Only someone got that right!
-          other: "%{count} players got that right!"
-        n_players_got_that_right_excluding_you:
-          one: Only someone got that right, but not you!
-          other: "%{count} players got that right, but not you!"
-        n_players_got_that_right_including_you:
-          one: Only you got that right!
-          two: Only you and someone else got that right!
-          other: "%{count} players got that right, including you!"
+
         x_out_of_y_guessed: "%{x} / %{y} guessed"
-        you_thought_it_was_name_html: "You thought it was <em>%{name}</em>."
-        n_got_that_right:
-          zero: "No one got that right!"
-          one: "1 player got that right!"
-          other: "%{count} players got that right!"
+
+      final_results:
         it_was_believed_it_belonged_to: It was believed it belonged to
         guessed_n_times:
           one: "Guessed 1 time"
           other: "Guessed %{count} times"
         you_guessed_it_right: You guessed it right!
         thats_you: That's you
+        final_results: Final results
+        belongs_to: belongs to
+        everyone_got_that_right: Everyone got that right!
+        you_thought_it_was_name_html: "You thought it was <em>%{name}</em>."
+        n_players_got_that_right:
+          zero: "No one got that right!"
+          one: "1 player got that right!"
+          other: "%{count} players got that right!"
+
     index:
       my_games: My games
       new_game: New game

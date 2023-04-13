@@ -21,10 +21,6 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
     @players_grouped_by_wrong_guesses_count ||= find_players_grouped_by_wrong_guesses_count
   end
 
-  def wrong_guess_count_for_player_id(player_id)
-    tallied_wrong_guessed_player_ids[player_id]
-  end
-
   def ordered_playlists
     game.playlists.order_by_user_name
   end
@@ -37,12 +33,12 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
     current_players_guess.guessed_player == playlist.player
   end
 
-  # def only_player_guessed_it_right?
-  #   right_guesses.size == 1 && right_guesses.first.player == player
-  # end
-
   def current_players_guess
     @current_players_guess ||= playlist.guesses.find_by(player: current_player)
+  end
+
+  def t(key, **params)
+    super("games.beatle.final_results#{key}", **params)
   end
 
   private

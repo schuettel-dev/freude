@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="px-8 flex flex-col gap-y-8">
-  <h1 class="text-5xl mb-8"><%= t("games.beatle.shared.results") %></h1>
+  <h1 class="text-5xl mb-8"><%= t("games.beatle.final_results.final_results") %></h1>
 
   <%= render Games::Beatle::Playlist::ShowComponent.new(playlist: @playlist, current_player: @player) %>
 </div>
