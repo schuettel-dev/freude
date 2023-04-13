@@ -9,7 +9,7 @@
 
       <% playlist = game.playlists.order_by_user_name.first %>
 
-      <%= render Games::Beatle::Playlist::ShowComponent.new(playlist:, player: @player) %>
+      <%= render Games::Beatle::Playlist::ShowComponent.new(playlist:, current_player: @player) %>
     <% else %>
       <section>
         <%= render CardComponent.new do %>

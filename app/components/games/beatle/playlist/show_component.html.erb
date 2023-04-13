@@ -19,69 +19,68 @@
             <% end %>
           </ul>
 
-          <div class="flex justify-center text-normal text-gray-400">
-            <%= t("games.beatle.shared.belongs_to") %>
-          </div>
-
-          <div class="flex justify-center text-3xl">
-            <%= playlist.player.decorate.display_name %>
-          </div>
-
           <div class="flex flex-col gap-y-4">
-            <div class="flex justify-center text-lg text-blue-500">
-              <% if wrong_guesses.size.zero? %>
-                <%= t("games.beatle.shared.everyone_got_that_right") %>
-              <% elsif right_guesses.size.zero? %>
-                <span>
-                  <%= t("games.beatle.shared.no_one_got_that_right") %>
+              <div class="flex justify-center text-normal text-gray-400">
+                <%= t("games.beatle.shared.belongs_to") %>
+              </div>
 
-                  <% if !players_playlist? %>
-                    <%= t("games.beatle.shared.you_thought_it_was_name_html", name: players_guess.guessed_player.decorate.display_name) %>
-                  <% end %>
+              <div class="flex flex-col text-center">
+                <span class="text-3xl">
+                  <%= playlist.player.decorate.display_name %>
                 </span>
-              <% else %>
-                <% if players_playlist? %>
-                  <%= t("games.beatle.shared.n_players_got_that_right", count: right_guesses.size) %>
+
+                <% if current_players_playlist? %>
+                  <span class="text-xs text-gray-400">
+                    <%= t("games.beatle.shared.thats_you") %>
+                  </span>
                 <% else %>
-                  <% if only_player_guessed_it_right? %>
-                    <%= t("games.beatle.shared.n_players_got_that_right_including_you", count: right_guesses.size) %>
-                  <% elsif right_guesses.find_by(player:).present? %>
-                    <%= t("games.beatle.shared.n_players_got_that_right_including_you", count: right_guesses.size) %>
+                  <% if current_player_guessed_it_right? %>
+                    <span class="text-sm text-green-500">
+                      <%= t("games.beatle.shared.you_guessed_it_right") %>
+                    </span>
                   <% else %>
-                    <span>
-                      <%= t("games.beatle.shared.n_players_got_that_right_excluding_you", count: right_guesses.size) %>
-                      <%= t("games.beatle.shared.you_thought_it_was_name_html", name: players_guess.guessed_player.decorate.display_name) %>
+                    <span class="text-sm text-gray-400">
+                      <%= t("games.beatle.shared.you_thought_it_was_name_html", name: current_players_guess.guessed_player.decorate.display_name) %>
                     </span>
                   <% end %>
                 <% end %>
-              <% end %>
-            </div>
-
-            <% if wrong_guesses.size.positive? %>
-              <div class="flex flex-col gap-y-2">
-                <div class="flex justify-center text-gray-400">
-                  <% if right_guesses.size.zero? && players_playlist? %>
-                    <%= t("games.beatle.shared.they_thought_it_belonged_to") %>
-                  <% else %>
-                    <%= t("games.beatle.shared.the_rest_thought_it_belonged_to") %>
-                  <% end %>
-                </div>
-
-                <ul>
-                  <% wrong_guesses_grouped_by_guessed_player.each do |player| %>
-                    <li class="flex justify-center items-baseline gap-x-1">
-                      <span class="text-xl">
-                        <%= player.decorate.display_name %>
-                      </span>
-                      <span class="text-sm text-gray-400">
-                        <%= "#{wrong_guess_count_for_player_id(player.id)}x" %>
-                      </span>
-                    </li>
-                  <% end %>
-                </ul>
               </div>
-            <% end %>
-          </div>
+
+              <div class="flex text-blue-500 text-xl justify-center">
+                <% if wrong_guesses.size.zero? %>
+                  <%= t("games.beatle.shared.everyone_got_that_right") %>
+                <% else %>
+                  <%= t("games.beatle.shared.n_got_that_right", count: right_guesses.size) %>
+                <% end %>
+              </div>
+
+              <% if wrong_guesses.any? %>
+                <div class="flex flex-col gap-y-4">
+                  <div class="flex justify-center text-lg gap-y-2 text-gray-400">
+                    <%= t("games.beatle.shared.it_was_believed_it_belonged_to") %>
+                  </div>
+
+                  <div class="flex flex-col gap-y-4">
+                    <% players_grouped_by_wrong_guesses_count.each do |wrong_guesses_count, players| %>
+                      <div class="flex flex-col gap-y-1">
+                        <div class="flex justify-center text-blue-400 text-sm">
+                          <%= t("games.beatle.shared.guessed_n_times", count: wrong_guesses_count) %>
+                        </div>
+                        <ul class="flex flex-col gap-y-1">
+                          <% players.each do |player| %>
+                            <li class="flex justify-center items-baseline gap-x-1">
+                              <span class="text-xl">
+                                <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+                              </span>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
         </div>
       </div>
     <% end %>
