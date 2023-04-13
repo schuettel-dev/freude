@@ -133,6 +133,7 @@ en:
       delete_game: Delete game
       do_you_really_want_to_delete_the_game: Do you really want to delete this game?
       edit_game: Edit game
+      final_ranking: Final ranking
       how_it_works: How it works
       join_url: URL to join
       qr_code: QR code
@@ -163,6 +164,8 @@ en:
       back_to_game: Back to game
       next: Next
       previous: Previous
+      show_less: Show less
+      show_more: Show more
     admin: Admin
     all_games: All games
     buttons:

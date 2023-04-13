@@ -22,9 +22,7 @@ module Games
         end
 
         def game
-          @game ||= game_template.new_game(group_name:, user: users.first).tap do |game|
-            game.save!
-          end
+          @game ||= game_template.new_game(group_name:, user: users.first).tap(&:save!)
         end
 
         def update_playlists!
@@ -60,9 +58,7 @@ module Games
 
         def players
           @players ||= users.map do |user|
-            game.new_player(user:).tap do |player|
-              player.save!
-            end
+            game.new_player(user:).tap(&:save!)
           end
         end
 
