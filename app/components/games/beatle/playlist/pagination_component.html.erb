@@ -18,7 +18,7 @@
   </div>
 
   <div class="col-span-2 flex justify-center">
-    <div class="flex gap-4">
+    <div class="flex flex-wrap gap-2 justify-center my-4">
       <% ordered_items.each do |playlist| %>
         <%= render Games::Beatle::Playlist::DotComponent.new(playlist:, current_playlist: current_item) do %>
           <%= playlist.player.decorate.display_name.first %>

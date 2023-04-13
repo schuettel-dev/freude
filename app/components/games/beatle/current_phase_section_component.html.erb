@@ -8,7 +8,8 @@
       <%= render Games::FinalRankingComponent.new(game:, highlight_player: player, all: params[:all].present?) %>
 
       <% playlist = game.playlists.order_by_user_name.first %>
-      <%= turbo_frame_tag dom_id(playlist.game, :show_playlist), src: game_beatle_playlist_path(game, playlist) %>
+
+      <%= render Games::Beatle::Playlist::ShowComponent.new(playlist:, player: @player) %>
     <% else %>
       <section>
         <%= render CardComponent.new do %>
