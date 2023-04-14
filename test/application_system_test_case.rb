@@ -1,7 +1,12 @@
 require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :rack_test
+  driven_by(ENV['DEBUG'].present? ? :selenium : :rack_test, using: :firefox)
+
+  def using_browser(&)
+    driver = ENV['DEBUG'].present? ? :selenium : :selenium_headless
+    Capybara.using_driver(driver, &)
+  end
 
   def sign_in(user_fixture_key)
     visit new_session_path
