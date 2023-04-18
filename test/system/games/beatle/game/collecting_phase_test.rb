@@ -2,12 +2,10 @@ require "application_system_test_case"
 
 class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   test "owner cannot change phase to :guessing if not enough players" do
+    players(:george_player_in_beatle_seinfeld, :kramer_player_in_beatle_seinfeld).map(&:destroy!)
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
+
     using_browser do
-      players(
-        :george_player_in_beatle_seinfeld,
-        :kramer_player_in_beatle_seinfeld
-      ).map(&:destroy!)
-      games(:beatle_seinfeld).update_column(:phase, :collecting)
       sign_in :jerry
       goto_game "Seinfeld"
 
@@ -23,10 +21,9 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to guessing" do
-    using_browser do
-      game = games(:beatle_seinfeld)
-      game.update_column(:phase, :collecting)
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
 
+    using_browser do
       sign_in :jerry
       goto_game "Seinfeld"
 
@@ -49,11 +46,11 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "player submits their songs" do
-    using_browser do
-      games(:beatle_seinfeld).update_column(:phase, :collecting)
-      player = players(:elaine_player_in_beatle_seinfeld)
-      player.playlist.reset_song_urls
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
+    player = players(:elaine_player_in_beatle_seinfeld)
+    player.playlist.reset_song_urls
 
+    using_browser do
       sign_in :elaine
       goto_game "Seinfeld"
 
