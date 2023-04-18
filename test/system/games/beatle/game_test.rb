@@ -11,15 +11,15 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
 
       within_game_template_section "BEATLE" do
         assert_text "Guess who's behind a playlist of 3 songs"
-        click_on "Start this game"
+        click_on "Start new game"
       end
 
-      assert_link "Back to all games", href: "/game_templates"
+      assert_link "Back to catalogue", href: "/games/catalogue"
 
       click_on "I changed my mind..."
 
       within_game_template_section "BEATLE" do
-        click_on "Start this game"
+        click_on "Start new game"
       end
 
       assert_selector "h2", text: "BEATLE"
