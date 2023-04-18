@@ -62,4 +62,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     section_title_element = find "h2", text: section_title
     within(section_title_element.ancestor("section"), &)
   end
+
+  def stale_element!(element, text: "[[[STALED BY TEST]]]")
+    element.execute_script(
+      <<~JS
+        this.innerHTML = `#{text}`
+      JS
+    )
+  end
 end

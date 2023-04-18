@@ -11,7 +11,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      within_game_section "Phases" do
+      within_game_section "PHASES" do
         assert_current_phase "Collecting"
 
         within_phase_details "Collecting" do
@@ -30,15 +30,19 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      within_game_section "Phases" do
+      within_game_section "PHASES" do |element|
         assert_current_phase "Collecting"
 
+        stale_element!(element.find("h2"))
+
         within_phase_details "Collecting" do
-          click_on "Start guessing phase"
+          accept_confirm("Are you sure?") do
+            click_on "Start guessing phase"
+          end
         end
       end
 
-      within_game_section "Phases" do
+      within_game_section "PHASES" do
         assert_current_phase "Guessing"
       end
     end
@@ -53,7 +57,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :elaine
       goto_game "Seinfeld"
 
-      within_game_section "My playlist" do
+      within_game_section "MY PLAYLIST" do
         click_on "Show playlist"
       end
 
@@ -100,6 +104,8 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   def within_phase_details(phase, &)
+    assert_selector("summary", text: phase)
+
     phase_details_element = find("summary", text: phase).ancestor("details")
     phase_details_element.click # opens the dialog
     within(phase_details_element, &)
