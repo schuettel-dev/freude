@@ -1,7 +1,7 @@
 class GameTemplates::InstancesController < ApplicationController
   def new
     game_template = GameTemplate.find(params[:game_template_id])
-    @game = Game.new(game_template:)
+    @game = game_template.new_game
   end
 
   def create
