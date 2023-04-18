@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-y-8">
       <h2 class="text-3xl font-bold uppercase text-indigo-700"><%= game_template.name %></h2>
       <p class="text-xl tracking-wide"><%= game_template.description %></p>
-      <%= link_to t(".start_this_game"), new_game_template_instance_path(game_template), class: "button" %>
+      <%= link_to t("shared.actions.start_new_game"), new_game_path(game_template_id: game_template.to_param), class: "button" %>
     </div>
   <% end %>
 </section>

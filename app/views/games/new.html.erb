@@ -1,14 +1,15 @@
 <% content_for :navigation do %>
-  <%= render Links::BackToComponent.new(game_templates_path, t(".back_to_all_games")) %>
+  <%= render Links::BackToComponent.new(game_catalogue_path, t("shared.actions.back_to_catalogue")) %>
 <% end %>
 
-<div class="p-8 flex flex-col gap-y-8">
-  <h1 class="text-5xl"><%= t(".start_new_game") %></h1>
+<div class="px-8 flex flex-col gap-y-8">
+  <h1 class="text-5xl mb-8"><%= t("shared.actions.start_new_game") %></h1>
 
   <%= render CardComponent.new do %>
     <div class="flex flex-col gap-y-8">
       <h2 class="text-3xl uppercase font-bold text-indigo-700"><%= @game.name %></h2>
-      <%= form_with(model: @game.becomes(Game), url: game_template_instance_path(@game.game_template)) do |f| %>
+      <%= form_with(model: @game.becomes(Game)) do |f| %>
+        <%= f.hidden_field :game_template_id %>
         <div class="flex flex-col gap-y-4">
           <fieldset class="flex flex-col">
             <%= f.label :group_name, class: "sr-only", error_class: "" %>
@@ -18,7 +19,7 @@
 
           <%= f.submit t(".ready"), class: "button" %>
 
-          <%= link_to t("shared.buttons.i_changed_my_mind"), game_templates_path, class: "ghost-button" %>
+          <%= link_to t("shared.buttons.i_changed_my_mind"), game_catalogue_path, class: "ghost-button" %>
         </div>
       <% end %>
     </div>

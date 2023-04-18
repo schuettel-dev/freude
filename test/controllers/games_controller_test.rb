@@ -15,6 +15,25 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "GET new" do
+    sign_in :jerry
+    get new_game_path(game_template_id: game_templates(:beatle).to_param)
+
+    assert_response :success
+  end
+
+  test "POST create" do
+    sign_in :jerry
+
+    assert_difference -> { Game.count }, +1 do
+      post games_path(params: { game: { game_template_id: game_templates(:beatle).id, group_name: "Group name" } })
+    end
+
+    follow_redirect!
+
+    assert_response :success
+  end
+
   test "GET edit" do
     sign_in :jerry
     get edit_game_path(games(:beatle_seinfeld))

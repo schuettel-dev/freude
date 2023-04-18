@@ -6,6 +6,6 @@
   <h1 class="text-5xl mb-8"><%= t("shared.all_games") %></h1>
 
   <div class="flex flex-col gap-y-8">
-    <%= render @game_templates %>
+    <%= render partial: "game_template", collection: @game_templates, as: :game_template %>
   </div>
 </div>

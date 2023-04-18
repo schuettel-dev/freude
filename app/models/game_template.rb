@@ -1,4 +1,6 @@
 class GameTemplate < ApplicationRecord
+  include UrlIdentifiable
+
   has_many :games, dependent: :destroy
 
   validates :name, :description,

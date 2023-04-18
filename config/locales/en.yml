@@ -126,6 +126,8 @@ en:
       new_game: New game
     join:
       could_not_join_game_due_to_wrong_token: Game couldn't be joined, the token was wrong.
+    new:
+      ready: Ready!
     shared:
       back_to_game: Back to game
       coming_up_next: Coming up next
@@ -145,11 +147,6 @@ en:
   game_templates:
     game_template:
       start_this_game: Start this game
-    instances:
-      new:
-        back_to_all_games: Back to all games
-        start_new_game: Start new game
-        ready: Ready!
   players:
     shared:
       players_with_count:
@@ -162,11 +159,13 @@ en:
       update_profile: Update profile
   shared:
     actions:
+      back_to_catalogue: Back to catalogue
       back_to_game: Back to game
       next: Next
       previous: Previous
       show_less: Show less
       show_more: Show more
+      start_new_game: Start new game
     admin: Admin
     all_games: All games
     buttons:

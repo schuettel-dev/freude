@@ -9,7 +9,7 @@
     <%= render partial: "list_item", collection: @games, as: :game %>
   </div>
 
-  <%= link_to game_templates_path, class: "button" do %>
+  <%= link_to game_catalogue_path, class: "button" do %>
     <%= render HeroiconComponent.new(:"plus-small")%>
 
     <%= t(".new_game") %>

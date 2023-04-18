@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  include UrlIdentifiable
+
   attr_readonly :url_identifier
 
   belongs_to :user
@@ -17,10 +19,6 @@ class Game < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
   scope :for_user, ->(user) { where(players: Player.for_user(user)) }
-
-  def to_param
-    url_identifier
-  end
 
   def new_player(...)
     game_template.append_to_namespace(Player).new(...).tap do |player|
