@@ -83,6 +83,29 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
     end
   end
 
+  test "player get updated if phase changed to collecting" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+    player = players(:jerry_player_in_beatle_seinfeld)
+
+    using_browser do
+      sign_in :jerry
+
+      goto_game "Seinfeld"
+
+      assert_no_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST?"
+      assert_selector "h2", text: "MY PLAYLIST"
+      assert_selector "h2", text: "PLAYERS"
+
+      game.update_column(:phase, :guessing)
+      player.broadcast_phase_update
+
+      assert_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST?"
+      assert_selector "h2", text: "MY PLAYLIST"
+      assert_selector "h2", text: "PLAYERS"
+    end
+  end
+
   private
 
   def assert_urls(blank:, valid:, invalid:)
