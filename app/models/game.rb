@@ -74,6 +74,10 @@ class Game < ApplicationRecord
     broadcast_replace_to(self, target: comp.to_dom_id, html: ApplicationController.render(comp, layout: false))
   end
 
+  def broadcast_phase_update
+    players.each(&:broadcast_phase_update)
+  end
+
   private
 
   def initialize_url_identifier

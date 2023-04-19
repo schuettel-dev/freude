@@ -9,7 +9,12 @@ class Games::PhasesController < ApplicationController
     form = Games::Beatle::Game::PhaseChangeForm.new(game: @game, params:)
     form.save
 
-    redirect_to game_path(@game)
+    respond_to do |format|
+      format.html { redirect_to game_path(@game) }
+      format.turbo_stream do
+        @game.broadcast_phase_update
+      end
+    end
   end
 
   private

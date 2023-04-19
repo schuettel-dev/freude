@@ -14,4 +14,10 @@ class Player < ApplicationRecord
   def setup
     raise "implement in subclass"
   end
+
+  def broadcast_phase_update
+    broadcast_replace_component Games::CurrentPhaseSectionComponent.new(player: self)
+    broadcast_replace_component Games::PhasesSectionComponent.new(player: self)
+    broadcast_replace_component Games::PlayersSectionComponent.new(player: self)
+  end
 end

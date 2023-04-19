@@ -8,4 +8,9 @@ class ApplicationRecord < ActiveRecord::Base
   def decorate
     @decorate ||= "#{self.class}Decorator".constantize.new(self)
   end
+
+  def broadcast_replace_component(component)
+    broadcast_replace(target: component.to_dom_id,
+                      html: ApplicationController.render(component, layout: false))
+  end
 end
