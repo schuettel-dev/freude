@@ -1,16 +1,18 @@
-<div class="flex flex-col gap-y-12">
-  <div class="flex flex-col gap-y-4">
-    <% playlist_guess.guessing_player.playlist.song_urls.each do |song_url| %>
-      <%= render EmbeddedPlayerComponent.new(song_url:) %>
+<%= turbo_frame_tag to_dom_id do %>
+  <div class="flex flex-col gap-y-12">
+    <div class="flex flex-col gap-y-4">
+      <% playlist_guess.guessing_player.playlist.song_urls.each do |song_url| %>
+        <%= render EmbeddedPlayerComponent.new(song_url:) %>
+      <% end %>
+    </div>
+
+    <%= form_with(model: playlist_guess, url: game_beatle_playlist_guess_path(game, playlist_guess), class: "flex flex-col gap-y-2") do |f| %>
+      <%= f.select :guessed_player_id, guessed_player_options, { include_blank: t("games.beatle.shared.pick_your_guess") },{  class: "input" } %>
+      <%= f.submit t("games.beatle.shared.save_guess"), class: "button" %>
     <% end %>
-  </div>
 
-  <%= form_with(model: playlist_guess, url: game_beatle_playlist_guess_path(game, playlist_guess), class: "flex flex-col gap-y-2") do |f| %>
-    <%= f.select :guessed_player_id, guessed_player_options, { include_blank: t("games.beatle.shared.pick_your_guess") },{  class: "input" } %>
-    <%= f.submit t("games.beatle.shared.save_guess"), class: "button" %>
-  <% end %>
-
-  <div>
-    <%= render Games::Beatle::PlaylistGuess::PaginationComponent.new(ordered_playlist_guesses, playlist_guess) %>
+    <div>
+      <%= render Games::Beatle::PlaylistGuess::PaginationComponent.new(ordered_playlist_guesses, playlist_guess) %>
+    </div>
   </div>
-</div>
+<% end %>

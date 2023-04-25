@@ -1,7 +1,7 @@
 <%= turbo_frame_tag to_dom_id do %>
   <div class="flex flex-col gap-y-8">
     <% if game.guessing? %>
-      <%= turbo_frame_tag dom_id(player, :playlist_guess), src: edit_game_beatle_playlist_guess_path(game, player.playlist_guesses.ordered.first) %>
+      <%= render Games::Beatle::Player::GuessingPhaseSectionComponent.new(player:) %>
     <% end %>
 
     <% if game.ended? %>

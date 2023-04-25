@@ -19,6 +19,10 @@ class Games::Beatle::PlaylistGuess::FormComponent < ApplicationComponent
     end
   end
 
+  def to_dom_id
+    dom_id(player, :playlist_guess_form)
+  end
+
   private
 
   def to_label(option_player)

@@ -19,8 +19,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
     render_inline new_component(player:)
 
     assert_show_playlist_link(player)
-    assert_selector "section", count: 1
-    assert_selector "turbo-frame##{dom_id(player, :playlist_guess)}"
+    assert_selector "section", count: 2
     assert_inline_status_component count: 0
   end
 
@@ -29,8 +28,7 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
     player = players(:jerry_player_in_beatle_seinfeld)
     render_inline new_component(player:)
 
-    assert_selector "section", count: 1
-    assert_selector "turbo-frame##{dom_id(player, :playlist_guess)}"
+    assert_selector "section", count: 2
     assert_inline_status_component count: 0
     assert_show_playlist_link(player)
   end

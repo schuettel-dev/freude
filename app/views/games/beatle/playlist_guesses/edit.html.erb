@@ -1,13 +1,1 @@
-<%= turbo_frame_tag dom_id(@playlist_guess.player, :playlist_guess) do %>
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-4">
-        <h2 class="text-normal uppercase tracking-wide text-gray-600">
-          <%= t("games.beatle.shared.whos_behind_this_playlist") %>
-        </h2>
-
-        <%= render Games::Beatle::PlaylistGuess::FormComponent.new(playlist_guess: @playlist_guess) %>
-      </div>
-    <% end %>
-  </section>
-<% end %>
+<%= render Games::Beatle::PlaylistGuess::FormComponent.new(playlist_guess: @playlist_guess)  %>
