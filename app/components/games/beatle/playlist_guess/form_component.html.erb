@@ -7,6 +7,7 @@
     </div>
 
     <%= form_with(model: playlist_guess, url: game_beatle_playlist_guess_path(game, playlist_guess), class: "flex flex-col gap-y-2") do |f| %>
+      <%= f.label :guessed_player_id, class: "sr-only" %>
       <%= f.select :guessed_player_id, guessed_player_options, { include_blank: t("games.beatle.shared.pick_your_guess") },{  class: "input" } %>
       <%= f.submit t("games.beatle.shared.save_guess"), class: "button" %>
     <% end %>

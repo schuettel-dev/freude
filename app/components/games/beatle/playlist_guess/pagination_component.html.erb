@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-2 gap-4 <%= to_css_class %>">
   <div class="flex justify-start">
     <% if previous_item.present? %>
       <%= link_to edit_game_beatle_playlist_guess_path(current_item.game, previous_item), class: "flex items-center gap-x-1" do %>

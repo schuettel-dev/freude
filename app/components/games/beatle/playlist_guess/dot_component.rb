@@ -30,7 +30,9 @@ class Games::Beatle::PlaylistGuess::DotComponent < ApplicationComponent
       common_css_classes,
       bg_css_classes,
       "outline outline-offset-2 outline-4",
-      (playlist_guess.guessed? ? "outline-blue-600" : "outline-gray-500")
+      (playlist_guess.guessed? ? "outline-blue-600" : "outline-gray-500"),
+      "current-playlist-guess",
+      test_classes
     )
   end
 
@@ -43,10 +45,18 @@ class Games::Beatle::PlaylistGuess::DotComponent < ApplicationComponent
   end
 
   def common_css_classes
-    "flex justify-center items-center text-xs w-8 h-8 rounded-full"
+    class_names(
+      "flex justify-center items-center text-xs w-8 h-8 rounded-full",
+      to_css_class,
+      test_classes
+    )
   end
 
   def bg_css_classes
     playlist_guess.guessed? ? "bg-blue-300" : "bg-gray-200"
+  end
+
+  def test_classes
+    playlist_guess.guessed? ? "playlist-guessed" : "playlist-unguessed"
   end
 end

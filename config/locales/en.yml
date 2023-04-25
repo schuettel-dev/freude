@@ -34,6 +34,8 @@ en:
           collecting: Players join and submit their songs.
           ended: Final results and ranking.
           guessing: Players listen to the others songs and guess who is behind.
+      games/beatle/playlist_guess:
+        guessed_player_id: Guessed player
       game_template:
         description: Description
         image_path: Image
