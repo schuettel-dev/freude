@@ -1,4 +1,4 @@
-class Games::Beatle::Player::GuessingPhaseSectionComponent < ApplicationComponent
+class Games::Beatle::GuessingPhaseComponent < ApplicationComponent
   def initialize(player:)
     super()
     @player = player

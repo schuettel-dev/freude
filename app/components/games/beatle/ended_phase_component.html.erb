@@ -1,0 +1,3 @@
+<%= render Games::FinalRankingComponent.new(game:, highlight_player: player, all: params[:all].present?) %>
+
+<%= render Games::Beatle::Playlist::ShowResolvedComponent.new(playlist: game.playlists.order_by_user_name.first, current_player: @player) %>

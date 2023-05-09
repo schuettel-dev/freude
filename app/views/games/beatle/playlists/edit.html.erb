@@ -2,11 +2,12 @@
   <%= render Links::BackToComponent.new(game_path(@playlist.game), t("games.beatle.shared.buttons.back_to_game")) %>
 <% end %>
 
-
 <div class="px-8 flex flex-col gap-y-8">
   <h1 class="text-5xl mb-8"><%= t("games.beatle.shared.my_playlist") %></h1>
 
   <div>
-    <%= render Games::Beatle::PlaylistComponent.new(playlist: @playlist, user: Current.user) %>
+    <%= turbo_frame_tag dom_id(@playlist) do %>
+      <%= render Games::Beatle::Playlist::EditComponent.new(playlist: @playlist) %>
+    <% end %>
   </div>
 </div>

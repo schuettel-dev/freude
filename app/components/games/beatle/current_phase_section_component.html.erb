@@ -1,37 +1,13 @@
 <%= turbo_frame_tag to_dom_id do %>
-  <div class="flex flex-col gap-y-8">
-    <% if game.guessing? %>
-      <%= render Games::Beatle::Player::GuessingPhaseSectionComponent.new(player:) %>
-    <% end %>
-
-    <% if game.ended? %>
-      <%= render Games::FinalRankingComponent.new(game:, highlight_player: player, all: params[:all].present?) %>
-
-      <% playlist = game.playlists.order_by_user_name.first %>
-
-      <%= render Games::Beatle::Playlist::ShowComponent.new(playlist:, current_player: @player) %>
-    <% else %>
-      <section>
-        <%= render CardComponent.new do %>
-          <div class="flex flex-col gap-y-4">
-            <h2 class="text-xl uppercase tracking-wide text-gray-600">
-              <%= t("games.beatle.shared.my_playlist") %>
-            </h2>
-
-            <% if game.collecting? %>
-              <div class="flex justify-center">
-                <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:, class: "h-8 w-8") %>
-              </div>
-            <% end %>
-
-            <div class="flex gap-x-4">
-              <div class="w-full">
-                <%= link_to t("games.beatle.shared.buttons.show_playlist"), edit_game_beatle_playlist_path(game, game.playlists.find_by!(player:)), class: "button" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </section>
-    <% end %>
-  </div>
+  <section>
+    <div class="flex flex-col gap-y-8">
+      <% if game.guessing? %>
+        <%= render Games::Beatle::GuessingPhaseComponent.new(player:) %>
+      <% elsif game.ended? %>
+        <%= render Games::Beatle::EndedPhaseComponent.new(player:) %>
+      <% else %>
+        <%= render Games::Beatle::CollectingPhaseComponent.new(player:) %>
+      <% end %>
+    </div>
+  </section>
 <% end %>

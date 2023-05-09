@@ -9,7 +9,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      within_game_section "PHASES" do
+      within_game_card "PHASES" do
         assert_current_phase "Collecting"
 
         within_phase_details "Collecting" do
@@ -30,7 +30,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       assert_selector "h2", text: "MY PLAYLIST"
       assert_no_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST"
 
-      within_game_section "PHASES" do
+      within_game_card "PHASES" do
         assert_current_phase "Collecting"
 
         within_phase_details "Collecting" do
@@ -43,7 +43,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       assert_selector "h2", text: "MY PLAYLIST"
       assert_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST?"
 
-      within_game_section "PHASES" do
+      within_game_card "PHASES" do
         assert_current_phase "Guessing"
       end
     end
@@ -58,7 +58,7 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :elaine
       goto_game "Seinfeld"
 
-      within_game_section "MY PLAYLIST" do
+      within_game_card "MY PLAYLIST" do
         click_on "Show playlist"
       end
 

@@ -34,6 +34,17 @@ en:
           collecting: Players join and submit their songs.
           ended: Final results and ranking.
           guessing: Players listen to the others songs and guess who is behind.
+      games/beatle/playlist:
+        song_1_url: Song 1
+        song_2_url: Song 2
+        song_3_url: Song 3
+        song_url_providers:
+          spotify: Spotify
+          youtube: YouTube
+        song_url_statuses:
+          blank: "Blank"
+          invalid: "Invalid"
+          valid: "Valid"
       games/beatle/playlist_guess:
         guessed_player_id: Guessed player
       game_template:
@@ -45,17 +56,6 @@ en:
         name: Name
         namespace: Namespace
         url_identifier: URL identifier
-      player/beatle/playlist:
-        song_1_url: Song 1
-        song_2_url: Song 2
-        song_3_url: Song 3
-        song_url_providers:
-          spotify: Spotify
-          youtube: YouTube
-        song_url_statuses:
-          blank: "Blank"
-          invalid: "Invalid"
-          valid: "Valid"
       user:
         name: Name
         token: Token

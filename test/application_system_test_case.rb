@@ -58,9 +58,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     within(group_title_element.ancestor("section"), &)
   end
 
-  def within_game_section(section_title, &)
-    section_title_element = find "h2", text: section_title
-    within(section_title_element.ancestor("section"), &)
+  def within_game_card(section_title, &)
+    assert_selector "h2", text: section_title do |h2_element|
+      within(h2_element.ancestor(".card-component"), &)
+    end
   end
 
   def stale_element!(element, text: "[[[STALED BY TEST]]]")

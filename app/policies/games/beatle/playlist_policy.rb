@@ -2,7 +2,7 @@ module Games
   module Beatle
     class PlaylistPolicy < ApplicationPolicy
       def show?
-        record.game.ended?
+        own? || record.game.ended?
       end
 
       def edit?

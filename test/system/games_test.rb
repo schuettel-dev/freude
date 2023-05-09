@@ -8,7 +8,7 @@ class GamesTest < ApplicationSystemTestCase
 
     goto_game "Seinfeld"
 
-    within_game_section "Admin" do
+    within_game_card "Admin" do
       assert_field "URL to join", with: "http://www.example.com/games/BEATLEJERRYURLIDENTIFIER/join/BEATLEJERRYJOINTOKEN"
     end
   end

@@ -16,10 +16,24 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   test "user shows own playlist" do
     games(:beatle_seinfeld).update_column(:phase, :guessing)
 
-    sign_in :jerry
-    goto_game "Seinfeld"
+    using_browser do
+      sign_in :jerry
+      goto_game "Seinfeld"
 
-    assert false, "TODO"
+      within_game_card "MY PLAYLIST" do
+        click_on "Show playlist"
+      end
+
+      within_game_card "MY PLAYLIST" do |elm|
+        assert_selector "iframe", count: 3
+
+        click_on "Close playlist"
+      end
+
+      within_game_card "MY PLAYLIST" do
+        click_on "Show playlist"
+      end
+    end
   end
 
   test "user guesses the playlists" do
@@ -30,7 +44,7 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      within_game_section "WHO'S BEHIND THIS PLAYLIST?" do
+      within_game_card "WHO'S BEHIND THIS PLAYLIST?" do
         assert_selector ".games--beatle--playlist-guess--dot-component.current-playlist-guess", text: "1"
         assert_selector ".games--beatle--playlist-guess--dot-component.playlist-guessed", count: 0
         assert_selector ".games--beatle--playlist-guess--dot-component.playlist-unguessed", count: 3

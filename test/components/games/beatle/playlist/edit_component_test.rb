@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
+class Games::Beatle::Playlist::EditComponentTest < ViewComponent::TestCase
   test "render, phase collecting" do
     games(:beatle_seinfeld).update_column(:phase, :collecting)
     playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
@@ -8,9 +8,8 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
       song_2_url: "https://something",
       song_3_url: nil
     )
-    user = users(:jerry)
 
-    render_inline new_component(playlist:, user:)
+    render_inline new_component(playlist:)
 
     assert_selector ".games--beatle--playlist--song-url-status", text: "URL is valid", count: 1
     assert_selector ".games--beatle--playlist--song-url-status", text: "URL is invalid", count: 1
@@ -25,25 +24,5 @@ class Games::Beatle::PlaylistComponentTest < ViewComponent::TestCase
 
     assert_button "Save playlist"
     assert_link "Close playlist"
-  end
-
-  test "render, phase guessing" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
-
-    playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
-    user = users(:jerry)
-
-    render_inline new_component(playlist:, user:)
-
-    assert_no_selector "input"
-  end
-
-  test "render, phase ended" do
-    playlist = games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist)
-    user = users(:jerry)
-
-    render_inline new_component(playlist:, user:)
-
-    assert_no_selector "input"
   end
 end

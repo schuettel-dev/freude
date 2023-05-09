@@ -1,59 +1,61 @@
 <%= turbo_frame_tag to_dom_id do %>
-  <section>
-    <%= render CardComponent.new do %>
-      <div class="flex flex-col gap-y-6">
+  <%= render CardComponent.new(padding: false) do %>
+    <div class="flex flex-col gap-y-6">
+      <div class="mx-4 mt-4">
         <h2 class="text-xl uppercase tracking-wide text-gray-600">
           <%= t("games.beatle.shared.final_ranking") %>
         </h2>
+      </div>
 
+      <div class="m-4">
         <div class="flex flex-col gap-y-2">
           <h3 class="flex justify-center uppercase text-sm text-gray-400"><%= t("games.beatle.shared.your_ranking") %></h3>
           <div class="flex justify-center">
             <%= render Players::FinalRankComponent.new(player: highlight_player, size: :lg) %>
           </div>
         </div>
+      </div>
 
-        <div>
-          <table class="w-full">
-            <thead>
-              <tr>
-                <th class="p-2 "></th>
-                <th class="p-2 w-full"></th>
-                <th class="p-2 text-right text-xs text-gray-400 font-normal">Points</th>
+      <div class="my-4">
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="pl-4 pr-2"></th>
+              <th class="px-2 w-full"></th>
+              <th class="pr-4 pl-2 text-right text-xs text-gray-400 font-normal">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% players.order_by_final_rank.each do |player| %>
+              <tr class="<%= class_names("bg-yellow-100": highlight_player?(player)) %>">
+                <td class="pl-4 py-4 pr-2">
+                  <%= render Players::FinalRankComponent.new(player:) %>
+                </td>
+                <td class="px-2 py-4 text-2xl">
+                  <%= player.decorate.display_name %>
+                </td>
+                <td class="pl-2 py-4 pr-4 text-right text-gray-400">
+                  <%= player.decorate.display_final_points %>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              <% players.order_by_final_rank.each do |player| %>
-                <tr class="<%= class_names("bg-yellow-100": highlight_player?(player)) %>">
-                  <td class="p-2">
-                    <%= render Players::FinalRankComponent.new(player:) %>
-                  </td>
-                  <td class="p-2 text-2xl">
-                    <%= player.decorate.display_name %>
-                  </td>
-                  <td class="p-2 text-right text-gray-400">
-                    <%= player.decorate.display_final_points %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+            <% end %>
+          </tbody>
+        </table>
 
-          <% if fourth_exists? %>
-            <% if all? %>
-              <%= link_to game_final_ranking_path(game), class: "ghost-button" do %>
-                <%= render HeroiconComponent.new(:"chevron-up") %>
-                <%= t("shared.actions.show_less") %>
-              <% end %>
-            <%  else %>
-              <%= link_to game_final_ranking_path(game, all: true), class: "ghost-button" do %>
-                <%= render HeroiconComponent.new(:"chevron-down") %>
-                <%= t("shared.actions.show_more") %>
-              <% end %>
+        <% if fourth_exists? %>
+          <% if all? %>
+            <%= link_to game_final_ranking_path(game), class: "ghost-button" do %>
+              <%= render HeroiconComponent.new(:"chevron-up") %>
+              <%= t("shared.actions.show_less") %>
+            <% end %>
+          <%  else %>
+            <%= link_to game_final_ranking_path(game, all: true), class: "ghost-button" do %>
+              <%= render HeroiconComponent.new(:"chevron-down") %>
+              <%= t("shared.actions.show_more") %>
             <% end %>
           <% end %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
-  </section>
+    </div>
+  <% end %>
 <% end %>

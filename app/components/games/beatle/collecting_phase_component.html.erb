@@ -1,0 +1,19 @@
+<div class="flex flex-col">
+  <%= turbo_frame_tag dom_id(player.playlist) do %>
+    <%= render CardComponent.new do %>
+      <div class="flex flex-col gap-y-4">
+        <h2 class="text-xl uppercase tracking-wide text-gray-600">
+          <%= t("games.beatle.shared.my_playlist") %>
+        </h2>
+
+        <div class="flex justify-center">
+          <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:, class: "h-8 w-8") %>
+        </div>
+
+        <div class="w-full">
+          <%= link_to t("games.beatle.shared.buttons.show_playlist"), edit_game_beatle_playlist_path(game, player.playlist), class: "button" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
