@@ -13,7 +13,7 @@
               <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
 
               <% if game.collecting? %>
-                <%= render Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:) %>
+                <%= render Games::Beatle::Playlist::InlineStatusComponent.new(player:) %>
               <% elsif game.guessing? %>
                 <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:, hole_scale: 0.5) %>
               <% end %>

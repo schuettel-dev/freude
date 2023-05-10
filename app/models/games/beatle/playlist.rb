@@ -64,13 +64,7 @@ module Games
       end
 
       def broadcast_inline_statuses
-        comp = Games::Beatle::Player::PlaylistInlineStatusComponent.new(player:)
-        broadcast_replace_to(
-          game,
-          :players_section,
-          target: comp.to_dom_id,
-          html: ApplicationController.render(comp, layout: false)
-        )
+        broadcast_replace_component Games::Beatle::Playlist::InlineStatusComponent.new(player:)
       end
 
       def guesses

@@ -35,6 +35,6 @@ class Games::Beatle::CurrentPhaseSectionComponentTest < ViewComponent::TestCase
   private
 
   def assert_inline_status_component(count: 1)
-    assert_selector ".games--beatle--player--playlist-inline-status-component", count:
+    assert_selector ".games--beatle--playlist--inline-status-component", count:
   end
 end

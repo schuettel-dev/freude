@@ -1,4 +1,4 @@
-class Games::Beatle::Player::PlaylistInlineStatusComponent < ApplicationComponent
+class Games::Beatle::Playlist::InlineStatusComponent < ApplicationComponent
   attr_reader :player, :args
 
   delegate :playlist, to: :player
