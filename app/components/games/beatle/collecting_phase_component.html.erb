@@ -7,7 +7,7 @@
         </h2>
 
         <div class="flex justify-center">
-          <%= render Games::Beatle::Playlist::InlineStatusComponent.new(player:, class: "h-8 w-8") %>
+          <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist, class: "h-8 w-8") %>
         </div>
 
         <div class="w-full">

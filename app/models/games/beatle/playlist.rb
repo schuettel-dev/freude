@@ -64,7 +64,7 @@ module Games
       end
 
       def broadcast_inline_statuses
-        broadcast_replace_component Games::Beatle::Playlist::InlineStatusComponent.new(player:)
+        game.broadcast_replace_component Games::Beatle::Playlist::InlineStatusComponent.new(playlist: self)
       end
 
       def guesses

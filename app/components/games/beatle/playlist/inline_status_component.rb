@@ -1,14 +1,12 @@
 class Games::Beatle::Playlist::InlineStatusComponent < ApplicationComponent
-  attr_reader :player, :args
-
-  delegate :playlist, to: :player
+  attr_reader :playlist, :args
 
   DEFAULT_OPTIONS = {
     class: "h-6 w-6"
   }.freeze
 
-  def initialize(player:, **args)
-    @player = player
+  def initialize(playlist:, **args)
+    @playlist = playlist
     @args = DEFAULT_OPTIONS.deep_dup.merge(args)
     super()
   end
@@ -18,6 +16,6 @@ class Games::Beatle::Playlist::InlineStatusComponent < ApplicationComponent
   end
 
   def to_dom_id
-    dom_id(player, :playlist_inline_status)
+    dom_id(playlist, :inline_status)
   end
 end
