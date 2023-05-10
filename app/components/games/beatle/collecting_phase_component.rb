@@ -5,5 +5,6 @@ class Games::Beatle::CollectingPhaseComponent < ApplicationComponent
 
   def initialize(player:)
     @player = player
+    super()
   end
 end

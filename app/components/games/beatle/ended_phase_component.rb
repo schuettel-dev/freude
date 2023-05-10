@@ -5,6 +5,7 @@ class Games::Beatle::EndedPhaseComponent < ApplicationComponent
 
   def initialize(player:)
     @player = player
+    super()
   end
 
   def initial_playlist

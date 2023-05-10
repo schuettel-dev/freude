@@ -3,5 +3,6 @@ class Games::Beatle::Playlist::ShowComponent < ApplicationComponent
 
   def initialize(playlist:)
     @playlist = playlist
+    super()
   end
 end

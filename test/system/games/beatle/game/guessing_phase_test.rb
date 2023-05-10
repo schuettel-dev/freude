@@ -24,7 +24,7 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
         click_on "Show playlist"
       end
 
-      within_game_card "MY PLAYLIST" do |elm|
+      within_game_card "MY PLAYLIST" do
         assert_selector "iframe", count: 3
 
         click_on "Close playlist"
