@@ -33,6 +33,6 @@ end
 
 group :test do
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "= 4.9.0" # remove pin when >= 4.9.2 is released
   gem "webdrivers"
 end

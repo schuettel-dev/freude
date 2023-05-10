@@ -100,6 +100,9 @@ Lint/DuplicateElsifCondition:
 Lint/DuplicateMagicComment:
   Enabled: true
 
+Lint/DuplicateMatchPattern:
+  Enabled: true
+
 Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 
@@ -299,6 +302,9 @@ Minitest/RefutePredicate:
 Minitest/RefuteSame:
   Enabled: true
 
+Minitest/ReturnInTestMethod:
+  Enabled: true
+
 Minitest/SkipEnsure:
   Enabled: true
 
@@ -453,6 +459,9 @@ Rails/SquishedSQLHeredocs:
 Rails/StripHeredoc:
   Enabled: true
 
+Rails/ThreeStateBooleanColumn:
+  Enabled: true
+
 Rails/TimeZoneAssignment:
   Enabled: true
 
@@ -523,6 +532,9 @@ Style/ComparableClamp:
   Enabled: true
 
 Style/ConcatArrayLiterals:
+  Enabled: true
+
+Style/DataInheritance:
   Enabled: true
 
 Style/DirEmpty:
@@ -673,6 +685,9 @@ Style/RedundantHeredocDelimiterQuotes:
   Enabled: true
 
 Style/RedundantInitialize:
+  Enabled: true
+
+Style/RedundantLineContinuation:
   Enabled: true
 
 Style/RedundantRegexpCharacterClass:

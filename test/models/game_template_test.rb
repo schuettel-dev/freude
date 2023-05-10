@@ -21,7 +21,7 @@ class GameTemplateTest < ActiveSupport::TestCase
     game_template = game_templates(:beatle)
 
     game_template.new_game.tap do |instance|
-      assert_equal Games::Beatle::Game, instance.class
+      assert_instance_of Games::Beatle::Game, instance
       assert_equal game_template, instance.game_template
       assert_equal "Beatle", instance.name
       assert_equal "Guess who's behind a playlist of 3 songs", instance.description
