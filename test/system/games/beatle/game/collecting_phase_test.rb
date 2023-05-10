@@ -90,7 +90,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
 
     using_browser do
       sign_in :jerry
-
       goto_game "Seinfeld"
 
       assert_no_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST?"
@@ -107,7 +106,33 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "submitting a playlist changes inline status components" do
-    skip "TODO"
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    using_browser do
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      within_game_card "4 PLAYERS" do
+        assert_no_selector ".games--beatle--playlist--inline-status-component .text-gray-500"
+        assert_no_selector ".games--beatle--playlist--inline-status-component .text-red-500"
+      end
+
+      within_game_card "MY PLAYLIST" do
+        click_on "Show playlist"
+      end
+
+      within_game_card "MY PLAYLIST" do
+        fill_in "Song 1", with: "https://wrong"
+        fill_in "Song 2", with: ""
+        click_on "Save playlist"
+      end
+
+      within_game_card "4 PLAYERS" do
+        assert_selector ".games--beatle--playlist--inline-status-component .text-gray-500"
+        assert_selector ".games--beatle--playlist--inline-status-component .text-red-400"
+      end
+    end
   end
 
   private
