@@ -30,11 +30,11 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       assert_selector "h2", text: "MY PLAYLIST"
       assert_no_selector "h2", text: "WHO'S BEHIND THIS PLAYLIST"
 
-      within_game_card "PHASES" do
-        assert_current_phase "Collecting"
+      accept_confirm("Are you sure?") do
+        within_game_card "PHASES" do
+          assert_current_phase "Collecting"
 
-        within_phase_details "Collecting" do
-          accept_confirm("Are you sure?") do
+          within_phase_details "Collecting" do
             click_on "Start guessing phase"
           end
         end
@@ -123,9 +123,9 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
     end
   end
 
-  def find_current_phase
-    find("[title='Current']")
-  end
+  # def find_current_phase
+  #   find("[title='Current']")
+  # end
 
   def within_phase_details(phase, &)
     assert_selector("summary", text: phase)

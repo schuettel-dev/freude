@@ -106,14 +106,65 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to collecting" do
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
+
     using_browser do
-      assert false, "TODO"
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      accept_confirm("Are you sure? Player's guesses will reset.") do
+        within_game_card "PHASES" do
+          assert_current_phase "Guessing"
+
+          within_phase_details "Guessing" do
+            click_on "Go back to collecting phase"
+          end
+        end
+      end
+
+      assert_selector "h2", text: "MY PLAYLIST"
+
+      within_game_card "PHASES" do
+        assert_current_phase "Collecting"
+      end
     end
   end
 
   test "owner changes phase to ended" do
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
+
     using_browser do
-      assert false, "TODO"
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      accept_confirm("This will end the game, you cannot undo this.") do
+        within_game_card "PHASES" do
+          assert_current_phase "Guessing"
+
+          within_phase_details "Guessing" do
+            click_on "End game"
+          end
+        end
+      end
+
+      assert_selector "h2", text: "FINAL RANKING"
+      assert_selector "h2", text: "FINAL RESULTS"
     end
+  end
+
+  private
+
+  def assert_current_phase(phase)
+    assert_selector "[title='Current']" do |element|
+      element.ancestor("summary").has_text?(phase)
+    end
+  end
+
+  def within_phase_details(phase, &)
+    assert_selector("summary", text: phase)
+
+    phase_details_element = find("summary", text: phase).ancestor("details")
+    phase_details_element.click # opens the dialog
+    within(phase_details_element, &)
   end
 end
