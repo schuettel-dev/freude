@@ -1,7 +1,7 @@
 class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationComponent
   DEFAULTS = {
     class: "w-8 h-8",
-    hole_scale: 0,
+    hole_scale: 0.5,
     hole_color: "#fff"
   }.freeze
 
@@ -12,7 +12,11 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
   end
 
   def call
-    tag.div(class: css_classes, style:, title:)
+    tag.div(class: css_classes, style:, title:, id: to_dom_id)
+  end
+
+  def to_dom_id
+    dom_id(player, :playlist_guesses_inline_status)
   end
 
   private

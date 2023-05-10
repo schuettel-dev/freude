@@ -4,11 +4,11 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponentTest < ViewComp
   test "render, custom arguments" do
     player = players(:jerry_player_in_beatle_seinfeld)
 
-    render_inline new_component(player:, class: "w-10 h-10", hole_scale: 0.5, hole_color: "tomato")
+    render_inline new_component(player:, class: "w-10 h-10", hole_scale: 0.6, hole_color: "tomato")
 
     assert_selector "div" do |element|
       assert_match(/--conic-pie-percent: 100.0%;/, element["style"])
-      assert_match(/--conic-pie-hole-scale: 0.5;/, element["style"])
+      assert_match(/--conic-pie-hole-scale: 0.6;/, element["style"])
       assert_match(/--conic-pie-hole-color: tomato;/, element["style"])
       assert_equal "3 / 3 guessed", element["title"]
     end
@@ -22,7 +22,7 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponentTest < ViewComp
 
     assert_selector "div" do |element|
       assert_match(/--conic-pie-percent: 66.66667%;/, element["style"])
-      assert_match(/--conic-pie-hole-scale: 0;/, element["style"])
+      assert_match(/--conic-pie-hole-scale: 0.5;/, element["style"])
       assert_match(/--conic-pie-hole-color: #fff;/, element["style"])
       assert_equal "2 / 3 guessed", element["title"]
     end

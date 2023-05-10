@@ -9,6 +9,7 @@ class Games::Beatle::PlaylistGuessesController < ApplicationController
                           .where.not(user: Current.user)
                           .find_by(id: games_beatle_playlist_guess_params[:guessed_player_id])
     @playlist_guess.update(guessed_player:)
+    @playlist_guess.broadcast_inline_statuses
 
     redirect_to edit_game_beatle_playlist_guess_path(@game, @playlist_guess)
   end

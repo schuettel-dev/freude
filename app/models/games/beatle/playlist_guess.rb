@@ -19,4 +19,9 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
   def guessed?
     guessed_player.present?
   end
+
+  def broadcast_inline_statuses
+    component = Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:)
+    player.game.broadcast_replace_component(component)
+  end
 end

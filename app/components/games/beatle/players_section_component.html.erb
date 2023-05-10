@@ -15,7 +15,7 @@
               <% if game.collecting? %>
                 <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
               <% elsif game.guessing? %>
-                <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:, hole_scale: 0.5) %>
+                <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
               <% end %>
             </li>
           <% end %>

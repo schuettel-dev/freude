@@ -102,7 +102,26 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "guessing a playlist changes the conic pie" do
-    skip "TODO"
+    games(:beatle_seinfeld).update_column(:phase, :guessing)
+    players(:jerry_player_in_beatle_seinfeld).playlist_guesses.update_all(guessed_player_id: nil)
+
+    using_browser do
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      conic_pie_for "Jerry" do |element|
+        assert_equal "0 / 3 guessed", element["title"]
+      end
+
+      within_game_card "WHO'S BEHIND THIS PLAYLIST?" do
+        select "George (Selected 0 times)", from: "Guessed player"
+        click_on "Save guess"
+      end
+
+      conic_pie_for "Jerry" do |element|
+        assert_equal "1 / 3 guessed", element["title"]
+      end
+    end
   end
 
   test "owner changes phase to collecting" do
@@ -166,5 +185,11 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     phase_details_element = find("summary", text: phase).ancestor("details")
     phase_details_element.click # opens the dialog
     within(phase_details_element, &)
+  end
+
+  def conic_pie_for(name, &)
+    within_game_card "4 PLAYERS" do
+      yield find("li", text: name).find(".conic-pie")
+    end
   end
 end
