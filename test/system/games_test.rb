@@ -31,8 +31,6 @@ class GamesTest < ApplicationSystemTestCase
   end
 
   test "owner edits a game" do
-    skip "TODO: FIX BROADCASTS"
-
     using_browser do
       sign_in :jerry
 

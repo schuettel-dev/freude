@@ -70,8 +70,7 @@ class Game < ApplicationRecord
   end
 
   def broadcast_group_names
-    comp = Games::GroupNameComponent.new(game: self)
-    broadcast_replace_to(self, target: comp.to_dom_id, html: ApplicationController.render(comp, layout: false))
+    broadcast_replace_component Games::GroupNameComponent.new(game: self)
   end
 
   def broadcast_phase_update

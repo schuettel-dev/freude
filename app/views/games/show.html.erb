@@ -2,7 +2,7 @@
   <%= render Links::BackToComponent.new(root_path, t("shared.buttons.back_to_dashboard")) %>
 <% end %>
 
-<%= turbo_stream_from @game %>
+<%= turbo_stream_from @player.game %>
 <%= turbo_stream_from @player %>
 
 <div class="px-8 flex flex-col gap-y-8">
