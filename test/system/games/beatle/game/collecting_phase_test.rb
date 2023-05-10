@@ -106,6 +106,10 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
     end
   end
 
+  test "submitting a playlist changes inline status components" do
+    skip "TODO"
+  end
+
   private
 
   def assert_urls(blank:, valid:, invalid:)
@@ -122,10 +126,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       element.ancestor("summary").has_text?(phase)
     end
   end
-
-  # def find_current_phase
-  #   find("[title='Current']")
-  # end
 
   def within_phase_details(phase, &)
     assert_selector("summary", text: phase)
