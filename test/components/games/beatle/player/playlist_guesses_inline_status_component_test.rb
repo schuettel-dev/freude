@@ -27,4 +27,16 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponentTest < ViewComp
       assert_equal "2 / 3 guessed", element["title"]
     end
   end
+
+  test "render, empty playlist" do
+    player = players(:jerry_player_in_beatle_seinfeld)
+    player.playlist.reset_song_urls
+    player.playlist_guesses.destroy_all
+
+    render_inline new_component(player:, class: "w-10 h-10")
+
+    assert_selector "div", match: :first do |element|
+      assert_equal "Empty playlist", element["title"]
+    end
+  end
 end

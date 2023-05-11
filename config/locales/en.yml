@@ -92,6 +92,7 @@ en:
           close_playlist: Close playlist
           save_playlist: Save playlist
           show_playlist: Show playlist
+        empty_playlist: "Empty playlist"
         song_url_statuses:
           blank: URL is blank
           invalid: URL is invalid
