@@ -84,6 +84,8 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "player sees new player joining" do
+    joining_user_session = Capybara::Session.new(:selenium_headless)
+
     game = games(:beatle_seinfeld)
     game.update_column(:phase, :collecting)
 
@@ -95,8 +97,9 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
         assert_text "4 Players"
       end
 
-      game.new_player(user: users(:newman)).save!
-      game.broadcast_all_players_section
+      joining_user_session.visit game_join_url(game, token: game.join_token)
+      joining_user_session.fill_in "Name", with: "Babu"
+      joining_user_session.click_on "Sign up"
 
       within_game_card "PLAYERS" do
         assert_text "5 Players"
