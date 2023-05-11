@@ -19,9 +19,18 @@ class Player < ApplicationRecord
     broadcast_replace_component Games::CurrentPhaseSectionComponent.new(player: self)
     broadcast_replace_component Games::PhasesSectionComponent.new(player: self)
     broadcast_replace_component Games::PlayersSectionComponent.new(player: self)
+    broadcast_replace_component Games::AdminSectionComponent.new(player: self) if game_admin?
   end
 
   def broadcast_admin_phase_transition
     broadcast_replace_component Games::Beatle::AdminPhaseTransitionComponent.new(player: self)
+  end
+
+  def broadcast_players_section
+    broadcast_replace_component Games::PlayersSectionComponent.new(player: self)
+  end
+
+  def game_admin?
+    game.user == user
   end
 end

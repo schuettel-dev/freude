@@ -42,6 +42,10 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       within_game_card "PHASES" do
         assert_current_phase "Guessing"
       end
+
+      within_game_card "ADMIN" do
+        assert_no_field
+      end
     end
   end
 
@@ -76,6 +80,27 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       click_on "Save"
 
       assert_urls blank: 0, valid: 3, invalid: 0
+    end
+  end
+
+  test "player sees new player joining" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    using_browser do
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      within_game_card "PLAYERS" do
+        assert_text "4 Players"
+      end
+
+      game.new_player(user: users(:newman)).save!
+      game.broadcast_all_players_section
+
+      within_game_card "PLAYERS" do
+        assert_text "5 Players"
+      end
     end
   end
 

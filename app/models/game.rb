@@ -73,6 +73,10 @@ class Game < ApplicationRecord
     broadcast_replace_component Games::GroupNameComponent.new(game: self)
   end
 
+  def broadcast_all_players_section
+    players.find_each(&:broadcast_players_section)
+  end
+
   def broadcast_phase_update
     players.find_each(&:broadcast_phase_update)
   end
