@@ -16,4 +16,18 @@ class Games::Beatle::PlaylistGuess::FormComponentTest < ViewComponent::TestCase
       assert_equal "Save guess", element["value"]
     end
   end
+
+  test "#guessed_player_options does not include players that have empty playlists" do
+    playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
+    games_beatle_playlists(:kramer_player_in_beatle_seinfeld_playlist).reset_song_urls
+
+    render_inline new_component(playlist_guess:)
+
+    assert_selector "select" do |element|
+      assert_equal(
+        ["Pick your guess...", "George (Selected 1 time)", "Laney (Selected 1 time)"],
+        element.find_css("option").map(&:text)
+      )
+    end
+  end
 end

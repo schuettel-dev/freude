@@ -14,7 +14,7 @@ class Games::Beatle::AdminPhaseTransitionComponent < ApplicationComponent
   def display_error_messages_for(phase)
     return if transition_error_messages(phase).none?
 
-    tag.span(transition_error_messages(phase).to_a.to_sentence, class: "flex justify-center text-sm text-red-500")
+    tag.div(transition_error_messages(phase).to_a.to_sentence, class: "flex justify-center text-sm text-red-500")
   end
 
   def transition_error_messages(phase)

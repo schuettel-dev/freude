@@ -35,6 +35,23 @@ class Games::Beatle::AdminPhaseTransitionComponentTest < ViewComponent::TestCase
     assert_text "There aren't enough players"
   end
 
+  test "render, collecting phase, warning because incomplete playlists" do
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
+
+    games_beatle_playlists(:jerry_player_in_beatle_seinfeld_playlist).update(song_1_url: nil)
+
+    player = players(:jerry_player_in_beatle_seinfeld)
+    render_inline new_component(player:)
+
+    assert_button "Start guessing phase" do |element|
+      assert_equal "Are you sure?", element["data-turbo-confirm"]
+    end
+
+    assert_text "Warning: There are still empty or incomplete playlists."
+    assert_text "Players with empty playlists will be excluded in the guessing phase."
+  end
+
+
   test "render, guessing phase, valid" do
     games(:beatle_seinfeld).update_column(:phase, :guessing)
 

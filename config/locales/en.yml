@@ -109,6 +109,8 @@ en:
         count_playlists_are_incomplete:
           one: "%{count} playlist is incomplete"
           other: "%{count} playlists are incomplete"
+        warning_to_start_guessing_phase_as_there_are_still_empty_or_incomplete_playlists: |
+          Warning: There are still empty or incomplete playlists. Players with empty playlists will be excluded in the guessing phase.
         x_out_of_y_guessed: "%{x} / %{y} guessed"
 
       final_results:

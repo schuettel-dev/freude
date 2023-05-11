@@ -3,7 +3,15 @@
     <div class="flex flex-col gap-y-2">
       <%= button_to t("games.beatle.phase_actions.start_guessing_phase"), game_phases_path(game), method: :put, params: { phase: :guessing }, disabled: transition_error_messages(:guessing).any?, class: "button", "data-turbo-confirm": t("games.beatle.phase_actions.start_guessing_phase_confirm") %>
 
-      <%= display_error_messages_for(:guessing) %>
+      <div class="flex flex-col">
+        <%= display_error_messages_for(:guessing) %>
+
+        <% unless game.playlists.all? { _1.song_urls.all?(&:valid?) } %>
+          <span class="text-xs text-center text-amber-700">
+            <%= t("games.beatle.shared.warning_to_start_guessing_phase_as_there_are_still_empty_or_incomplete_playlists") %>
+          </span>
+        <% end %>
+      </div>
     </div>
 
   <% elsif game.guessing? %>
