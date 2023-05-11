@@ -3,23 +3,39 @@
     <%= render CardComponent.new(padding: false) do %>
       <div class="flex flex-col gap-y-4">
         <h2 class="px-4 pt-4 text-xl uppercase tracking-wide text-gray-600">
-          <%= t("players.shared.players_with_count", count: game.players.size) %>
+          <%= Player.model_name.human(count: 2) %>
         </h2>
 
-        <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
-          <% ordered_players = game.ended? ? game.players.order_by_final_rank : game.players.order_by_user_name %>
-          <% ordered_players.each do |player| %>
-            <li class="p-4 flex items-center justify-between gap-x-4">
-              <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+        <div class="flex flex-col gap-y-1">
+          <div class="px-4 flex items-center justify-between">
+            <div>
+              <span class="text-gray-400">
+                <%= t("players.shared.players_with_count", count: game.players.size) %>
+              </span>
+            </div>
 
-              <% if game.collecting? %>
-                <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
-              <% elsif game.guessing? %>
-                <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+            <% if game.collecting? %>
+              <%= render Games::Beatle::AllPlaylistsInlineStatusComponent.new(game:) %>
+            <% elsif game.guessing? %>
+              <%= render Games::Beatle::AllPlaylistGuessesInlineStatusComponent.new(game:) %>
+            <% end %>
+          </div>
+
+          <ul class="text-2xl divide-y-2 divide-indigo-600 overflow-hidden">
+            <% ordered_players = game.ended? ? game.players.order_by_final_rank : game.players.order_by_user_name %>
+            <% ordered_players.each do |player| %>
+              <li class="p-4 flex items-center justify-between gap-x-4">
+                <%= render Users::NameWithColorBadgeComponent.new(user: player.user) %>
+
+                <% if game.collecting? %>
+                  <%= render Games::Beatle::Playlist::InlineStatusComponent.new(playlist: player.playlist) %>
+                <% elsif game.guessing? %>
+                  <%= render Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:) %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
   </section>

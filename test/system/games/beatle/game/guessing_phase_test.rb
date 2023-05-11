@@ -10,7 +10,7 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     assert_selector "h2", text: "Who's behind this playlist?"
     assert_selector "h2", text: "My playlist"
     assert_selector "h2", text: "Phases"
-    assert_selector "h2", text: "4 Players"
+    assert_selector "h2", text: "Players"
   end
 
   test "user shows own playlist" do
@@ -101,7 +101,7 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     end
   end
 
-  test "guessing a playlist changes the conic pie" do
+  test "guessing a playlist changes the conic pies" do
     games(:beatle_seinfeld).update_column(:phase, :guessing)
     players(:jerry_player_in_beatle_seinfeld).playlist_guesses.update_all(guessed_player_id: nil)
 
@@ -109,7 +109,9 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      conic_pie_for "Jerry" do |element|
+      assert_conic_pie_for_all_players "9 / 12 guessed"
+
+      conic_pie_for_player "Jerry" do |element|
         assert_equal "0 / 3 guessed", element["title"]
       end
 
@@ -118,7 +120,9 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
         click_on "Save guess"
       end
 
-      conic_pie_for "Jerry" do |element|
+      assert_conic_pie_for_all_players "10 / 12 guessed"
+
+      conic_pie_for_player "Jerry" do |element|
         assert_equal "1 / 3 guessed", element["title"]
       end
     end
@@ -202,8 +206,16 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     end
   end
 
-  def conic_pie_for(name, &)
-    within_game_card "4 PLAYERS" do
+  def assert_conic_pie_for_all_players(title_text)
+    within_game_card "PLAYERS" do
+      assert_selector ".games--beatle--all-playlist-guesses-inline-status-component" do |element|
+        assert_equal title_text, element["title"]
+      end
+    end
+  end
+
+  def conic_pie_for_player(name, &)
+    within_game_card "PLAYERS" do
       yield find("li", text: name).find(".conic-pie")
     end
   end

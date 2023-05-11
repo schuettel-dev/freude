@@ -23,5 +23,8 @@ class Games::Beatle::PlaylistGuess < ApplicationRecord
   def broadcast_inline_statuses
     component = Games::Beatle::Player::PlaylistGuessesInlineStatusComponent.new(player:)
     player.game.broadcast_replace_component(component)
+
+    component = Games::Beatle::AllPlaylistGuessesInlineStatusComponent.new(game:)
+    player.game.broadcast_replace_component(component)
   end
 end

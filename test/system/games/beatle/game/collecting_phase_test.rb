@@ -109,7 +109,10 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       sign_in :jerry
       goto_game "Seinfeld"
 
-      within_game_card "4 PLAYERS" do
+      within_game_card "PLAYERS" do
+        assert_selector ".games--beatle--all-playlists-inline-status-component" do |element|
+          assert_equal "All playlists are ready to guess", element["title"]
+        end
         assert_no_selector ".games--beatle--playlist--inline-status-component .text-gray-500"
         assert_no_selector ".games--beatle--playlist--inline-status-component .text-red-500"
       end
@@ -124,7 +127,10 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
         click_on "Save playlist"
       end
 
-      within_game_card "4 PLAYERS" do
+      within_game_card "PLAYERS" do
+        assert_selector ".games--beatle--all-playlists-inline-status-component" do |element|
+          assert_equal "1 playlist is incomplete", element["title"]
+        end
         assert_selector ".games--beatle--playlist--inline-status-component .text-gray-500"
         assert_selector ".games--beatle--playlist--inline-status-component .text-red-400"
       end

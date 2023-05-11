@@ -66,11 +66,18 @@ body {
 
 .conic-pie {
   --conic-pie-color-base: theme(colors.gray.200);
-  --conic-pie-color-completed: theme(colors.green.500);
   --conic-pie-percent: 0%;
   --conic-pie-hole-scale: 0;
   border-radius: 50%;
   background: conic-gradient(var(--conic-pie-color-completed) var(--conic-pie-percent), var(--conic-pie-color-base) 0);
+}
+
+.conic-pie-complete {
+  --conic-pie-color-completed: theme(colors.green.500);
+}
+
+.conic-pie-incomplete {
+  --conic-pie-color-completed: theme(colors.indigo.400);
 }
 
 .conic-pie::before {

@@ -1,27 +1,24 @@
-class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationComponent
-  DEFAULTS = {
-    class: "w-8 h-8",
-    hole_scale: 0.5,
-    hole_color: "#fff"
-  }.freeze
-
-  def initialize(player:, **args)
-    @player = player
-    @args = DEFAULTS.dup.merge(args)
+class Games::Beatle::AllPlaylistGuessesInlineStatusComponent < ApplicationComponent
+  def initialize(game:)
+    @game = game
     super()
   end
 
   def call
-    render ConicPieComponent.new(guessed_percentage.round(5), **args.merge(title:, id: to_dom_id))
+    render ConicPieComponent.new(guessed_percentage, class: css_classes, hole_scale: 0.4, title:, id: to_dom_id)
   end
 
   def to_dom_id
-    dom_id(player, :playlist_guesses_inline_status)
+    dom_id(game, :all_playlist_guesses_inline_status)
   end
 
   private
 
-  attr_reader :player, :args
+  attr_reader :game
+
+  def css_classes
+    "w-6 h-6 #{to_css_class}"
+  end
 
   def title
     t("games.beatle.shared.x_out_of_y_guessed", x: guessed_guesses_count, y: total_guesses_count)
@@ -40,6 +37,6 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
   end
 
   def playlist_guesses
-    @playlist_guesses ||= player.playlist_guesses
+    @playlist_guesses ||= game.playlist_guesses
   end
 end

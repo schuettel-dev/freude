@@ -86,6 +86,7 @@ en:
         back_to_collecting_phase: Go back to collecting phase
         back_to_collecting_phase_confirm: "Are you sure? Player's guesses will reset."
       shared:
+        all_playlists_are_ready_to_guess: "All playlists are ready to guess"
         buttons:
           back_to_playlist: Back to playlist
           close_playlist: Close playlist
@@ -104,7 +105,9 @@ en:
         whos_behind_this_playlist: Who's behind this playlist?
         final_ranking: Final ranking
         your_ranking: Your ranking
-
+        count_playlists_are_incomplete:
+          one: "%{count} playlist is incomplete"
+          other: "%{count} playlists are incomplete"
         x_out_of_y_guessed: "%{x} / %{y} guessed"
 
       final_results:
