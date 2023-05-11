@@ -20,4 +20,8 @@ class Player < ApplicationRecord
     broadcast_replace_component Games::PhasesSectionComponent.new(player: self)
     broadcast_replace_component Games::PlayersSectionComponent.new(player: self)
   end
+
+  def broadcast_admin_phase_transition
+    broadcast_replace_component Games::Beatle::AdminPhaseTransitionComponent.new(player: self)
+  end
 end

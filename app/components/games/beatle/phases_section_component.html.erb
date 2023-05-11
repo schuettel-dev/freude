@@ -6,6 +6,10 @@
           <%= t("shared.phase", count: 2) %>
         </h2>
 
+        <div class="p-4">
+          <%= render Games::Beatle::AdminPhaseTransitionComponent.new(player:) %>
+        </div>
+
         <ul class="games--phase-description divide-y-2 divide-indigo-600 overflow-hidden">
           <% phases.each do |phase| %>
             <li>
@@ -20,10 +24,6 @@
                   <div>
                     <%= Games::Beatle::Game.human_enum_name(:phase_description, phase) %>
                   </div>
-
-                    <% if game.current_phase?(phase) %>
-                      <%= render Games::Beatle::Game::PhaseTransitionComponent.new(game:, user:) %>
-                    <% end %>
                 </div>
               </details>
             </li>

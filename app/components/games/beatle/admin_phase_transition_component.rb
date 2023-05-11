@@ -1,15 +1,14 @@
-class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
-  attr_reader :game, :user
+class Games::Beatle::AdminPhaseTransitionComponent < ApplicationComponent
+  delegate :game, to: :player
 
-  def initialize(game:, user:)
-    @game = game
-    @user = user
+  def initialize(player:)
+    @player = player
     @transition_error_messages = {}
     super()
   end
 
   def render?
-    game.user == user
+    game.user == player.user
   end
 
   def display_error_messages_for(phase)
@@ -22,7 +21,13 @@ class Games::Beatle::Game::PhaseTransitionComponent < ApplicationComponent
     @transition_error_messages[phase.to_sym] ||= errors_if_transitioned_to_phase(phase.to_sym)
   end
 
+  def to_dom_id
+    dom_id(game, :admin_phase_transition)
+  end
+
   private
+
+  attr_reader :player
 
   def errors_if_transitioned_to_phase(phase)
     form = Games::Beatle::Game::PhaseChangeForm.new(game:, params: { phase: })

@@ -74,7 +74,11 @@ class Game < ApplicationRecord
   end
 
   def broadcast_phase_update
-    players.each(&:broadcast_phase_update)
+    players.find_each(&:broadcast_phase_update)
+  end
+
+  def broadcast_admin_phase_transition
+    players.where(user:).find_each(&:broadcast_admin_phase_transition)
   end
 
   private

@@ -135,9 +135,7 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
         within_game_card "PHASES" do
           assert_current_phase "Guessing"
 
-          within_phase_details "Guessing" do
-            click_on "Go back to collecting phase"
-          end
+          click_on "Go back to collecting phase"
         end
       end
 
@@ -160,14 +158,39 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
         within_game_card "PHASES" do
           assert_current_phase "Guessing"
 
-          within_phase_details "Guessing" do
-            click_on "End game"
-          end
+          click_on "End game"
         end
       end
 
       assert_selector "h2", text: "FINAL RANKING"
       assert_selector "h2", text: "FINAL RESULTS"
+    end
+  end
+
+  test "owner cannot change phase to ended if preconditions are not met" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :guessing)
+
+    playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
+    playlist_guess.update!(guessed_player: nil)
+
+    using_browser do
+      sign_in :jerry
+      goto_game "Seinfeld"
+
+      within_game_card "PHASES" do
+        assert_current_phase "Guessing"
+
+        assert_button "End game", disabled: true
+        assert_text "Not all players have casted all of their guesses"
+      end
+
+      playlist_guess.update!(guessed_player: players(:elaine_player_in_beatle_seinfeld))
+      game.broadcast_admin_phase_transition
+
+      within_game_card "PHASES" do
+        assert_button "End game"
+      end
     end
   end
 
@@ -177,14 +200,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     assert_selector "[title='Current']" do |element|
       element.ancestor("summary").has_text?(phase)
     end
-  end
-
-  def within_phase_details(phase, &)
-    assert_selector("summary", text: phase)
-
-    phase_details_element = find("summary", text: phase).ancestor("details")
-    phase_details_element.click # opens the dialog
-    within(phase_details_element, &)
   end
 
   def conic_pie_for(name, &)

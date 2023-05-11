@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-y-4">
+<div class="flex flex-col gap-y-4" id="<%= to_dom_id %>">
   <% if game.collecting? %>
     <div class="flex flex-col gap-y-2">
       <%= button_to t("games.beatle.phase_actions.start_guessing_phase"), game_phases_path(game), method: :put, params: { phase: :guessing }, disabled: transition_error_messages(:guessing).any?, class: "button", "data-turbo-confirm": t("games.beatle.phase_actions.start_guessing_phase_confirm") %>
