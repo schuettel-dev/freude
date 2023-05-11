@@ -51,6 +51,8 @@ class GamesController < ApplicationController
   end
 
   def join
+    return redirect_to game_path(@game) if @game.players.where(user: Current.user).exists?
+
     if correct_game_token?
       @game.new_player(user: Current.user).save
       @game.broadcast_all_players_section

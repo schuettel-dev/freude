@@ -95,4 +95,18 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "Game couldn't be joined, the token was wrong.", flash[:notice]
   end
+
+  test "GET join, already joined" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    sign_in :kramer
+
+    assert_no_difference -> { game.players.count } do
+      get game_join_url(game, token: game.join_token, host: "www.example.com")
+    end
+
+    follow_redirect!
+    assert_response :success
+  end
 end
