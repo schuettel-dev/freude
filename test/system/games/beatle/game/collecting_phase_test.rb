@@ -1,9 +1,32 @@
 require "application_system_test_case"
 
 class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
+  setup do
+    games(:beatle_seinfeld).update_column(:phase, :collecting)
+  end
+
+  test "owner visits game in collecting phase" do
+    sign_in :jerry
+    goto_game "Seinfeld"
+
+    assert_selector "h2", text: "My playlist"
+    assert_selector "h2", text: "Phases"
+    assert_selector "h2", text: "Players"
+    assert_selector "h2", text: "General"
+  end
+
+  test "player visits game in collecting phase" do
+    sign_in :elaine
+    goto_game "Seinfeld"
+
+    assert_selector "h2", text: "My playlist"
+    assert_selector "h2", text: "Phases"
+    assert_selector "h2", text: "Players"
+    assert_selector "h2", text: "General"
+  end
+
   test "owner cannot change phase to :guessing if not enough players" do
     players(:george_player_in_beatle_seinfeld, :kramer_player_in_beatle_seinfeld).map(&:destroy!)
-    games(:beatle_seinfeld).update_column(:phase, :collecting)
 
     using_browser do
       sign_in :jerry
@@ -19,8 +42,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to guessing" do
-    games(:beatle_seinfeld).update_column(:phase, :collecting)
-
     using_browser do
       sign_in :jerry
       goto_game "Seinfeld"
@@ -43,14 +64,13 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
         assert_current_phase "Guessing"
       end
 
-      within_game_card "ADMIN" do
+      within_game_card "GENERAL" do
         assert_no_field
       end
     end
   end
 
   test "player submits their songs" do
-    games(:beatle_seinfeld).update_column(:phase, :collecting)
     player = players(:elaine_player_in_beatle_seinfeld)
     player.playlist.reset_song_urls
 
@@ -87,7 +107,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
     joining_user_session = Capybara::Session.new(:selenium_headless)
 
     game = games(:beatle_seinfeld)
-    game.update_column(:phase, :collecting)
 
     using_browser do
       sign_in :jerry
@@ -109,7 +128,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
 
   test "player get updated if phase changed to collecting" do
     game = games(:beatle_seinfeld)
-    game.update_column(:phase, :collecting)
     player = players(:jerry_player_in_beatle_seinfeld)
 
     using_browser do
@@ -130,9 +148,6 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
   end
 
   test "submitting a playlist changes inline status components" do
-    game = games(:beatle_seinfeld)
-    game.update_column(:phase, :collecting)
-
     using_browser do
       sign_in :jerry
       goto_game "Seinfeld"

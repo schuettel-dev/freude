@@ -8,7 +8,7 @@ class GamesTest < ApplicationSystemTestCase
 
     goto_game "Seinfeld"
 
-    within_game_card "Admin" do
+    within_game_card "General" do
       assert_field "URL to join", with: "http://www.example.com/games/BEATLEJERRYURLIDENTIFIER/join/BEATLEJERRYJOINTOKEN"
     end
   end
@@ -100,7 +100,9 @@ class GamesTest < ApplicationSystemTestCase
 
     goto_game "Seinfeld"
 
-    click_on "Leave game"
+    within_game_card "GENERAL" do
+      click_on "Leave game"
+    end
 
     assert_selector "h1", "Games"
   end

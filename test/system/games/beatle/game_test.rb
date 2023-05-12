@@ -35,7 +35,7 @@ class Games::Beatle::GameTest < ApplicationSystemTestCase
       assert_selector "h1", text: "All stars"
       assert_selector "h2", text: "PHASES"
       assert_selector "h2", text: "PLAYERS"
-      assert_selector "h2", text: "ADMIN"
+      assert_selector "h2", text: "GENERAL"
     end
   end
 end

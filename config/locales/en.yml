@@ -109,6 +109,8 @@ en:
         count_playlists_are_incomplete:
           one: "%{count} playlist is incomplete"
           other: "%{count} playlists are incomplete"
+        you_are_not_allowed_to_guess_because_your_playlist_was_empty: |
+          You're not allowed to guess because your playlist was empty.
         warning_to_start_guessing_phase_as_there_are_still_empty_or_incomplete_playlists: |
           Warning: There are still empty or incomplete playlists. Players with empty playlists will be excluded in the guessing phase.
         x_out_of_y_guessed: "%{x} / %{y} guessed"
@@ -174,7 +176,7 @@ en:
       show_less: Show less
       show_more: Show more
       start_new_game: Start new game
-    admin: Admin
+    general: General
     all_games: All games
     buttons:
       back_to_dashboard: Back to dashboard
@@ -201,3 +203,4 @@ en:
     new:
       sign_in: Sign in
       token: Enter token
+  sorries: Sorries!

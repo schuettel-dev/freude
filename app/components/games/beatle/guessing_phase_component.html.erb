@@ -1,11 +1,30 @@
-<%= render CardComponent.new do %>
-  <div class="flex flex-col gap-y-4">
-    <h2 class="text-normal uppercase tracking-wide text-gray-600">
-      <%= t("games.beatle.shared.whos_behind_this_playlist") %>
-    </h2>
+<% if first_playlist_guess.present? %>
+  <%= render CardComponent.new do %>
+    <div class="flex flex-col gap-y-4">
+      <h2 class="text-normal uppercase tracking-wide text-gray-600">
+        <%= t("games.beatle.shared.whos_behind_this_playlist") %>
+      </h2>
 
-    <%= render Games::Beatle::PlaylistGuess::FormComponent.new(playlist_guess: first_playlist_guess) %>
-  </div>
+      <%= render Games::Beatle::PlaylistGuess::FormComponent.new(playlist_guess: first_playlist_guess) %>
+    </div>
+  <% end %>
+<% else %>
+  <%= render CardComponent.new do %>
+    <div class="flex flex-col gap-y-4">
+      <h2 class="text-normal uppercase tracking-wide text-gray-600">
+        <%= t("shared.sorries") %>
+      </h2>
+
+      <div class="flex flex-col gap-y-4 text-gray-500">
+        <div class="flex justify-center">
+          <%= render HeroiconComponent.new(:"speaker-x-mark", class: "w-16 h-16 opacity-70") %>
+        </div>
+        <span class="text-center text-xl">
+          <%= t("games.beatle.shared.you_are_not_allowed_to_guess_because_your_playlist_was_empty") %>
+        </span>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 
 <%= turbo_frame_tag dom_id(player.playlist) do %>

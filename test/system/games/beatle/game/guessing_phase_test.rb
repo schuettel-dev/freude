@@ -1,9 +1,11 @@
 require "application_system_test_case"
 
 class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
-  test "user sees sections" do
+  setup do
     games(:beatle_seinfeld).update_column(:phase, :guessing)
+  end
 
+  test "owner visits game in guessing phase" do
     sign_in :jerry
     goto_game "Seinfeld"
 
@@ -11,11 +13,21 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
     assert_selector "h2", text: "My playlist"
     assert_selector "h2", text: "Phases"
     assert_selector "h2", text: "Players"
+    assert_selector "h2", text: "General"
+  end
+
+  test "player visits game in guessing phase" do
+    sign_in :elaine
+    goto_game "Seinfeld"
+
+    assert_selector "h2", text: "Who's behind this playlist?"
+    assert_selector "h2", text: "My playlist"
+    assert_selector "h2", text: "Phases"
+    assert_selector "h2", text: "Players"
+    assert_no_selector "h2", text: "General"
   end
 
   test "user shows own playlist" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
-
     using_browser do
       sign_in :jerry
       goto_game "Seinfeld"
@@ -37,7 +49,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "user guesses the playlists" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
     players(:jerry_player_in_beatle_seinfeld).playlist_guesses.update_all(guessed_player_id: nil)
 
     using_browser do
@@ -102,7 +113,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "guessing a playlist changes the conic pies" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
     players(:jerry_player_in_beatle_seinfeld).playlist_guesses.update_all(guessed_player_id: nil)
 
     using_browser do
@@ -129,8 +139,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to collecting" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
-
     using_browser do
       sign_in :jerry
       goto_game "Seinfeld"
@@ -152,8 +160,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
   end
 
   test "owner changes phase to ended" do
-    games(:beatle_seinfeld).update_column(:phase, :guessing)
-
     using_browser do
       sign_in :jerry
       goto_game "Seinfeld"
@@ -173,7 +179,6 @@ class Games::Beatle::Game::GuessingPhaseTest < ApplicationSystemTestCase
 
   test "owner cannot change phase to ended if preconditions are not met" do
     game = games(:beatle_seinfeld)
-    game.update_column(:phase, :guessing)
 
     playlist_guess = games_beatle_playlist_guesses(:jerry_player_in_beatle_seinfeld_guessing_elaine)
     playlist_guess.update!(guessed_player: nil)
