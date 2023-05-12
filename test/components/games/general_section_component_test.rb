@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Games::AdminSectionComponentTest < ViewComponent::TestCase
+class Games::GeneralSectionComponentTest < ViewComponent::TestCase
   test "render, collecting phase" do
     games(:beatle_seinfeld).update_column(:phase, :collecting)
     player = players(:jerry_player_in_beatle_seinfeld)

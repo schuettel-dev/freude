@@ -1,4 +1,4 @@
-class Games::AdminSectionComponent < Games::ProxyComponent
+class Games::GeneralSectionComponent < Games::ProxyComponent
   def render?
     game_policy.admin?
   end
