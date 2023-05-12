@@ -51,7 +51,6 @@ class Games::Beatle::AdminPhaseTransitionComponentTest < ViewComponent::TestCase
     assert_text "Players with empty playlists will be excluded in the guessing phase."
   end
 
-
   test "render, guessing phase, valid" do
     games(:beatle_seinfeld).update_column(:phase, :guessing)
 

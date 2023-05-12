@@ -31,6 +31,14 @@ class GamePolicy < ApplicationPolicy
     record.user == user
   end
 
+  def join?
+    false # override in subclass
+  end
+
+  def leave?
+    !admin?
+  end
+
   class Scope < Scope
     def resolve
       Game.for_user(user)

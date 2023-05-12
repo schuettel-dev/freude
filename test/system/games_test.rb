@@ -92,4 +92,16 @@ class GamesTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Seinfeld"
   end
+
+  test "user leaves game" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+    sign_in :kramer
+
+    goto_game "Seinfeld"
+
+    click_on "Leave game"
+
+    assert_selector "h1", "Games"
+  end
 end

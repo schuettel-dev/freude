@@ -15,7 +15,11 @@ class Games::Beatle::Player::PlaylistGuessesInlineStatusComponent < ApplicationC
     if player.playlist.ready_to_guess?
       render ConicPieComponent.new(guessed_percentage.round(5), **args.merge(title:, id: to_dom_id))
     else
-      render HeroiconComponent.new(:"speaker-x-mark", class: "w-8 h-8 text-gray-300", title: t("games.beatle.shared.empty_playlist"))
+      render HeroiconComponent.new(
+        :"speaker-x-mark",
+        class: "w-8 h-8 text-gray-300",
+        title: t("games.beatle.shared.empty_playlist")
+      )
     end
   end
 

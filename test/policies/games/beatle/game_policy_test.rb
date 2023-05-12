@@ -11,6 +11,7 @@ class Games::Beatle::GamePolicyTest < ActiveSupport::TestCase
     assert_permit users(:jerry), games(:beatle_seinfeld), :update?
     assert_permit users(:jerry), games(:beatle_seinfeld), :destroy?
     assert_permit users(:jerry), games(:beatle_seinfeld), :admin?
+    assert_not_permit users(:jerry), games(:beatle_seinfeld), :leave?
 
     assert_permit users(:elaine), games(:beatle_seinfeld), :show?
     assert_not_permit users(:elaine), games(:beatle_seinfeld), :edit?

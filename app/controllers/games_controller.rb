@@ -1,15 +1,16 @@
 class GamesController < ApplicationController
   prepend_before_action :store_after_sign_in_redirect_to_url, only: :join
 
-  before_action :set_and_authorize_game, except: [:index, :new, :create, :join]
+  before_action :set_and_authorize_game, except: [:index, :new, :create, :join, :leave]
   before_action :set_and_authorize_game_for_join, only: [:join]
+  before_action :set_and_authorize_game_for_leave, only: [:leave]
 
   def index
     @games = policy_scope(Game).ordered
   end
 
   def show
-    @player = find_game.players.find_by!(user: Current.user)
+    @player = @game.players.find_by!(user: Current.user)
   end
 
   def new
@@ -17,9 +18,7 @@ class GamesController < ApplicationController
     @game = game_template.new_game
   end
 
-  def edit
-    @game = find_game
-  end
+  def edit; end
 
   def create
     game_template = GameTemplate.find(game_params[:game_template_id])
@@ -35,8 +34,6 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = find_game
-
     if @game.update(game_params)
       @game.broadcast_group_names
       redirect_to @game.becomes(Game)
@@ -46,12 +43,12 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    find_game.destroy
+    @game.destroy
     redirect_to root_path
   end
 
   def join
-    return redirect_to game_path(@game) if @game.players.where(user: Current.user).exists?
+    return redirect_to game_path(@game) if @game.players.exists?(user: Current.user)
 
     if correct_game_token?
       @game.new_player(user: Current.user).save
@@ -63,19 +60,26 @@ class GamesController < ApplicationController
     end
   end
 
-  private
-
-  def find_game
-    @find_game ||= policy_scope(Game).find_by!(url_identifier: params[:id])
+  def leave
+    @game.players.find_by(user: Current.user).destroy
+    redirect_to games_path
   end
 
+  private
+
   def set_and_authorize_game
-    authorize find_game
+    @game ||= policy_scope(Game).find_by!(url_identifier: params[:id])
+    authorize @game
   end
 
   def set_and_authorize_game_for_join
-    @game = Game.find_by!(url_identifier: params[:game_id])
-    raise Pundit::NotAuthorizedError unless @game.collecting?
+    @game ||= Game.find_by!(url_identifier: params[:game_id])
+    authorize @game
+  end
+
+  def set_and_authorize_game_for_leave
+    @game ||= policy_scope(Game).find_by!(url_identifier: params[:game_id])
+    authorize @game
   end
 
   def game_params

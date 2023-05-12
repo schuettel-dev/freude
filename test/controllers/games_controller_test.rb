@@ -107,6 +107,55 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     end
 
     follow_redirect!
+
     assert_response :success
+  end
+
+  test "DELETE leave" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    sign_in :kramer
+
+    assert_difference -> { game.players.count }, -1 do
+      delete game_leave_path(game)
+    end
+
+    follow_redirect!
+
+    assert_response :success
+  end
+
+  test "not DELETE leave, if phase not collecting" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :guessing)
+
+    sign_in :kramer
+
+    assert_raises(Pundit::NotAuthorizedError) do
+      delete game_leave_path(game)
+    end
+  end
+
+  test "DELETE leave, game where not player" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    sign_in :newman
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      delete game_leave_path(game)
+    end
+  end
+
+  test "DELETE leave, admin cannot leave" do
+    game = games(:beatle_seinfeld)
+    game.update_column(:phase, :collecting)
+
+    sign_in :jerry
+
+    assert_raises(Pundit::NotAuthorizedError) do
+      delete game_leave_path(game)
+    end
   end
 end

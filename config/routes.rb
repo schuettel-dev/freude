@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :games, only: %i[index show new create edit update destroy] do
     get "join/:token", action: :join, as: :join
+    delete "leave", action: :leave, as: :leave
 
     collection do
       resource :catalogue, only: %i[show], module: :games, as: :game_catalogue
