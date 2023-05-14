@@ -50,18 +50,15 @@ class GamesController < ApplicationController
   def join
     return redirect_to game_path(@game) if @game.players.exists?(user: Current.user)
 
-    if correct_game_token?
-      @game.new_player(user: Current.user).save
-      @game.broadcast_all_players_section
-      redirect_to @game.becomes(Game)
-    else
-      flash[:notice] = t(".could_not_join_game_due_to_wrong_token")
-      redirect_to root_path
-    end
+    return handle_join_with_correct_token if correct_game_token?
+
+    flash[:notice] = t(".could_not_join_game_due_to_wrong_token")
+    redirect_to root_path
   end
 
   def leave
     @game.players.find_by(user: Current.user).destroy
+    @game.broadcast_all_players_section
     redirect_to games_path
   end
 
@@ -88,5 +85,12 @@ class GamesController < ApplicationController
 
   def correct_game_token?
     params[:token].present? && params[:token] == @game.join_token
+  end
+
+  def handle_join_with_correct_token
+    @game.new_player(user: Current.user).save
+    @game.broadcast_all_players_section
+
+    redirect_to @game.becomes(Game)
   end
 end

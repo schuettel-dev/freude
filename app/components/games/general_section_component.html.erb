@@ -39,7 +39,7 @@
           </div>
         <% end %>
       <% else %>
-        [LEAVE GAME!!]
+        <%= button_to t("games.shared.leave_game"), game_leave_path(game), method: :delete, 'data-turbo-confirm': t("games.shared.are_you_sure"), class: "dangerous-button" %>
       <% end %>
     </div>
   <% end %>

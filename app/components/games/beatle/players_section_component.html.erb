@@ -9,7 +9,7 @@
         <div class="flex flex-col gap-y-1">
           <div class="px-4 flex items-center justify-between">
             <div>
-              <span class="text-gray-400">
+              <span class="text-gray-400 <%= to_css_class(append: "--players-count") %>">
                 <%= t("players.shared.players_with_count", count: game.players.size) %>
               </span>
             </div>

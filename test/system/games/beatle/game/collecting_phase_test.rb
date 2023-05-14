@@ -103,8 +103,8 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
     end
   end
 
-  test "player sees new player joining" do
-    joining_user_session = Capybara::Session.new(:selenium_headless)
+  test "player sees new player joining, and then leaving" do
+    other_user_session = Capybara::Session.new(:selenium_headless)
 
     game = games(:beatle_seinfeld)
 
@@ -113,15 +113,23 @@ class Games::Beatle::Game::CollectingPhaseTest < ApplicationSystemTestCase
       goto_game "Seinfeld"
 
       within_game_card "PLAYERS" do
-        assert_text "4 Players"
+        assert_selector ".games--beatle--players-section-component--players-count", text: "4 Players"
       end
 
-      joining_user_session.visit game_join_url(game, token: game.join_token)
-      joining_user_session.fill_in "Name", with: "Babu"
-      joining_user_session.click_on "Sign up"
+      other_user_session.visit game_join_url(game, token: game.join_token)
+      other_user_session.fill_in "Name", with: "Babu"
+      other_user_session.click_on "Sign up"
 
       within_game_card "PLAYERS" do
-        assert_text "5 Players"
+        assert_selector ".games--beatle--players-section-component--players-count", text: "5 Players"
+      end
+
+      other_user_session.accept_confirm("Are you sure?") do
+        other_user_session.click_on "Leave game"
+      end
+
+      within_game_card "PLAYERS" do
+        assert_selector ".games--beatle--players-section-component--players-count", text: "4 Players"
       end
     end
   end

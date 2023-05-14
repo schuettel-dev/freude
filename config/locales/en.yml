@@ -139,6 +139,7 @@ en:
     new:
       ready: Ready!
     shared:
+      are_you_sure: "Are you sure?"
       back_to_game: Back to game
       coming_up_next: Coming up next
       completed: Completed
@@ -149,6 +150,7 @@ en:
       final_ranking: Final ranking
       how_it_works: How it works
       join_url: URL to join
+      leave_game: Leave game
       qr_code: QR code
       update_game: Update game
       n_points:

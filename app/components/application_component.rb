@@ -3,7 +3,7 @@ class ApplicationComponent < ViewComponent::Base
   include Turbo::StreamsHelper
   include ActionView::RecordIdentifier
 
-  def to_css_class
-    self.class.to_s.underscore.gsub(%r{/}, "__").dasherize
+  def to_css_class(append: "")
+    self.class.to_s.underscore.gsub(%r{/}, "__").dasherize.concat(append)
   end
 end
