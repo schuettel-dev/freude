@@ -1,5 +1,8 @@
 ---
 
+Style/ExactRegexpMatch: # new in 1.51
+  Enabled: true
+
 require:
 - rubocop-capybara
 - rubocop-minitest
