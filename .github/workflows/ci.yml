@@ -30,5 +30,11 @@ jobs:
       - name: Precompile assets
         run: bin/rails assets:precompile
 
-      - name: bin/test
-        run: bin/test
+      - name: bin/rails test
+        run: bin/rails test
+
+      - name: bin/rails test:system
+        run: bin/rails test:system
+
+      - name: bundle exec rubocop
+        run: bundle exec rubocop
